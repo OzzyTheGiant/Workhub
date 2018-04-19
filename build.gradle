@@ -1,0 +1,17 @@
+group 'dreamcraft.workhub'
+version '0.1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE'
+    compile 'org.hibernate:hibernate-core:5.2.16.Final'
+    testCompile "org.springframework.boot:spring-boot-starter-test:2.0.1.RELEASE"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:5.1.0"
+}
