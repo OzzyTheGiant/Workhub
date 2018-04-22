@@ -5,18 +5,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Documents")
 public class Document {
-    @Id @Column(name = "ID") private int id;
+    @Id @Column(name = "ID") private String id;
     @Column(name = "Description", nullable = false) String description;
     @Column(name = "FilePath", nullable =  false) String filePath;
     @ManyToOne @JoinColumn(name = "ClientID") private Client client;
     @ManyToOne @JoinColumn(name = "ProjectID") private Project project;
     @Column(name = "FileTypeID") @Enumerated(EnumType.ORDINAL) private FileType fileType;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
