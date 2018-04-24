@@ -57,7 +57,7 @@ public class DataConfig {
     public Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        hibernateProperties.setProperty("hibernate.ddl-auto", env.getProperty("hibernate.ddl-auto"));
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.ddl-auto"));
         hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.showSQL"));
         return hibernateProperties;
     }
