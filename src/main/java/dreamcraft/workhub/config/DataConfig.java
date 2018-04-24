@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -14,6 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@EnableJpaRepositories("dreamcraft.workhub.dao")
 @PropertySource("classpath:application.properties")
 public class DataConfig {
     @Autowired private Environment env;
@@ -46,7 +48,7 @@ public class DataConfig {
         return dataSource;
     }
 
-    @Bean
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager createTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(createEntityManager().getObject());
