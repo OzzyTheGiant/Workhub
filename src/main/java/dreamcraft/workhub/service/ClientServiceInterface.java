@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ClientServiceInterface {
     List<Client> selectAll();
-    Client selectById(String id);
+    Client selectById(String id) throws NoResultsFoundException;
     void save(Client client);
     void delete(Client client);
 }

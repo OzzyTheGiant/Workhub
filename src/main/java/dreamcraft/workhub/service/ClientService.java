@@ -17,7 +17,7 @@ public class ClientService implements ClientServiceInterface {
 
     @Override
     public Client selectById(String id) {
-        return clientDAO.findById(id).get();
+        return clientDAO.findById(id).orElseThrow(NoResultsFoundException::new);
     }
 
     @Override
