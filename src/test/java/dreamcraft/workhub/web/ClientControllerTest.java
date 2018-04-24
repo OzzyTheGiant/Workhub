@@ -33,7 +33,7 @@ class ClientControllerTest {
     );
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
         mockMVC = MockMvcBuilders.standaloneSetup(controller).build();
     }
