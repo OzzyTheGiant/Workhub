@@ -17,6 +17,9 @@ public class ProjectService implements ProjectServiceInterface {
     }
 
     @Override
+    public List<Project> selectAllByClientId(String id) { return projectDAO.findAllByClientId(id); }
+
+    @Override
     public Project selectById(int id) {
         return projectDAO.findById(id).get();
     }
