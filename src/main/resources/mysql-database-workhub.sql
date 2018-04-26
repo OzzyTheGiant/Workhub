@@ -46,8 +46,10 @@ CREATE TABLE IF NOT EXISTS DocumentActionTypes (
 CREATE TABLE IF NOT EXISTS DocumentHistory (
     ID INT PRIMARY KEY AUTOINCREMENT,
     Action TINYINT NOT NULL,
+    DocumentID ID VARCHAR(255) NOT NULL,
     ActionDate DATETIME NOT NULL,
     ActionUser INT NOT NULL,
+    FOREIGN KEY (DocumentID) REFERENCES Documents(ID),
     FOREIGN KEY (Action) REFERENCES DocumentActionTypes(ID),
     FOREIGN KEY (ActionUser) REFERENCES Employees(ID)
 );

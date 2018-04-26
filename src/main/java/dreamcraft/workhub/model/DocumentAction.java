@@ -12,6 +12,9 @@ public class DocumentAction {
     @Column(name = "Action", nullable = false) @Enumerated(EnumType.ORDINAL)
     private DocumentActionType action;
 
+    @ManyToOne @JoinColumn(name = "DocumentID", nullable = false)
+    private Document document;
+
     @Column(name = "ActionDate", nullable = false, columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actionDate;
@@ -32,6 +35,14 @@ public class DocumentAction {
 
     public void setAction(DocumentActionType action) {
         this.action = action;
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
     }
 
     public Date getActionDate() {

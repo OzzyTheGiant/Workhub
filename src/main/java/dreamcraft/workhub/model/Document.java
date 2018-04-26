@@ -1,6 +1,7 @@
 package dreamcraft.workhub.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Documents")
@@ -10,6 +11,7 @@ public class Document {
     @Column(name = "FilePath", nullable =  false) String filePath;
     @ManyToOne @JoinColumn(name = "ClientID") private Client client;
     @ManyToOne @JoinColumn(name = "ProjectID") private Project project;
+    @OneToMany(mappedBy = "document") private List<DocumentAction> action;
     @Column(name = "FileTypeID") @Enumerated(EnumType.ORDINAL) private FileType fileType;
 
     public String getId() {
@@ -50,6 +52,14 @@ public class Document {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public List<DocumentAction> getAction() {
+        return action;
+    }
+
+    public void setAction(List<DocumentAction> action) {
+        this.action = action;
     }
 
     public FileType getFileType() {
