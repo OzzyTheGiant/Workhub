@@ -8,4 +8,6 @@ public interface DocumentServiceInterface {
     Document selectById(String id);
     void save(Document document);
     void delete(Document document);
+    List<Document> selectByClientId(String clientId);
+    List<Document> selectByProjectId(int projectId);
 }

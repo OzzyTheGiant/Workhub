@@ -24,7 +24,8 @@ class ClientControllerTest extends ControllerTest {
     @InjectMocks private ClientController controller;
     @Mock private ClientService clientService;
 
-    protected void initMockMvcAndSampleData() {
+    @Override
+    void initMockMvcAndSampleData() {
         mockMVC = MockMvcBuilders.standaloneSetup(controller).build();
         client = new Client();
         client.setId("100000");

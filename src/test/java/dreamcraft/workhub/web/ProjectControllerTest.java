@@ -24,31 +24,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(MockitoJUnitRunner.class)
 class ProjectControllerTest extends ControllerTest {
-    private Client client;
     private Project project;
     @InjectMocks private ProjectController controller;
     @Mock private ProjectService projectService;
 
-    protected void initMockMvcAndSampleData() {
+    @Override
+    void initMockMvcAndSampleData() {
         mockMVC = MockMvcBuilders.standaloneSetup(controller).build();
-        client = new Client();
-        client.setId("100000");
-        client.setClientName("Ozzy Perez");
         project = new Project();
-        project.setId(1);
-        project.setClient(client);
-        project.setName("sample");
     }
 
     @Test
     public void projectListForClient_shouldReturnListOfProjectsByClient() throws Exception {
         List<Project> projects = Arrays.asList(project, project);
         when(projectService.selectAllByClientId("100000")).thenReturn(projects);
-        MvcResult result = mockMVC.perform(get("/clients/" + client.getId() + "/projects"))
+        MvcResult result = mockMVC.perform(get("/clients/100000/projects"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
                 .andReturn();
-        verify(projectService).selectAllByClientId(client.getId());
+        verify(projectService).selectAllByClientId("100000");
         JSONArray jsonArray = createJSONArray();
         System.out.println(jsonArray.toString());
         System.out.println(result.getResponse().getContentAsString());
@@ -78,12 +72,9 @@ class ProjectControllerTest extends ControllerTest {
     private JSONObject createJSONObject() throws JSONException {
         /* expected values */
         JSONObject record = new JSONObject();
-        JSONObject clientObject = new JSONObject();
-        clientObject.put("id", "100000");
-        clientObject.put("clientName", "Ozzy Perez");
-        record.put("id", 1);
-        record.put("name", "sample");
-        record.put("client", clientObject);
+        record.put("id", null);
+        record.put("name", null);
+        record.put("client", null);
         return record;
     }
 

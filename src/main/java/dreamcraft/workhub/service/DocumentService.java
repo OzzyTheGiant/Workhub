@@ -30,4 +30,14 @@ public class DocumentService implements DocumentServiceInterface {
     public void delete(Document document) {
         documentDAO.delete(document);
     }
+
+    @Override
+    public List<Document> selectByClientId(String clientId) {
+        return documentDAO.findAllByClientId(clientId);
+    }
+
+    @Override
+    public List<Document> selectByProjectId(int projectId) {
+        return documentDAO.findAllByProjectId(projectId);
+    }
 }
