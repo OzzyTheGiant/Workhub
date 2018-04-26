@@ -21,7 +21,7 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Override
     public Project selectById(int id) {
-        return projectDAO.findById(id).get();
+        return projectDAO.findById(id).orElseThrow(NoResultsFoundException::new);
     }
 
     @Override
