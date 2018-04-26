@@ -8,6 +8,7 @@ import java.util.List;
 public class Document {
     @Id @Column(name = "ID") private String id;
     @Column(name = "Description", nullable = false) String description;
+    @Column(name = "Year", nullable = false) private short year;
     @Column(name = "FilePath", nullable =  false) String filePath;
     @ManyToOne @JoinColumn(name = "ClientID") private Client client;
     @ManyToOne @JoinColumn(name = "ProjectID") private Project project;
@@ -28,6 +29,14 @@ public class Document {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public short getYear() {
+        return year;
+    }
+
+    public void setYear(short year) {
+        this.year = year;
     }
 
     public String getFilePath() {
