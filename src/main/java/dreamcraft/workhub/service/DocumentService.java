@@ -20,7 +20,7 @@ public class DocumentService implements DocumentServiceInterface {
 
     @Override
     public Document selectById(String id) {
-        return documentDAO.findById(id).get();
+        return documentDAO.findById(id).orElseThrow(NoResultsFoundException::new);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DocumentService implements DocumentServiceInterface {
         return documentDAO.findAllByProjectId(projectId);
     }
 
-    public String getDocumentFilePath(String id) {
+    public String getDocumentFilePath(String id) throws NoResultsFoundException {
         Document document = selectById(id);
         FolderStructure structure = new DescriptiveFolderStructure();
         return structure.generateFilePath(document);
