@@ -16,6 +16,6 @@ public interface DocumentDAO extends CrudRepository<Document, String> {
     @Query("select d from Document d where d.client.id=:#{#clientId}")
     List<Document> findAllByClientId(@Param("clientId") String clientId);
 
-    @Query("select d from Document d where d.project.id=:#{#{projectId}")
+    @Query("select d from Document d where d.project.id=:#{#projectId}")
     List<Document> findAllByProjectId(@Param("projectId") int projectId);
 }
