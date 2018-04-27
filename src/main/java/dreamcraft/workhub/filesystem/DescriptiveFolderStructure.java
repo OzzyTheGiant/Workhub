@@ -6,7 +6,7 @@ public class DescriptiveFolderStructure implements FolderStructure {
     @Override
     public String generateFilePath(Document doc) {
         return String.format(
-                "/[%s] %s/[%s] %s/[%s][%s][%d] %s.%s",
+                "/[%s] %s/[%s] %s/[%s][%s][%d] %s%s",
                 doc.getClient().getId(),
                 doc.getClient().getClientName(),
                 doc.getProject().getCategory().getDescription(),
@@ -15,7 +15,7 @@ public class DescriptiveFolderStructure implements FolderStructure {
                 doc.getCategory().getDescription(),
                 doc.getYear(),
                 doc.getDescription(),
-                doc.getFileType()
+                doc.getFileType().getExtension()
         );
     }
 }
