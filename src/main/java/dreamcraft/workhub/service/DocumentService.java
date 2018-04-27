@@ -1,6 +1,8 @@
 package dreamcraft.workhub.service;
 
 import dreamcraft.workhub.dao.DocumentDAO;
+import dreamcraft.workhub.filesystem.DescriptiveFolderStructure;
+import dreamcraft.workhub.filesystem.FolderStructure;
 import dreamcraft.workhub.model.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,11 @@ public class DocumentService implements DocumentServiceInterface {
     @Override
     public List<Document> selectByProjectId(int projectId) {
         return documentDAO.findAllByProjectId(projectId);
+    }
+
+    public String getDocumentFilePath(String id) {
+        Document document = selectById(id);
+        FolderStructure structure = new DescriptiveFolderStructure();
+        return structure.generateFilePath(document);
     }
 }
