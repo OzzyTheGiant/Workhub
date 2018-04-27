@@ -6,8 +6,12 @@ import java.util.List;
 @Entity
 @Table(name = "ProjectCategories")
 public class ProjectCategory {
-    @Id @Column(name = "ID") private short id;
-    @Column(name = "Description", length = 30) private String description;
+    @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private short id;
+
+    @Column(name = "Description", length = 30, unique = true, nullable = false)
+    private String description;
+
     @OneToMany(mappedBy = "category") private List<Project> projects;
 
     public short getId() {
