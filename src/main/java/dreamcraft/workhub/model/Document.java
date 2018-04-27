@@ -9,9 +9,9 @@ public class Document {
     @Id @Column(name = "ID") private String id;
     @Column(name = "Description", nullable = false) String description;
     @Column(name = "Year", nullable = false) private short year;
-    @Column(name = "FilePath", nullable =  false) String filePath;
     @ManyToOne @JoinColumn(name = "ClientID") private Client client;
     @ManyToOne @JoinColumn(name = "ProjectID") private Project project;
+    @ManyToOne @JoinColumn(name = "CategoryID") private DocumentCategory category;
     @OneToMany(mappedBy = "document") private List<DocumentAction> action;
     @Column(name = "FileTypeID") @Enumerated(EnumType.ORDINAL) private FileType fileType;
 
@@ -39,14 +39,6 @@ public class Document {
         this.year = year;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
     public Client getClient() {
         return client;
     }
@@ -61,6 +53,14 @@ public class Document {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public DocumentCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(DocumentCategory category) {
+        this.category = category;
     }
 
     public List<DocumentAction> getAction() {
