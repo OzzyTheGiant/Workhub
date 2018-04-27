@@ -22,7 +22,7 @@ public class DocumentController {
         return documentService.selectByProjectId(projectId);
     }
 
-    @GetMapping("/documents/{id}/open")
+    @GetMapping(value = "/documents/{id}/open", produces = "text/plain;charset=utf8")
     public String openDocument(@PathVariable String id) {
         return documentService.getDocumentFilePath(id);
     }
