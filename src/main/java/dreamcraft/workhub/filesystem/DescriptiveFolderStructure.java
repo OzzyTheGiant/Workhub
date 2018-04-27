@@ -12,7 +12,7 @@ public class DescriptiveFolderStructure implements FolderStructure {
                 doc.getProject().getCategory().getDescription(),
                 doc.getProject().getName(),
                 doc.getId(),
-                doc.getCategory(),
+                doc.getCategory().getDescription(),
                 doc.getYear(),
                 doc.getDescription(),
                 doc.getFileType()
