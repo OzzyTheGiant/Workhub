@@ -51,9 +51,7 @@ class ProjectServiceTest {
 
     @Test
     public void selectById_ShouldThrowExceptionIfNoneFound() {
-        assertThrows(NoResultsFoundException.class, () -> {
-            projectService.selectById(0);
-            verify(projectDAO).findById(0);
-        });
+        assertThrows(NoResultsFoundException.class, () -> projectService.selectById(0));
+        verify(projectDAO).findById(0);
     }
 }
