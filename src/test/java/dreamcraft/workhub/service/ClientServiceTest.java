@@ -54,6 +54,6 @@ class ClientServiceTest {
     @Test
     public void findById_shouldThrowExceptionIfNoneFound() throws Exception {
         assertThrows(NoResultsFoundException.class, () -> clientService.selectById("100000"));
-        verify(clientDAO).findById("100000").orElseThrow(NoResultsFoundException::new);
+        verify(clientDAO).findById("100000");
     }
 }

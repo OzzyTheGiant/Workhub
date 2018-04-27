@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
@@ -97,5 +98,15 @@ class DocumentControllerTest extends ControllerTest {
                 .andReturn();
         verify(documentService).selectByProjectId(1);
         JSONAssert.assertEquals("[]", result.getResponse().getContentAsString(), false);
+    }
+
+    @Test
+    public void openDocument_ShouldReturnStringPath() throws Exception {
+        when(documentService.getDocumentFilePath("AAAAAAAAAAA")).thenReturn("/path/to/filedirectory");
+        MvcResult result = mockMVC.perform(get("/documents/AAAAAAAAAAA/open"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(TEXT_PLAIN_UTF8))
+                .andReturn();
+        verify(documentService).getDocumentFilePath("AAAAAAAAAAA");
     }
 }

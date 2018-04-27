@@ -14,6 +14,12 @@ public abstract class ControllerTest {
             Charset.forName("utf8")
     );
 
+    public static final MediaType TEXT_PLAIN_UTF8 = new MediaType(
+            MediaType.TEXT_PLAIN.getType(),
+            MediaType.TEXT_PLAIN.getSubtype(),
+            Charset.forName("utf8")
+    );
+
     @BeforeEach
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
