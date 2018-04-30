@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS DocumentCategories (
 CREATE TABLE IF NOT EXISTS Documents (
     ID VARCHAR(255) PRIMARY KEY,
     Description VARCHAR(255) NOT NULL,
+    AccessLevel TINYINT NOT NULL DEFAULT 0;
     ClientID INT NOT NULL,
     ProjectID INT,
     FileTypeID TINYINT NOT NULL,
@@ -65,4 +66,12 @@ CREATE TABLE IF NOT EXISTS DocumentHistory (
     FOREIGN KEY (DocumentID) REFERENCES Documents(ID),
     FOREIGN KEY (Action) REFERENCES DocumentActionTypes(ID),
     FOREIGN KEY (ActionUser) REFERENCES Employees(ID)
+);
+
+CREATE TABLE IF NOT EXISTS DocumentAccessRestrictions (
+    ID INT PRIMARY KEY,
+    DocumentID VARCHAR(255) NOT NULL,
+    EmployeeID SMALLINT NOT NULL,
+    FOREIGN KEY (DocumentID) REFERENCES Documents(ID),
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(ID)
 );

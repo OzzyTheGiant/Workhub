@@ -9,6 +9,8 @@ public class Document {
     @Id @Column(name = "ID") private String id;
     @Column(name = "Description", nullable = false) String description;
     @Column(name = "Year", nullable = false) private short year;
+    @Column(name = "AccessLevel", nullable = false, columnDefinition = "TINYINT DEFAULT 0") @Enumerated(EnumType.ORDINAL)
+    private AccessLevel accessLevel;
     @ManyToOne @JoinColumn(name = "ClientID") private Client client;
     @ManyToOne @JoinColumn(name = "ProjectID") private Project project;
     @ManyToOne @JoinColumn(name = "CategoryID") private DocumentCategory category;
@@ -37,6 +39,14 @@ public class Document {
 
     public void setYear(short year) {
         this.year = year;
+    }
+
+    public AccessLevel getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(AccessLevel accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
     public Client getClient() {

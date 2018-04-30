@@ -5,6 +5,7 @@ public enum DocumentActionType {
     OPEN("Opened document"),
     EDIT("Modified document"),
     MERGE("Merged pages to PDF document"),
+    RESTRICT("Changed restriction level on document"),
     REINDEX("Reindexed document"),
     DELETE("Removed document from database");
 
