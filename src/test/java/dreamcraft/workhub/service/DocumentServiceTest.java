@@ -1,7 +1,7 @@
 package dreamcraft.workhub.service;
 
+import dreamcraft.workhub.config.WorkhubProperties;
 import dreamcraft.workhub.dao.DocumentDAO;
-import dreamcraft.workhub.filesystem.DescriptiveFolderStructure;
 import dreamcraft.workhub.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import java.util.Arrays;
 import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.*;
 class DocumentServiceTest {
     @InjectMocks private DocumentService documentService;
     @Mock private DocumentDAO documentDAO;
-    @Mock private DescriptiveFolderStructure structure;
+    @Mock private WorkhubProperties properties;
 
     @BeforeEach
     public void setup() {
@@ -73,6 +74,7 @@ class DocumentServiceTest {
     public void getDocumentFilePath_ShouldReturnStringPath() {
         Document document = createNewTestDocument();
         when(documentDAO.findById("AAAAAAAAAAA")).thenReturn(Optional.of(document));
+        when(properties.getRootPath()).thenReturn("/Users/Ozzy/Desktop/sas/");
         assertThat(documentService.getDocumentFilePath("AAAAAAAAAAA"), instanceOf(String.class));
         verify(documentDAO).findById("AAAAAAAAAAA");
     }
@@ -90,6 +92,7 @@ class DocumentServiceTest {
         project.setCategory(new ProjectCategory());
         document.setProject(project);
         document.setCategory(new DocumentCategory());
+        document.setFileType(FileType.PDF);
         return document;
     }
 }
