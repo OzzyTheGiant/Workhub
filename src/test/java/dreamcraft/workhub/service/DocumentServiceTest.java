@@ -1,6 +1,7 @@
 package dreamcraft.workhub.service;
 
 import dreamcraft.workhub.config.WorkhubProperties;
+import dreamcraft.workhub.dao.DocumentActionDAO;
 import dreamcraft.workhub.dao.DocumentDAO;
 import dreamcraft.workhub.model.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ import static org.mockito.Mockito.*;
 class DocumentServiceTest {
     @InjectMocks private DocumentService documentService;
     @Mock private DocumentDAO documentDAO;
+    @Mock private DocumentActionDAO actionDAO;
     @Mock private WorkhubProperties properties;
 
     @BeforeEach
@@ -75,13 +77,13 @@ class DocumentServiceTest {
         Document document = createNewTestDocument();
         when(documentDAO.findById("AAAAAAAAAAA")).thenReturn(Optional.of(document));
         when(properties.getRootPath()).thenReturn("/Users/Ozzy/Desktop/sas/");
-        assertThat(documentService.getDocumentFilePath("AAAAAAAAAAA"), instanceOf(String.class));
+        assertThat(documentService.getDocumentFilePath("AAAAAAAAAAA", createNewTestEmployee()), instanceOf(String.class));
         verify(documentDAO).findById("AAAAAAAAAAA");
     }
 
     @Test
     public void getDocumentFilePath_ShouldThrowExceptionIfNoDocumentFound() {
-        assertThrows(NoResultsFoundException.class, () -> documentService.getDocumentFilePath("doesnotexist"));
+        assertThrows(NoResultsFoundException.class, () -> documentService.getDocumentFilePath("doesnotexist", createNewTestEmployee()));
         verify(documentDAO).findById("doesnotexist");
     }
 
@@ -94,5 +96,11 @@ class DocumentServiceTest {
         document.setCategory(new DocumentCategory());
         document.setFileType(FileType.PDF);
         return document;
+    }
+
+    private Employee createNewTestEmployee() {
+        Employee employee = new Employee();
+        employee.setId((short) 1);
+        return employee;
     }
 }

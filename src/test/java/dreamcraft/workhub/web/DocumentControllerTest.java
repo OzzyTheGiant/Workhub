@@ -1,7 +1,9 @@
 package dreamcraft.workhub.web;
 
 import dreamcraft.workhub.model.Document;
+import dreamcraft.workhub.model.Employee;
 import dreamcraft.workhub.service.DocumentService;
+import dreamcraft.workhub.service.NoResultsFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,6 +31,7 @@ class DocumentControllerTest extends ControllerTest {
     private Document document;
     @InjectMocks private DocumentController controller;
     @Mock private DocumentService documentService;
+    @Mock private UsernamePasswordAuthenticationToken principal;
 
     @Override
     void initMockMvcAndSampleData() {
@@ -102,11 +107,32 @@ class DocumentControllerTest extends ControllerTest {
 
     @Test
     public void openDocument_ShouldReturnStringPath() throws Exception {
-        when(documentService.getDocumentFilePath("AAAAAAAAAAA")).thenReturn("/path/to/filedirectory");
-        MvcResult result = mockMVC.perform(get("/documents/AAAAAAAAAAA/open"))
+        Employee employee = createTestEmployee();
+        when((Employee)((UsernamePasswordAuthenticationToken)principal).getPrincipal()).thenReturn(employee);
+        when(documentService.getDocumentFilePath("AAAAAAAAAAA", employee)).thenReturn("/path/to/filedirectory");
+        MvcResult result = mockMVC.perform(get("/documents/AAAAAAAAAAA/open").principal(principal))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(TEXT_PLAIN_UTF8))
                 .andReturn();
-        verify(documentService).getDocumentFilePath("AAAAAAAAAAA");
+        assertEquals("/path/to/filedirectory", result.getResponse().getContentAsString());
+        verify(documentService).getDocumentFilePath("AAAAAAAAAAA", employee);
+    }
+
+    @Test
+    public void openDocument_ShouldThrowError404IfDocumentNotFound() throws Exception {
+        Employee employee = createTestEmployee();
+        when((Employee)((UsernamePasswordAuthenticationToken)principal).getPrincipal()).thenReturn(employee);
+        when(documentService.getDocumentFilePath("doesnotexist", employee)).thenThrow(NoResultsFoundException.class);
+        MvcResult result = mockMVC.perform(get("/documents/doesnotexist/open").principal(principal))
+            .andExpect(status().isNotFound())
+            .andReturn();
+        verify(documentService).getDocumentFilePath("doesnotexist", employee);
+    }
+
+    private Employee createTestEmployee() {
+        Employee employee = new Employee();
+        employee.setId((short) 1);
+        employee.setUsername("OzzyTheGiant");
+        return employee;
     }
 }
