@@ -1,18 +1,24 @@
 package dreamcraft.workhub.service;
 
 import dreamcraft.workhub.config.WorkhubProperties;
+import dreamcraft.workhub.dao.DocumentActionDAO;
 import dreamcraft.workhub.dao.DocumentDAO;
 import dreamcraft.workhub.filesystem.DescriptiveFolderStructure;
 import dreamcraft.workhub.filesystem.FolderStructure;
 import dreamcraft.workhub.model.Document;
+import dreamcraft.workhub.model.DocumentAction;
+import dreamcraft.workhub.model.DocumentActionType;
+import dreamcraft.workhub.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class DocumentService implements DocumentServiceInterface {
     @Autowired DocumentDAO documentDAO;
+    @Autowired DocumentActionDAO actionDAO;
     @Autowired WorkhubProperties properties;
 
     @Override
@@ -45,9 +51,20 @@ public class DocumentService implements DocumentServiceInterface {
         return documentDAO.findAllByProjectId(projectId);
     }
 
-    public String getDocumentFilePath(String id) throws NoResultsFoundException {
+    public String getDocumentFilePath(String id, Employee employee) throws NoResultsFoundException {
         Document document = selectById(id);
         FolderStructure structure = new DescriptiveFolderStructure(properties.getRootPath());
-        return structure.generateFilePath(document);
+        String path = structure.generateFilePath(document);
+        actionDAO.save(createNewDocumentAction(document, DocumentActionType.OPEN, employee));
+        return path;
+    }
+
+    private DocumentAction createNewDocumentAction(Document doc, DocumentActionType type, Employee employee) {
+        DocumentAction action = new DocumentAction();
+        action.setDocument(doc);
+        action.setActionType(type);
+        action.setActionDate(new Date());
+        action.setEmployee(employee);
+        return action;
     }
 }

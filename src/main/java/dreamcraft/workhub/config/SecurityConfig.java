@@ -1,5 +1,6 @@
 package dreamcraft.workhub.config;
 
+import dreamcraft.workhub.service.EmployeeService;
 import dreamcraft.workhub.web.WorkhubLoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 @Configuration
@@ -24,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Autowired private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
     @Value("${db.queries.users-query}") private String usersQuery;
     @Value("${db.queries.roles-query}") private String rolesQuery;
+    @Resource(name = "EmployeeService") private EmployeeService employeeService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -32,9 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
+        auth.userDetailsService(employeeService).and()
+            .jdbcAuthentication()
             .dataSource(dataSource)
-            .passwordEncoder(passwordEncoder)
             .usersByUsernameQuery(usersQuery)
             .authoritiesByUsernameQuery(rolesQuery);
     }
@@ -59,9 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .successHandler(loginSuccessHandler()) // returns http 200
                 .failureHandler(loginFailureHandler()) // returns http 401
             .and()
+            .anonymous().disable()
             .logout()
                 .logoutUrl("/logout") // url for triggering log out
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()) // returns http 200 code by default
+                .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true); // destroy session
     }
 

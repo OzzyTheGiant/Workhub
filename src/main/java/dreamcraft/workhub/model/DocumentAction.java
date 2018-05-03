@@ -10,7 +10,7 @@ public class DocumentAction {
     private int id;
 
     @Column(name = "Action", nullable = false) @Enumerated(EnumType.ORDINAL)
-    private DocumentActionType action;
+    private DocumentActionType actionType;
 
     @ManyToOne @JoinColumn(name = "DocumentID", nullable = false)
     private Document document;
@@ -29,12 +29,12 @@ public class DocumentAction {
         this.id = id;
     }
 
-    public DocumentActionType getAction() {
-        return action;
+    public DocumentActionType getActionType() {
+        return actionType;
     }
 
-    public void setAction(DocumentActionType action) {
-        this.action = action;
+    public void setActionType(DocumentActionType actionType) {
+        this.actionType = actionType;
     }
 
     public Document getDocument() {

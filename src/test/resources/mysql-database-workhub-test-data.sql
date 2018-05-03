@@ -15,5 +15,3 @@ INSERT INTO Documents VALUES("AAAAAAAAAAA", "file2", 1, "100000", 1, 2017, 3);
 INSERT INTO Documents VALUES("BBBBBBBBBBB", "file3", 1, "100000A", 2, 2017, 2);
 INSERT INTO Documents VALUES("CCCCCCCCCCC", "file4", 4, "100000A", 2, 2017, 2);
 INSERT INTO Documents VALUES("DDDDDDDDDDD", "file5", 1, "100000A", 2, 2017, 3);
-
-select * from Employees;

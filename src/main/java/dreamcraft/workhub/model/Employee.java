@@ -1,10 +1,18 @@
 package dreamcraft.workhub.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
+import java.util.Collection;
 
-@Entity
+@Entity(name = "user")
 @Table(name = "Employees")
-public class Employee {
+public class Employee implements UserDetails {
+    public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private short id;
 
@@ -40,7 +48,7 @@ public class Employee {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = PASSWORD_ENCODER.encode(password);
     }
 
     public String getFirstName() {
@@ -81,5 +89,30 @@ public class Employee {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.createAuthorityList(role);
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isActive;
     }
 }
