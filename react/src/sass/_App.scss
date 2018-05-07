@@ -1,0 +1,20 @@
+#Header {
+	background-color: $black;
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+    height:70px;
+    padding:17px 20px;
+    color: $color-main-light;
+    font-weight:bold;
+    > * {
+    	display:inline-block;
+    	vertical-align:middle;
+    	line-height:0;
+    }
+    li {
+		display:inline-block;
+		padding:10px;
+		font-size:1.2rem;
+    }
+}

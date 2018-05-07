@@ -3,17 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "description": "Document & Project Manager",
-  "author":"Oziel Perez",
+  "author": "Oziel Perez",
   "dependencies": {
+    "normalize.css": "^8.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "compass": "compass compile ./ --sass-dir ./src/sass --css-dir ./src/css --output-style compressed --sourcemap --relative-assets",
     "build": "react-scripts build",
+    "build-all": "npm-run-all -p compass build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy":"http://localhost:8080/"
+  "proxy": "http://localhost:8080/"
 }
