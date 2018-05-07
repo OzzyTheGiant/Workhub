@@ -3,3 +3,4 @@
 build
 out
 keystore.p12
+logs/*
