@@ -1,9 +1,30 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,700');
 
 /* == FONTS == */
-$font-main:'Source Sans Pro', sans-serif;
+$font-main:'Ubuntu', sans-serif;
 
 $black:#222;
 $white:#FFF;
 $color-main:#00638E;
 $color-main-light:#8CDCFF;
+$color-success:#008E78;
+$color-gray:#F4F8F9;
+
+.button {
+	width:auto !important;
+	padding:10px 12px;
+	color:$white;
+	font-weight:bold;
+	font-size:1.2rem;
+	border:none;
+	border-radius:3px;
+	&-ok {background-color:$color-main;}
+}
+
+input {
+	&[type="text"], &[type="password"] {
+		height:40px;
+		padding:8px;
+		color:#333;
+	}
+}

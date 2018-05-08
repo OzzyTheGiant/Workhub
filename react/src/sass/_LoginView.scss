@@ -1,0 +1,29 @@
+#LoginView {
+	padding-top:80px;
+	background-color:$color-main;
+	height:100%;
+	img {
+		border-radius:50%;
+		margin:20px auto 0;
+	}
+	h1 {
+		color:$black;
+		margin:32px 0;
+		text-align:center;
+		font-size:1.5rem;
+	}
+	form {
+		margin:0 auto;
+		background-color:$color-gray;
+		box-shadow:1px 1px 12px 2px #333;
+		padding:16px;
+		width:100%;
+		max-width:400px;
+	}
+	input {
+		display:block;
+		margin:0 auto 10px;
+		width:100%;
+		&[type="submit"] {margin-top:32px;}
+	}
+}
