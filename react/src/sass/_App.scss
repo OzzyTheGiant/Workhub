@@ -4,7 +4,7 @@
 	align-items:center;
 	justify-content:space-between;
     height:70px;
-    padding:17px 20px;
+    padding:17px 16px;
     color: $color-main-light;
     font-weight:bold;
     > * {
@@ -17,4 +17,13 @@
 		padding:10px;
 		font-size:1.2rem;
     }
+}
+
+#ModuleContainer {
+	padding:40px 16px;
+	h1 {
+		font-size:2rem;
+		color:$color-main;
+		margin:0;
+	}
 }
