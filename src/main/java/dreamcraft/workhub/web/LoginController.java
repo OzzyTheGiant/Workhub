@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @GetMapping(path = "/")
     public String home() {
-        return "test";
+        return "/resources/public/index.html";
     }
 }
