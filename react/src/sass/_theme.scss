@@ -3,22 +3,29 @@
 /* == FONTS == */
 $font-main:'Ubuntu', sans-serif;
 
-$black:#222;
-$white:#FFF;
+$color-black:#222;
+$color-white:#FFF;
 $color-main:#00638E;
 $color-main-light:#8CDCFF;
 $color-success:#008E78;
+$color-error:#8E0000;
 $color-gray:#F4F8F9;
 
+$box-shadow:1px 1px 12px 2px #333;
+
 .button {
+	cursor:pointer;
 	width:auto !important;
 	padding:10px 12px;
-	color:$white;
+	color:$color-white;
 	font-weight:bold;
 	font-size:1.2rem;
 	border:none;
 	border-radius:3px;
-	&-ok {background-color:$color-main;}
+	&-ok {
+		background-color:$color-main;
+		&:hover {background-color:tint($color-main, 20%);}
+	}
 }
 
 input {
@@ -27,4 +34,17 @@ input {
 		padding:8px;
 		color:#333;
 	}
+}
+
+.Notification {
+	padding:0.7em 1em;
+	line-height:1.5em;
+	margin:0.7em 0;
+	color:$color-white;
+	box-shadow:$box-shadow;
+	&.none {display:none;}
+	&.error, &.success, &.info {display:block;}
+	&.error {background-color:$color-error;}
+	&.success {background-color:$color-success;}
+	&.info {background-color:$color-black;}
 }

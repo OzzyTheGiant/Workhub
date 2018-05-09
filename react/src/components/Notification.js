@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Notification = (props) => {
 	return (
-		<div className={"notification " + (props.type ? props.type : "none")}>
+		<div className={"Notification " + (props.type ? props.type : "none")}>
 			{props.message}
 		</div>
 	);
