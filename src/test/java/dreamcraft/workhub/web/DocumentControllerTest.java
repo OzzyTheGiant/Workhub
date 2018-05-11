@@ -123,7 +123,7 @@ class DocumentControllerTest extends ControllerTest {
         Employee employee = createTestEmployee();
         when((Employee)((UsernamePasswordAuthenticationToken)principal).getPrincipal()).thenReturn(employee);
         when(documentService.getDocumentFilePath("doesnotexist", employee)).thenThrow(NoResultsFoundException.class);
-        MvcResult result = mockMVC.perform(get("/documents/doesnotexist/open").principal(principal))
+        mockMVC.perform(get("/documents/doesnotexist/open").principal(principal))
             .andExpect(status().isNotFound())
             .andReturn();
         verify(documentService).getDocumentFilePath("doesnotexist", employee);

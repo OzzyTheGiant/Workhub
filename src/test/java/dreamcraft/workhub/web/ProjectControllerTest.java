@@ -1,7 +1,6 @@
 package dreamcraft.workhub.web;
 
 import dreamcraft.workhub.model.Project;
-import dreamcraft.workhub.model.Client;
 import dreamcraft.workhub.service.ProjectService;
 import org.json.JSONArray;
 import org.json.JSONException;
