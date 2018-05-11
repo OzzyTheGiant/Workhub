@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Should render correctly 1`] = `
+<Header>
+  <header
+    id="Header"
+  >
+    <img
+      alt="Workhub Logo"
+      src="http://placehold.it/120x35"
+    />
+    <nav>
+      <ul>
+        <li>
+          Documents
+        </li>
+        <li>
+          Log Out
+        </li>
+      </ul>
+    </nav>
+  </header>
+</Header>
+`;

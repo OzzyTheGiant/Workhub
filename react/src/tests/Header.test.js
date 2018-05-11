@@ -1,19 +1,22 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import { configure, mount, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import toJson from 'enzyme-to-json';
 import Header from 'components/Header';
-const renderer = new ShallowRenderer();
 
-test("Renders Header component properly", () => {
-	renderer.render(<Header/>);
-	const result = renderer.getRenderOutput();
-	expect(result.type).toBe('header');
-	expect(result.props.children).toEqual([
-		<img src="http://placehold.it/120x35" alt="Workhub Logo"/>,
-		<nav>
-			<ul>
-				<li>Documents</li>
-				<li>Log Out</li>
-			</ul>
-		</nav>
-	]);
+describe("Header", () => {
+	/* ==== COMPONENT ==== */
+	const header = <Header/>
+
+	beforeAll(() => {
+		configure({adapter:new Adapter()})
+	});
+
+	it("Should render correctly", () => {
+		const componentWrapper = mount(header);
+		let jsonComponent = toJson(componentWrapper);
+   		expect(jsonComponent.type).toBe('Header');
+   		expect(jsonComponent.children[0].type).toBe('header');
+        expect(jsonComponent).toMatchSnapshot();
+	});
 });

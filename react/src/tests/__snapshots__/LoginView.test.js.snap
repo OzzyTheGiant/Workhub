@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginView Should render correctly 1`] = `
+<LoginView
+  initApplication={[Function]}
+  login={[Function]}
+>
+  <div
+    id="LoginView"
+  >
+    <form
+      action="/login"
+      method="post"
+      onSubmit={[Function]}
+    >
+      <img
+        alt="Logo"
+        src="https://placehold.it/50x50/00638E"
+      />
+      <h1>
+        Log in to your account
+      </h1>
+      <input
+        name="username"
+        onChange={[Function]}
+        placeholder="Username"
+        type="text"
+      />
+      <input
+        name="password"
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+      />
+      <input
+        className="button button-ok"
+        type="submit"
+        value="Log In"
+      />
+    </form>
+    <Notification
+      message={null}
+      type=""
+    >
+      <div
+        className="Notification none"
+      />
+    </Notification>
+  </div>
+</LoginView>
+`;
