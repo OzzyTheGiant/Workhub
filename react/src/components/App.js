@@ -4,6 +4,7 @@ import Header from 'components/Header';
 import LoginView from 'components/LoginView';
 import ModuleContainer from 'components/ModuleContainer';
 import DocumentModule from 'components/DocumentModule';
+import services from 'api/services';
 
 class App extends Component {
 	constructor() {
@@ -35,7 +36,7 @@ class App extends Component {
 			{this.state.currentModule.component}
 			</ModuleContainer>
 		) : (
-			<LoginView initApplication={this.initApplication}/>
+			<LoginView initApplication={this.initApplication} login={services.login}/>
 		);
  		return (
  			<div className="App">
