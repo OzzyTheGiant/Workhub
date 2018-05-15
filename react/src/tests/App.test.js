@@ -5,8 +5,8 @@ import toJson from 'enzyme-to-json';
 import App from 'components/App';
 import LoginView from 'components/LoginView';
 import Header from 'components/Header';
-import ModuleContainer from 'components/ModuleContainer';
-import DocumentModule from 'components/DocumentModule';
+import Module from 'components/Module';
+import DocumentsModule from 'components/DocumentsModule';
 
 describe("App", () => {
 	/* ==== COMPONENT ==== */
@@ -32,11 +32,10 @@ describe("App", () => {
 		expect(jsonComponent).toMatchSnapshot();
 	});
 
-	it('Should render DocumentModule when initApplication() is called', () => {
+	it('Should render DocumentsModule when initApplication() is called', () => {
 		componentWrapper.instance().initApplication();
 		componentWrapper.update();
-		expect(componentWrapper.find("ModuleContainer").length).toBe(1);
-		expect(componentWrapper.find("DocumentModule").length).toBe(1);
+		expect(componentWrapper.find("DocumentsModule").length).toBe(1);
 		expect(componentWrapper.state("currentModule")).toBe("documents");
 	});
 });

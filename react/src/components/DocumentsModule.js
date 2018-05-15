@@ -1,24 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Module from 'components/Module';
 
-class DocumentModule extends React.Component  {
-    // {
-    //     clients:[
-    //         {
-    //             clientId:1,
-    //             projects:[
-    //                 {
-    //                     projectId:1,
-    //                     documents:[
-    //                         {
-    //                             documentId:1
-    //                         }
-    //                     ]
-    //                 }
-    //             ]
-    //         }
-    //     ]
-    // }
+class DocumentsModule extends React.Component  {
+    constructor() {
+        super();
+        this.state = {displayType:"grid-view"}
+    }
 
     createList = (clientID, projectID) => {
         let data = this.props.clients;
@@ -33,20 +21,26 @@ class DocumentModule extends React.Component  {
         this.setState(data)
     }
 
+    toggleDisplayType = () => {
+        this.setState({
+            dipslayType:this.state.displayType === "grid-view" ? "list-view" : "grid-view"
+        });
+    }
+
 	render() {
         const clients = this.props.clients;
 		return (
-            <div id="DocumentModule">
-                <ul className="list-view">
+            <Module title="Documents">
+                <ul className={this.state.displayType}>
                 { clients.map((client, index) => <li key={client.id}>{client.clientName}</li>) }
                 </ul>
-            </div>
+            </Module>
         );
 	}
 }
 
-DocumentModule.propTypes = {
+DocumentsModule.propTypes = {
 	clients:PropTypes.array,
 }
 
-export default DocumentModule;
+export default DocumentsModule;

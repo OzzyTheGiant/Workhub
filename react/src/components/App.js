@@ -2,18 +2,13 @@ import React, { Component } from 'react';
 import 'css/main-styles.css';
 import Header from 'components/Header';
 import LoginView from 'components/LoginView';
-import ModuleContainer from 'components/ModuleContainer';
-import DocumentModule from 'components/DocumentModule';
+import DocumentsModule from 'components/DocumentsModule';
 import services from 'api/services';
  
 class App extends Component {
 	constructor() {
 		super();
-		this.state = {
-			isLoggedIn:false,
-			currentModule:null,
-            clients:[]
-		};
+		this.state = {isLoggedIn:false, clients:[]};
 	}
 
 	initApplication = () => {
@@ -30,11 +25,9 @@ class App extends Component {
     }
 
  	render() {
-        const title = this.state.currentModule;
  		const view = this.state.isLoggedIn ? (
-			<ModuleContainer title={title[0].toUpperCase() + title.slice(1)}>
-			{ this.state.currentModule === "documents" ? <DocumentModule clients={this.state.clients}/> : null }
-			</ModuleContainer>
+			this.state.currentModule === "documents" ? 
+            <DocumentsModule clients={this.state.clients} /> : null
 		) : (
 			<LoginView initApplication={this.initApplication} login={services.login}/>
 		);
