@@ -5,35 +5,35 @@ import LoginView from 'components/LoginView';
 import ModuleContainer from 'components/ModuleContainer';
 import DocumentModule from 'components/DocumentModule';
 import services from 'api/services';
-
+ 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
 			isLoggedIn:false,
-			currentModule:{
-				title:null,
-				component:null
-			},
-			moduleData:null
+			currentModule:null,
+            clients:[]
 		};
 	}
 
 	initApplication = () => {
-		this.setState({
-			isLoggedIn:true,
-			currentModule:{
-				title:"Documents",
-				component:<DocumentModule/>
-			},
-			moduleData:null
-		});
-	}
+        services.getClients(this.setClients, this.ajaxErrorHandler); 
+		this.setState({currentModule:"documents", isLoggedIn:true});
+    }
+
+    setClients = (ajaxResponse) => this.setState({
+        clients:ajaxResponse.data
+    });
+
+    ajaxErrorHandler = () => {
+        // TODO: set error message later
+    }
 
  	render() {
+        const title = this.state.currentModule;
  		const view = this.state.isLoggedIn ? (
-			<ModuleContainer title={this.state.currentModule.title}>
-			{this.state.currentModule.component}
+			<ModuleContainer title={title[0].toUpperCase() + title.slice(1)}>
+			{ this.state.currentModule === "documents" ? <DocumentModule clients={this.state.clients}/> : null }
 			</ModuleContainer>
 		) : (
 			<LoginView initApplication={this.initApplication} login={services.login}/>

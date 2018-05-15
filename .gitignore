@@ -4,3 +4,8 @@ build
 out
 keystore.p12
 logs/*
+.settings
+bin
+.classpath
+.project
+.vscode

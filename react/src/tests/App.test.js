@@ -13,6 +13,9 @@ describe("App", () => {
 	const app = <App/>;
 	let componentWrapper = null;
 
+	/* ==== MOCKS ====*/
+	const services = {login: jest.fn()};
+
 	beforeAll(() => configure({adapter:new Adapter()}))
 	beforeEach(() => componentWrapper = shallow(app))
 
@@ -26,8 +29,15 @@ describe("App", () => {
 		expect(jsonComponent.type).toBe('App');
 		expect(jsonComponent.children[0].type).toBe('div');
 		expect(jsonComponent.children[0].children[0].type).toBe('LoginView');
-		console.log(jsonComponent);
 		expect(jsonComponent).toMatchSnapshot();
+	});
+
+	it('Should render DocumentModule when initApplication() is called', () => {
+		componentWrapper.instance().initApplication();
+		componentWrapper.update();
+		expect(componentWrapper.find("ModuleContainer").length).toBe(1);
+		expect(componentWrapper.find("DocumentModule").length).toBe(1);
+		expect(componentWrapper.state("currentModule")).toBe("documents");
 	});
 });
 

@@ -5,7 +5,6 @@ const api = axios.create({
 	timeout:'15000',
 	responseType:'json',
 	withCredentials:true,
-	headers: {'Content-Type':'application/x-www-form-urlencoded'}
 });
 
 function getBaseUrl() {

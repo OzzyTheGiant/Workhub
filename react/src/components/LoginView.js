@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { services } from 'api/services';
 import Notification from 'components/Notification';
 
 class LoginView extends React.Component {
