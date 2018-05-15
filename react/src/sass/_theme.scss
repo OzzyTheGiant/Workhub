@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700');
 
 /* == FONTS == */
-$font-main:'Ubuntu', sans-serif;
+$font-main:'Source Sans Pro', sans-serif;
 
 $color-black:#222;
 $color-white:#FFF;
@@ -47,4 +47,13 @@ input {
 	&.error {background-color:$color-error;}
 	&.success {background-color:$color-success;}
 	&.info {background-color:$color-black;}
+}
+
+.grid-view, .list-view {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:left;
+    max-height:1000px;
+    overflow-y:scroll;
+    li, .list-item {display:inline-block;}
 }

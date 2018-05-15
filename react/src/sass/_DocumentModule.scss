@@ -1,0 +1,33 @@
+#DocumentModule {
+    .grid-view, .list-view {
+        font-size:0.88rem;
+        li {
+            padding:0 8px 12px;
+            background-image:url("../folder.svg");
+            background-repeat:no-repeat;
+            
+        }
+    }
+    .grid-view {
+        li {
+            background-size:66%;
+            width:100px;
+            padding-top:65px;
+            height:112px;
+            overflow:hidden;
+            background-position:center top;
+            text-align:center;
+        }
+    }
+    .list-view {
+        li {
+            width:250px;
+            height:74px;
+            background-size:80px;
+            background-position:left top;
+            padding-left:90px;
+            margin-right:16px;
+            padding-top:5px;
+        }
+    }
+}

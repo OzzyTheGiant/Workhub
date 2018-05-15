@@ -37,7 +37,7 @@ class DocumentModule extends React.Component  {
         const clients = this.props.clients;
 		return (
             <div id="DocumentModule">
-                <ul>
+                <ul className="list-view">
                 { clients.map((client, index) => <li key={client.id}>{client.clientName}</li>) }
                 </ul>
             </div>
