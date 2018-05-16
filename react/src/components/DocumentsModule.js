@@ -21,16 +21,16 @@ class DocumentsModule extends React.Component  {
         this.setState(data)
     }
 
-    toggleDisplayType = () => {
+    toggleDisplayType = function toggleDisplayType() {
         this.setState({
-            dipslayType:this.state.displayType === "grid-view" ? "list-view" : "grid-view"
+            displayType:this.state.displayType === "grid-view" ? "list-view" : "grid-view"
         });
-    }
+    }.bind(this);
 
 	render() {
         const clients = this.props.clients;
 		return (
-            <Module title="Documents">
+            <Module title="Documents" buttonActions={[this.toggleDisplayType]} displayType={this.state.displayType}>
                 <ul className={this.state.displayType}>
                 { clients.map((client, index) => <li key={client.id}>{client.clientName}</li>) }
                 </ul>

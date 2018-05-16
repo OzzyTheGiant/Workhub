@@ -13,7 +13,7 @@ $color-gray:#F4F8F9;
 
 $box-shadow:1px 1px 12px 2px #333;
 
-.button {
+.color-button {
 	cursor:pointer;
 	width:auto !important;
 	padding:10px 12px;
@@ -22,10 +22,20 @@ $box-shadow:1px 1px 12px 2px #333;
 	font-size:1.2rem;
 	border:none;
 	border-radius:3px;
-	&-ok {
+	&.button-ok {
 		background-color:$color-main;
 		&:hover {background-color:tint($color-main, 20%);}
 	}
+}
+
+.toolbar-button {
+    background-size:100%;
+    background-position:center;
+    background-repeat:no-repeat;
+    outline:none;
+    background-color:transparent;
+    border:none;
+    width:28px;height:28px;
 }
 
 input {

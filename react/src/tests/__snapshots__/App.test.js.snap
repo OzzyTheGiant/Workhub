@@ -37,7 +37,7 @@ exports[`App Should render LoginView on start up 1`] = `
             type="password"
           />
           <input
-            className="button button-ok"
+            className="color-button color-button-ok"
             type="submit"
             value="Log In"
           />

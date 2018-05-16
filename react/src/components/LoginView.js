@@ -32,7 +32,7 @@ class LoginView extends React.Component {
 					<h1>Log in to your account</h1>
 					<input type="text" name="username" placeholder="Username" onChange={(e) => this.setState({username: e.target.value})}/>
 					<input type="password" name="password" placeholder="Password" onChange={(e) => this.setState({password: e.target.value})}/>
-					<input type="submit" className="button button-ok" value="Log In"/>
+					<input type="submit" className="color-button button-ok" value="Log In"/>
 				</form>
 				<Notification type={this.state.errorMessage ? "error" : ""} message={this.state.errorMessage}/>
 			</div>
