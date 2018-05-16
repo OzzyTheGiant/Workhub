@@ -32,7 +32,11 @@ class DocumentsModule extends React.Component  {
 		return (
             <Module title="Documents" buttonActions={[this.toggleDisplayType]} displayType={this.state.displayType}>
                 <ul className={this.state.displayType}>
-                { clients.map((client, index) => <li key={client.id}>{client.clientName}</li>) }
+                { clients.map((client, index) => {
+                    return <li key={client.id}>
+                        {client.clientName}<br/><span className="account-number">{this.state.displayType === "list-view" ? client.id : null}</span>
+                    </li>;
+                })}
                 </ul>
             </Module>
         );
