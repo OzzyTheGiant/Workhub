@@ -63,7 +63,7 @@ input {
     flex-wrap:wrap;
     justify-content:left;
     max-height:1000px;
-    overflow-y:scroll;
+    overflow-y:auto;
     li, .list-item {
         display:inline-block;
         cursor:pointer;
