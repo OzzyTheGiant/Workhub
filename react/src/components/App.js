@@ -13,16 +13,23 @@ class App extends Component {
 
 	initApplication = () => {
         services.getClients(this.setClients, this.ajaxErrorHandler); 
-		this.setState({currentModule:"documents", isLoggedIn:true});
+		this.setState({isLoggedIn:true});
     }
 
     setClients = (ajaxResponse) => this.setState({
-        clients:ajaxResponse.data
+        currentModule:"documents",
+        clients:ajaxResponse.data.sort(this.sortClients)
     });
+
+    sortClients = (a, b) => {
+        if (a.clientName < b.clientName) return -1;
+        if (b.clientName < a.clientName) return 1;
+        return 0;
+    };
 
     ajaxErrorHandler = () => {
         // TODO: set error message later
-    }
+    };
 
  	render() {
  		const view = this.state.isLoggedIn ? (

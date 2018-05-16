@@ -14,7 +14,11 @@ describe("App", () => {
 	let componentWrapper = null;
 
 	/* ==== MOCKS ====*/
-	const services = {login: jest.fn()};
+    const services = {login: jest.fn()};
+    const response = {data: [
+        {id:"100000", clientName: "Ozzy Perez"},
+        {id:"100001", clientName: "Alondra Perez"}
+    ]};
 
 	beforeAll(() => configure({adapter:new Adapter()}))
 	beforeEach(() => componentWrapper = shallow(app))
@@ -32,11 +36,13 @@ describe("App", () => {
 		expect(jsonComponent).toMatchSnapshot();
 	});
 
-	it('Should render DocumentsModule when initApplication() is called', () => {
-		componentWrapper.instance().initApplication();
-		componentWrapper.update();
+	it('Should render DocumentsModule when setClients() is called', () => {
+        componentWrapper.instance().initApplication();
+		componentWrapper.instance().setClients(response);
+        componentWrapper.update();
 		expect(componentWrapper.find("DocumentsModule").length).toBe(1);
-		expect(componentWrapper.state("currentModule")).toBe("documents");
+        expect(componentWrapper.state("currentModule")).toBe("documents");
+        expect(componentWrapper.state("clients")).toEqual(response.data);
 	});
 });
 
