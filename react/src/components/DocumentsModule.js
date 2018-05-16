@@ -44,7 +44,7 @@ class DocumentsModule extends React.Component  {
 }
 
 DocumentsModule.propTypes = {
-	clients:PropTypes.array,
+	clients:PropTypes.array
 }
 
 export default DocumentsModule;

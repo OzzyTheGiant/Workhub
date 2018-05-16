@@ -33,7 +33,7 @@ exports[`LoginView Should render correctly 1`] = `
         type="password"
       />
       <input
-        className="color-button color-button-ok"
+        className="color-button button-ok"
         type="submit"
         value="Log In"
       />

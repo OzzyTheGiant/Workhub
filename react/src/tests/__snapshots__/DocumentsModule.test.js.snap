@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DocumentsModule Should render correctly 1`] = `
+<DocumentsModule
+  clients={
+    Array [
+      Object {
+        "clientName": "Ozzy Perez",
+        "id": "100000",
+      },
+      Object {
+        "clientName": "Alondra Perez",
+        "id": "100001",
+      },
+    ]
+  }
+>
+  <Module
+    buttonActions={
+      Array [
+        [Function],
+      ]
+    }
+    displayType="grid-view"
+    title="Documents"
+  >
+    <div
+      className="Module"
+      id="DocumentsModule"
+    >
+      <div
+        id="toolbar"
+      >
+        <h1>
+          Documents
+        </h1>
+        <div
+          className="toolbarButtons"
+        >
+          <button
+            className="toggleDisplayType toolbar-button button-grid-view"
+            key="0"
+            onClick={[Function]}
+          />
+        </div>
+      </div>
+      <ul
+        className="grid-view"
+      >
+        <li
+          key="100000"
+        >
+          Ozzy Perez
+          <br />
+          <span
+            className="account-number"
+          />
+        </li>
+        <li
+          key="100001"
+        >
+          Alondra Perez
+          <br />
+          <span
+            className="account-number"
+          />
+        </li>
+      </ul>
+    </div>
+  </Module>
+</DocumentsModule>
+`;

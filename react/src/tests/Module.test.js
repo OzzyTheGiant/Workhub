@@ -5,16 +5,25 @@ import toJson from 'enzyme-to-json';
 import Module from 'components/Module';
 
 describe("Module", () => {
-	/* ==== COMPONENT ==== */
-	const module = <Module title="Sample Module"><div></div></Module>;
+    /* ==== MOCKS ==== */
+    const test = jest.fn(function test() {});
+
+    /* ==== COMPONENT ==== */
+    let componentWrapper = null;
+	const module = <Module title="Sample Module" buttonActions={[test]}><div></div></Module>;
 
 	beforeAll(() => {
 		configure({adapter:new Adapter()})
-	});
+    });
+    
+    beforeEach(() => componentWrapper = shallow(module));
 
-	it("Should render correctly", () => {
-		const componentWrapper = shallow(module);
-		expect(componentWrapper.find("h1").text()).toBe("Sample Module");
-		expect(componentWrapper.childAt(1).is("div")).toBe(true);
-	});
+	it("Should render correctly", () => {	
+		expect(toJson(componentWrapper)).toMatchSnapshot();
+    });
+    
+    it("Should execute designated functions when clicking button on toolbar", () => {
+        componentWrapper.find("button").at(0).simulate('click');
+        expect(test).toBeCalled();
+    });
 });

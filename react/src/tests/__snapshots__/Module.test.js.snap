@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Module Should render correctly 1`] = `
+<div
+  className="Module"
+  id="Sample ModuleModule"
+>
+  <div
+    id="toolbar"
+  >
+    <h1>
+      Sample Module
+    </h1>
+    <div
+      className="toolbarButtons"
+    >
+      <button
+        className="undefined toolbar-button button-undefined"
+        key="0"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div />
+</div>
+`;
