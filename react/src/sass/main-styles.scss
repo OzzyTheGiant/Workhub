@@ -36,6 +36,8 @@ footer {
 	width:100%;
 }
 
+[type="submit"], button {cursor:pointer;}
+
 img { display:block; }
 
 @import "LoginView";

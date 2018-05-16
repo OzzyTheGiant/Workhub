@@ -4,11 +4,10 @@ import PropTypes from "prop-types";
 const Module = (props) => {
     let toolbarButtons = null; 
     if (props.buttonActions) {
-        toolbarButtons = props.buttonActions.map((func, index) => { // TODO: add icons to toolbarButtons
-            console.log(func, func.name);
+        toolbarButtons = props.buttonActions.map((func, index) => {
             return <button 
                 key={index} 
-                className={func.name + " toolbar-button button-" + props.displayType} 
+                className={func.name.split(" ")[1] + " toolbar-button button-" + props.displayType} 
                 onClick={func}></button>;
         });
     }
