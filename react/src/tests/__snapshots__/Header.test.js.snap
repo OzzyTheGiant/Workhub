@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header Should render correctly 1`] = `
-<Header>
+<Header
+  logout={[Function]}
+>
   <header
     id="Header"
   >
@@ -11,10 +13,9 @@ exports[`Header Should render correctly 1`] = `
     />
     <nav>
       <ul>
-        <li>
-          Documents
-        </li>
-        <li>
+        <li
+          onClick={[Function]}
+        >
           Log Out
         </li>
       </ul>

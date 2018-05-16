@@ -16,6 +16,8 @@ class App extends Component {
 		this.setState({isLoggedIn:true});
     }
 
+    logout = () => services.logout(() => this.setState({isLoggedIn:false, currentModule:null, clients:[]}), this.ajaxErrorHandler);
+
     setClients = (ajaxResponse) => this.setState({
         currentModule:"documents",
         clients:ajaxResponse.data.sort(this.sortClients)
@@ -34,13 +36,13 @@ class App extends Component {
  	render() {
  		const view = this.state.isLoggedIn ? (
 			this.state.currentModule === "documents" ? 
-            <DocumentsModule clients={this.state.clients} /> : null
+            <DocumentsModule clients={this.state.clients}/> : null
 		) : (
 			<LoginView initApplication={this.initApplication} login={services.login}/>
 		);
  		return (
  			<div className="App">
- 				{this.state.isLoggedIn ? <Header/> : null}
+ 				{this.state.isLoggedIn ? <Header logout={this.logout}/> : null}
  				{view}
  				<footer>&copy; 2018 Salinas, Allen & Schmitt, LLP. All Rights Reserved</footer>
  			</div>

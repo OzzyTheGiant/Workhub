@@ -28,7 +28,7 @@ describe("App", () => {
 	});
 
 	it('Should render LoginView on start up', () => {
-		const wrapper = mount(app)
+		const wrapper = mount(app);
 		let jsonComponent = toJson(wrapper);
 		expect(jsonComponent.type).toBe('App');
 		expect(jsonComponent.children[0].type).toBe('div');
@@ -43,6 +43,17 @@ describe("App", () => {
 		expect(componentWrapper.find("DocumentsModule").length).toBe(1);
         expect(componentWrapper.state("currentModule")).toBe("documents");
         expect(componentWrapper.state("clients")).toEqual(response.data);
-	});
+    });
+    
+    it("Should log out the user when 'Log Out' button is clicked", () => {
+        const wrapper = mount(app);
+        wrapper.instance().initApplication();
+        wrapper.instance().setClients(response);
+        wrapper.update();
+        wrapper.setState({isLoggedIn:false, currentModule:null, clients:[]});
+        wrapper.update();
+        expect(wrapper.find("LoginView").length).toBe(1);
+        expect(wrapper.find("DocumentsModule").length).toBe(0);
+    });
 });
 

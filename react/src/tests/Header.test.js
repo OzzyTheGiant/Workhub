@@ -5,8 +5,11 @@ import toJson from 'enzyme-to-json';
 import Header from 'components/Header';
 
 describe("Header", () => {
+    /* ==== MOCKS ==== */
+    const logout = jest.fn();
+
 	/* ==== COMPONENT ==== */
-	const header = <Header/>
+	const header = <Header logout={logout}/>
 
 	beforeAll(() => {
 		configure({adapter:new Adapter()})
