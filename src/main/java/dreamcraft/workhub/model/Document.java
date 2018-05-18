@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Documents")
-@JsonIgnoreProperties({"client", "project", "category"})
+@JsonIgnoreProperties({"client", "project"})
 public class Document {
     @Id @Column(name = "ID") private String id;
     @Column(name = "Description", nullable = false) String description;

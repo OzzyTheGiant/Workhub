@@ -1,10 +1,14 @@
 package dreamcraft.workhub.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 @Entity
 @Table(name = "ProjectCategories")
+@JsonIgnoreProperties({"projects"})
 public class ProjectCategory {
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private short id;
