@@ -1,10 +1,14 @@
 package dreamcraft.workhub.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 @Entity
 @Table(name = "Documents")
+@JsonIgnoreProperties({"client", "project", "category"})
 public class Document {
     @Id @Column(name = "ID") private String id;
     @Column(name = "Description", nullable = false) String description;
@@ -13,7 +17,7 @@ public class Document {
     private AccessLevel accessLevel;
     @ManyToOne @JoinColumn(name = "ClientID") private Client client;
     @ManyToOne @JoinColumn(name = "ProjectID") private Project project;
-    @ManyToOne @JoinColumn(name = "CategoryID") private DocumentCategory category;
+    @ManyToOne @JoinColumn(name = "CategoryID") @Enumerated private DocumentCategory category;
     @OneToMany(mappedBy = "document") private List<DocumentAction> action;
     @Column(name = "FileTypeID") @Enumerated(EnumType.ORDINAL) private FileType fileType;
 

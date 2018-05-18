@@ -1,10 +1,14 @@
 package dreamcraft.workhub.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "DocumentHistory")
+@JsonIgnoreProperties({"document", "employee"})
 public class DocumentAction {
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

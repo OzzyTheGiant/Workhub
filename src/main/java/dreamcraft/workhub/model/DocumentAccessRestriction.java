@@ -1,9 +1,11 @@
 package dreamcraft.workhub.model;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "DocumentAccessRestrictions")
+@JsonIgnoreProperties({"document", "employee"})
 public class DocumentAccessRestriction {
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
     @ManyToOne @JoinColumn(name = "DocumentID") private Document document;

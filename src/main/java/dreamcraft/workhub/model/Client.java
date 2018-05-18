@@ -9,7 +9,7 @@ public class Client {
     @Id @Column(name = "ID", length = 20) private String id;
     @Column(name = "ClientName", length = 255, nullable = false)
     private String clientName;
-    @OneToMany(mappedBy = "client") List<Project> projects;
+    @OneToMany(mappedBy = "client") private List<Project> projects;
 
     public String getId() {
         return id;

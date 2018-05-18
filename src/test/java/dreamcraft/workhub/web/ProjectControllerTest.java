@@ -1,5 +1,6 @@
 package dreamcraft.workhub.web;
 
+import dreamcraft.workhub.model.Client;
 import dreamcraft.workhub.model.Project;
 import dreamcraft.workhub.service.ProjectService;
 import org.json.JSONArray;
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(MockitoJUnitRunner.class)
 class ProjectControllerTest extends ControllerTest {
     private Project project;
+    private Client client;
     @InjectMocks private ProjectController controller;
     @Mock private ProjectService projectService;
 
@@ -31,6 +33,8 @@ class ProjectControllerTest extends ControllerTest {
     void initMockMvcAndSampleData() {
         mockMVC = MockMvcBuilders.standaloneSetup(controller).build();
         project = new Project();
+        client = new Client();
+        project.setClient(client);
     }
 
     @Test
@@ -74,6 +78,9 @@ class ProjectControllerTest extends ControllerTest {
         record.put("id", null);
         record.put("name", null);
         record.put("client", null);
+        record.put("category", null);
+        record.put("dateCreated", null);
+        record.put("dateDue", null);
         return record;
     }
 

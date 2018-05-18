@@ -1,10 +1,13 @@
 package dreamcraft.workhub.model;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Projects")
+@JsonIgnoreProperties({"client", "category"})
 public class Project {
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,6 +30,8 @@ public class Project {
     @Column(name = "DateDue", columnDefinition = "DATETIME")
     @Temporal(TemporalType.DATE)
     private Date dateDue;
+
+    @OneToMany(mappedBy = "project") private List<Document> documents; 
 
     public int getId() {
         return id;
