@@ -5,8 +5,16 @@
             padding:0 8px 12px;
             background-image:url("../images/folder.svg");
             background-repeat:no-repeat;
-            
+            &.PDF, &.WORD, &.EXCEL, &.POWERPOINT, 
+            &.WORD_2003, &.EXCEL_2003, &.POWERPOINT_2003, &.TXT, &.RTF {background-size:74px;}
+            &.PDF {background-image:url("../images/pdf.svg")}
+            &.WORD, &.WORD_2003 {background-image:url("../images/word.svg")}
+            &.EXCEL, &.EXCEL_2003 {background-image:url("../images/excel.svg")}
+            &.POWERPOINT, &.POWERPOINT_2003 {background-image:url("../images/powerpoint.svg")}
+            &.TXT {background-image:url("../images/txt.svg")}
+            &.RTF {background-image:url("../images/rtf.svg")}
         }
+        p {margin:0;}
     }
     .grid-view {
         li {
@@ -17,6 +25,8 @@
             overflow:hidden;
             background-position:center top;
             text-align:center;
+            &.PDF, &.WORD, &.EXCEL, &.POWERPOINT, 
+            &.WORD_2003, &.EXCEL_2003, &.POWERPOINT_2003, &.TXT, &.RTF {background-size:60px;}
         }
     }
     .list-view {
@@ -29,10 +39,14 @@
             margin-right:16px;
             padding-top:5px;
         }
+        p {
+            white-space:nowrap;
+            text-overflow:ellipsis;
+        }
     }
 }
 
-.account-number {
+.details {
     color:$color-success;
     font-weight:bold;
 }

@@ -15,10 +15,10 @@ describe("App", () => {
 
 	/* ==== MOCKS ====*/
     const services = {login: jest.fn()};
-    const response = {data: [
+    const response = [
         {id:"100000", clientName: "Ozzy Perez"},
         {id:"100001", clientName: "Alondra Perez"}
-    ]};
+    ];
 
 	beforeAll(() => configure({adapter:new Adapter()}))
 	beforeEach(() => componentWrapper = shallow(app))
@@ -42,7 +42,10 @@ describe("App", () => {
         componentWrapper.update();
 		expect(componentWrapper.find("DocumentsModule").length).toBe(1);
         expect(componentWrapper.state("currentModule")).toBe("documents");
-        expect(componentWrapper.state("clients")).toEqual(response.data);
+        expect(componentWrapper.state("clients")).toEqual({
+            "100000":{id:"100000", clientName: "Ozzy Perez"},
+            "100001":{id:"100001", clientName: "Alondra Perez"}
+        });
     });
     
     it("Should log out the user when 'Log Out' button is clicked", () => {

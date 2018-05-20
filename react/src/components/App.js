@@ -8,25 +8,51 @@ import services from 'api/services';
 class App extends Component {
 	constructor() {
 		super();
-		this.state = {isLoggedIn:false, clients:[]};
+		this.state = {isLoggedIn:false, clients:{}};
 	}
 
 	initApplication = () => {
-        services.getClients(this.setClients, this.ajaxErrorHandler); 
+        services.getClients(this.setClients, this.ajaxErrorHandler);
 		this.setState({isLoggedIn:true});
     }
 
-    logout = () => services.logout(() => this.setState({isLoggedIn:false, currentModule:null, clients:[]}), this.ajaxErrorHandler);
+    logout = () => services.logout(() => this.setState({
+        isLoggedIn:false, currentModule:null, clients:[]
+    }), this.ajaxErrorHandler);
 
-    setClients = (ajaxResponse) => this.setState({
+    setClients = (data) => this.setState({
         currentModule:"documents",
-        clients:ajaxResponse.data.sort(this.sortClients)
+        clients:data.reduce((accumulator, client, index, clients) => {
+            accumulator[client.id] = clients[index];
+            return accumulator;
+        }, {})
     });
 
-    sortClients = (a, b) => {
-        if (a.clientName < b.clientName) return -1;
-        if (b.clientName < a.clientName) return 1;
-        return 0;
+    getProjects = clientID => {
+        if (!this.state.clients[clientID].projects) {
+            services.getProjectsByClientID(clientID, (data) => {
+                let newState = {clients:{...this.state.clients}};
+                newState.clients[clientID].projects = data.reduce((accumulator, project, i, projects) => {
+                    accumulator[project.id] = projects[i];
+                    return accumulator;
+                }, {});
+                this.setState(newState);
+            }, this.ajaxErrorHandler);
+            return false;
+        } return true;
+    };
+    
+    getDocuments = (clientID, projectID) => {
+        if (!this.state.clients[clientID].projects[projectID].documents) {
+            services.getDocumentsByProjectID(projectID, (data) => {
+                let newState = {clients:{...this.state.clients}};
+                newState.clients[clientID].projects[projectID].documents = data.reduce((accumulator, doc, i, docs) => {
+                    accumulator[doc.id] = docs[i];
+                    return accumulator;  
+                }, {});
+                this.setState(newState);
+            }, this.ajaxErrorHandler);
+        }
     };
 
     ajaxErrorHandler = () => {
@@ -36,7 +62,10 @@ class App extends Component {
  	render() {
  		const view = this.state.isLoggedIn ? (
 			this.state.currentModule === "documents" ? 
-            <DocumentsModule clients={this.state.clients}/> : null
+            <DocumentsModule 
+            clients={this.state.clients}
+            getProjects={this.getProjects}
+            getDocuments={this.getDocuments}/> : null
 		) : (
 			<LoginView initApplication={this.initApplication} login={services.login}/>
 		);
