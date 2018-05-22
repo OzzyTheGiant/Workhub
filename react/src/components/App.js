@@ -64,7 +64,9 @@ class App extends Component {
 			this.state.currentModule === "documents" ? 
             <DocumentsModule 
             clients={this.state.clients}
+            ajaxErrorHandler={this.ajaxErrorHandler}
             getProjects={this.getProjects}
+            openDocument={services.openDocument}
             getDocuments={this.getDocuments}/> : null
 		) : (
 			<LoginView initApplication={this.initApplication} login={services.login}/>

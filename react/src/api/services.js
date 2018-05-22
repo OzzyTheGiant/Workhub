@@ -18,6 +18,9 @@ const services = {
     .then(response => successHandler(response.data)).catch(error => errorHandler(error)),
 
     getDocumentsByProjectID:(projectID, successHandler, errorHandler) => ajax.get(`projects/${projectID}/documents`)
+    .then(response => successHandler(response.data)).catch(error => errorHandler(error)),
+    
+    openDocument:(docID, successHandler, errorHandler) => ajax.get(`documents/${docID}/open`, {responseType:'text'})
     .then(response => successHandler(response.data)).catch(error => errorHandler(error))
 };
 

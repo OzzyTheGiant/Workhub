@@ -1,6 +1,5 @@
 package dreamcraft.workhub.service;
 
-import dreamcraft.workhub.config.WorkhubProperties;
 import dreamcraft.workhub.dao.DocumentActionDAO;
 import dreamcraft.workhub.dao.DocumentDAO;
 import dreamcraft.workhub.filesystem.DescriptiveFolderStructure;
@@ -11,7 +10,6 @@ import dreamcraft.workhub.model.DocumentActionType;
 import dreamcraft.workhub.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +17,6 @@ import java.util.List;
 public class DocumentService implements DocumentServiceInterface {
     @Autowired DocumentDAO documentDAO;
     @Autowired DocumentActionDAO actionDAO;
-    @Autowired WorkhubProperties properties;
 
     @Override
     public List<Document> selectAll() {
@@ -53,7 +50,7 @@ public class DocumentService implements DocumentServiceInterface {
 
     public String getDocumentFilePath(String id, Employee employee) throws NoResultsFoundException {
         Document document = selectById(id);
-        FolderStructure structure = new DescriptiveFolderStructure(properties.getRootPath());
+        FolderStructure structure = new DescriptiveFolderStructure();
         String path = structure.generateFilePath(document);
         actionDAO.save(createNewDocumentAction(document, DocumentActionType.OPEN, employee));
         return path;

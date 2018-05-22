@@ -26,7 +26,7 @@ public class DocumentController {
         return documentService.selectByProjectId(projectId);
     }
 
-    @GetMapping(value = "/documents/{id}/open")
+    @GetMapping(value = "/documents/{id}/open", produces={"text/plain"})
     public String openDocument(@PathVariable String id, Principal principal, HttpServletResponse response) {
         Employee employee = (Employee)((UsernamePasswordAuthenticationToken) principal).getPrincipal();
         response.setHeader("Content-Type", "text/plain;charset=utf8");

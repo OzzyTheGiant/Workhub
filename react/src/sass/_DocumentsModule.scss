@@ -44,6 +44,14 @@
             text-overflow:ellipsis;
         }
     }
+    object {
+        border:1px solid $color-black;
+        width:100%;
+        max-width:1280px;
+        background-color: $color-black;
+        height:500px;
+        margin-bottom:30px;
+    }
 }
 
 #breadcrumb {

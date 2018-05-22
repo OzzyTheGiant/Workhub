@@ -10,7 +10,8 @@ class DocumentsModule extends React.Component  {
             displayType:"grid-view",
             currClient:null,
             currProject:null,
-            currDoc:null
+            currDoc:null,
+            filePath:null,
         };
     }
 
@@ -20,27 +21,34 @@ class DocumentsModule extends React.Component  {
         });
     }.bind(this);
 
-    openDocument = () => { /* TODO: set open document handler here */}
+    openDocument = (id) => {
+        this.props.openDocument(id, (filePath) => this.setState({filePath, currDoc:id}), this.props.ajaxErrorHandler);
+    }
 
 	render() {
-        let list;
+        let list = null, doc = null;
         if (this.state.currClient) {
             if (this.state.currProject) {
-                list = Object.keys(this.props.clients[this.state.currClient].projects[this.state.currProject].documents || {}).map((id) => {
-                    let document = this.props.clients[this.state.currClient].projects[this.state.currProject].documents[id];
-                    return ( // documents list
-                        <IconLink 
-                        key={id}
-                        details={{
-                            category:document.category.description,
-                            year:document.year
-                        }}
-                        fileType={document.fileType}
-                        dblClickHandler={() => {this.setState({currDoc:id}); this.props.openDocument();}} 
-                        name={this.props.clients[this.state.currClient].projects[this.state.currProject].documents[id].description}
-                        view={this.state.displayType}/>
-                    );
-                });
+                if (this.state.currDoc) {
+                    let document = this.props.clients[this.state.currClient].projects[this.state.currProject].documents[this.state.currDoc]
+                    doc = <object data={"/document-files" + this.state.filePath} type="application/pdf" title={"Current Document: " + document.description + "." + document.fileType.toLowerCase()}></object>;
+                } else {
+                    list = Object.keys(this.props.clients[this.state.currClient].projects[this.state.currProject].documents || {}).map((id) => {
+                        let document = this.props.clients[this.state.currClient].projects[this.state.currProject].documents[id];
+                        return ( // documents list
+                            <IconLink 
+                            key={id}
+                            details={{
+                                category:document.category.description,
+                                year:document.year
+                            }}
+                            fileType={document.fileType}
+                            dblClickHandler={() => this.openDocument(id)} 
+                            name={this.props.clients[this.state.currClient].projects[this.state.currProject].documents[id].description}
+                            view={this.state.displayType}/>
+                        );
+                    });
+                }
             } else {
                 list = Object.keys(this.props.clients[this.state.currClient].projects || {}).map((id) => {
                     let project = this.props.clients[this.state.currClient].projects[id];
@@ -66,7 +74,7 @@ class DocumentsModule extends React.Component  {
                 );
             });
         }
-        list.sort((a, b) => {
+        if (list) list.sort((a, b) => {
             if (a.props.name < b.props.name) return -1;
             if (b.props.name < a.props.name) return 1;
             return 0;
@@ -94,6 +102,7 @@ class DocumentsModule extends React.Component  {
                     </div>
                 </div>
                 <ul className={this.state.displayType}>{list}</ul>
+                {doc}
             </Module>
         );
 	}
@@ -101,8 +110,10 @@ class DocumentsModule extends React.Component  {
 
 DocumentsModule.propTypes = {
     clients:PropTypes.objectOf(PropTypes.object),
+    ajaxErrorHandler:PropTypes.func,
     getProjects:PropTypes.func.isRequired,
-    getDocuments:PropTypes.func.isRequired
+    getDocuments:PropTypes.func.isRequired,
+    openDocument:PropTypes.func.isRequired
 }
 
 export default DocumentsModule;

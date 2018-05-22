@@ -3,7 +3,8 @@ import axios from 'axios';
 const api = axios.create({
 	baseURL:getBaseUrl(),
 	timeout:'15000',
-	responseType:'json',
+    responseType:'json',
+    responseEncoding:'utf8',
 	withCredentials:true,
 });
 
