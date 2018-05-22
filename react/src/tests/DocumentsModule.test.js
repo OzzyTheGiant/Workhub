@@ -80,4 +80,13 @@ describe("DocumentsModule", () => {
         expect(componentWrapper.state("currProject")).toBe("1");
         expect(componentWrapper.find("li").at(0).prop("title")).toBe("file2");
     });
+
+    it("Should render file path correctly after double-clicking an icon", () => {
+        expect(componentWrapper.find("#breadcrumb-slider").children().length).toBe(0);
+        componentWrapper.find("li").at(0).simulate("doubleClick");
+        expect(componentWrapper.find("#breadcrumb-slider").children().at(0).text()).toBe("Home");
+        expect(componentWrapper.find("#breadcrumb-slider").children().at(1).text()).toBe("Alondra Perez");
+        componentWrapper.find("li").at(0).simulate("doubleClick");
+        expect(componentWrapper.find("#breadcrumb-slider").children().at(2).text()).toBe("2017 Form 1040");
+    });
 });

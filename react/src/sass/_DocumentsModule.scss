@@ -46,6 +46,39 @@
     }
 }
 
+#breadcrumb {
+    background-color:$color-black;
+    border-radius:4px;
+    margin-bottom:1.2rem;
+    display:flex;
+    white-space:nowrap;
+    justify-content:flex-start;
+}
+
+#breadcrumb-slider {
+    color:$color-main-light;
+    overflow:hidden;
+    align-items:center;
+    display:inline-flex;
+    justify-content:flex-end;
+    padding-right:10px;
+    div {
+        height:32px;
+        display:inline-block;
+        padding:7px 0 7px 10px;
+        vertical-align:middle;
+        cursor:pointer;
+    }
+    div:not(:last-child):after {
+        content:'>';
+        padding-left:10px;
+        display:inline-block;
+        vertical-align:middle;
+        position:relative;
+        bottom:2px;
+    }
+}
+
 .details {
     color:$color-success;
     font-weight:bold;

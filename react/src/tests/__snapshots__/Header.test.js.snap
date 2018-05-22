@@ -9,7 +9,7 @@ exports[`Header Should render correctly 1`] = `
   >
     <img
       alt="Workhub Logo"
-      src="http://placehold.it/120x35"
+      src="http://placehold.it/120x32/8CDCFF"
     />
     <nav>
       <ul>

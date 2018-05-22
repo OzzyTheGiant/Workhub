@@ -73,6 +73,26 @@ class DocumentsModule extends React.Component  {
         });
 		return (
             <Module title="Documents" buttonActions={[this.toggleDisplayType]} displayType={this.state.displayType}>
+                <div id="breadcrumb">
+                    <div id="breadcrumb-slider">
+                        {this.state.currClient ? <div onClick={() => this.setState({currClient:null, currProject:null, currDoc:null})}>Home</div> : null}
+                        {this.state.currClient ? (
+                            <div onClick={() => this.setState({currProject:null, currDoc:null})}>
+                                {this.props.clients[this.state.currClient].clientName}
+                            </div>
+                        ) : null }
+                        {this.state.currProject ? (
+                            <div onClick={() => this.setState({currDoc:null})}>
+                                {this.props.clients[this.state.currClient].projects[this.state.currProject].name}
+                            </div>
+                        ) : null }
+                        {this.state.currDoc ? (
+                            <div>
+                                {this.props.clients[this.state.currClient].projects[this.state.currProject].documents[this.state.currDoc].description}
+                            </div>
+                        ) : null }
+                    </div>
+                </div>
                 <ul className={this.state.displayType}>{list}</ul>
             </Module>
         );

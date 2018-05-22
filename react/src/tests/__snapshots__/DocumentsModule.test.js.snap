@@ -98,6 +98,29 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
           />
         </div>
       </div>
+      <div
+        id="breadcrumb"
+      >
+        <div
+          id="breadcrumb-slider"
+        >
+          <div
+            onClick={[Function]}
+          >
+            Home
+          </div>
+          <div
+            onClick={[Function]}
+          >
+            Alondra Perez
+          </div>
+          <div
+            onClick={[Function]}
+          >
+            2017 Form 1040
+          </div>
+        </div>
+      </div>
       <ul
         className="grid-view"
       >
@@ -230,6 +253,13 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
             onClick={[Function]}
           />
         </div>
+      </div>
+      <div
+        id="breadcrumb"
+      >
+        <div
+          id="breadcrumb-slider"
+        />
       </div>
       <ul
         className="grid-view"
