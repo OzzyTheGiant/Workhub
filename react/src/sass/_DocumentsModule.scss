@@ -13,6 +13,14 @@
             &.POWERPOINT, &.POWERPOINT_2003 {background-image:url("../images/powerpoint.svg")}
             &.TXT {background-image:url("../images/txt.svg")}
             &.RTF {background-image:url("../images/rtf.svg")}
+            &.empty {
+                background-image:none;
+                width:550px;
+                margin:0 auto;
+                color:$color-gray-text;
+                cursor:default;
+                font-size:1.2rem;
+            }
         }
         p {margin:0;}
     }
@@ -54,7 +62,7 @@
     }
 }
 
-#breadcrumb {
+#breadcrumbs {
     background-color:$color-black;
     border-radius:4px;
     margin-bottom:1.2rem;
