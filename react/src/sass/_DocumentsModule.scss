@@ -53,12 +53,13 @@
         }
     }
     object {
-        border:1px solid $color-black;
+        border-bottom:1px solid $color-black;
         width:100%;
         max-width:1280px;
         background-color: $color-black;
         height:500px;
         margin-bottom:30px;
+        .color-button {display:block; margin:20px auto 0;}
     }
 }
 
@@ -83,19 +84,42 @@
         display:inline-block;
         padding:7px 0 7px 10px;
         vertical-align:middle;
-        cursor:pointer;
+        cursor:default;
     }
-    div:not(:last-child):after {
-        content:'>';
-        padding-left:10px;
-        display:inline-block;
-        vertical-align:middle;
-        position:relative;
-        bottom:2px;
+    div:not(:last-child) {
+        &:hover {
+            text-decoration:underline;
+            cursor:pointer;
+        }
+        &:after {
+            content:'>';
+            padding-left:10px;
+            display:inline-block;
+            vertical-align:middle;
+            position:relative;
+            bottom:2px;
+        }
     }
 }
 
 .details {
     color:$color-success;
     font-weight:bold;
+}
+
+
+#download-prompt {
+    text-align:center;
+    background-color:$color-gray-text;
+    padding:20px 8px;
+    min-height:300px;
+    color:$color-white;
+    button {margin-top:20px}
+}
+
+#text-file {
+    background-color:$color-gray;
+    padding:20px 8px;
+    border:1px solid shade($color-gray, 10%);
+    white-space:pre;
 }

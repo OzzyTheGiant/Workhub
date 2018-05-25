@@ -12,17 +12,19 @@ class DocumentsModule extends React.Component  {
             currClient:null,
             currProject:null,
             currDoc:null,
-            filePath:null,
+            filePath:null
         };
     }
 
-    toggleDisplayType = function toggleDisplayType() { // uses old function syntax with bind(this) to provide function name
+    toggleDisplayType = function toggleDisplayType() { 
+        // toggle between "list" and "grid" views for icons; uses old function syntax with bind(this) to provide function name
         this.setState({
             displayType:this.state.displayType === "grid-view" ? "list-view" : "grid-view"
         });
     }.bind(this);
 
     setCurrentSelections = (currClient, currProject, currDoc) => {
+        // set the current selected entity (client, project, or document) based on which link or breadcrumb was clicked
         let newState = {};
         if (currClient !== false) newState.currClient = currClient;
         if (currProject !== false) newState.currProject = currProject;
@@ -30,8 +32,11 @@ class DocumentsModule extends React.Component  {
         this.setState(newState);
     }
 
-    openDocument = (id) => {
+    openDocument = (id) => { // get the file path for the file that is to be rendered or downloaded
         this.props.openDocument(id, (filePath) => this.setState({filePath, currDoc:id}), this.props.ajaxErrorHandler);
+        if (this.props.clients[this.state.currClient].projects[this.state.currProject].documents[id].fileType !== "TXT") {
+            this.setState({textFile:null});
+        }
     }
 
 	render() {
@@ -39,6 +44,7 @@ class DocumentsModule extends React.Component  {
         let project = this.state.currProject ? client.projects[this.state.currProject] : null;
         let document = this.state.currDoc ? project.documents[this.state.currDoc] : null;
         let list = null;
+        // create list to be rendered on the screen, similar to a file explorer
         if (!client) {
             list = Object.keys(this.props.clients).map((clientID) => {
                 return ( // Default clients list
@@ -81,6 +87,7 @@ class DocumentsModule extends React.Component  {
                 });
             }
         }
+        // sort file/folder list by name
         if (list.length !== 0) { 
             list.sort((a, b) => {
                 if (a.props.name < b.props.name) return -1;
@@ -90,6 +97,10 @@ class DocumentsModule extends React.Component  {
         } else {
             list = <li className="empty">No files or folders found!</li>   
         };
+        // download text file for display if that's the document to be opened
+        if (document && document.fileType === "TXT") {
+            this.props.downloadFile(this.state.filePath, (textFile) => this.setState({textFile}), this.props.ajaxErrorHandler);   
+        }
 		return (
             <Module title="Documents" buttonActions={[this.toggleDisplayType]} displayType={this.state.displayType}>
                 <Breadcrumbs breadcrumbs={
@@ -103,11 +114,21 @@ class DocumentsModule extends React.Component  {
                 {!this.state.currDoc ? (
                     <ul className={this.state.displayType}>{list}</ul>
                 ) : (
-                    <object 
+                    // Object element for rendering PDFs, otherwise, will display a link to download the non-PDF file
+                    <object
                     data={"/document-files" + this.state.filePath} 
-                    type="application/pdf" 
+                    type={document.fileType === "PDF" ? "application/pdf" : "application/octet-stream"}
                     title={"Current Document: " + document.description + "." + document.fileType.toLowerCase()}>
-                        File could not be loaded!
+                        {document.fileType === "TXT" ? (
+                            <div id="text-file">
+                                {this.state.textFile}
+                            </div>
+                         ) : (
+                            <div id="download-prompt">
+                                This file could not be loaded or cannot be previewed online, click below to download and open locally.
+                                <button className="color-button button-ok" onClick={() => this.props.downloadFile(this.state.filePath, null, this.props.ajaxErrorHandler)}>Download</button>
+                            </div>
+                         )}
                     </object>
                 )}
             </Module>
@@ -120,7 +141,8 @@ DocumentsModule.propTypes = {
     ajaxErrorHandler:PropTypes.func,
     getProjects:PropTypes.func.isRequired,
     getDocuments:PropTypes.func.isRequired,
-    openDocument:PropTypes.func.isRequired
+    openDocument:PropTypes.func.isRequired,
+    downloadFile:PropTypes.func.isRequired
 }
 
 export default DocumentsModule;

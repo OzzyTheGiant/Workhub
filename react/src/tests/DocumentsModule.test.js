@@ -8,6 +8,11 @@ describe("DocumentsModule", () => {
     /* ==== MOCKS ==== */
     const getProjects = jest.fn();
     const getDocuments = jest.fn();
+    const openDocument = jest.fn((id) => this.setState(
+        {filePath:"/Users/Ozzy/Desktop/sas/[100000] Ozzy Perez/[Tax Return] 2017 Form 1040/[ASDFHOWEOUH][Notes][2017] notes.txt"}
+    ));
+    const downloadFile = jest.fn();
+    const ajaxErrorHandler = jest.fn();
     const documents = {
         "AAAAAAAAAAA":{
             accessLevel:"PUBLIC",
@@ -17,7 +22,25 @@ describe("DocumentsModule", () => {
             fileType:"PDF",
             id:"AAAAAAAAAAA",
             year:2017
-        }
+        },
+        "ASDFHOWEOUH":{
+            accessLevel:"PUBLIC",
+            action:[],
+            category:{description:"Notes", id:4},
+            description:"notes",
+            fileType:"TXT",
+            id:"ASDFHOWEOUH",
+            year:2017
+        },
+        "BBBBBBBBBBB":{
+            accessLevel:"PUBLIC",
+            action:[],
+            category:{description:"Workpapers", id:3},
+            description:"file2",
+            fileType:"EXCEL",
+            id:"BBBBBBBBBBB",
+            year:2017
+        },
     }
     const projects = {
         1:{
@@ -36,7 +59,14 @@ describe("DocumentsModule", () => {
 
     /* ==== COMPONENT ==== */
     let componentWrapper = null;
-	const documentsModule = <DocumentsModule clients={clients} getProjects={getProjects} getDocuments={getDocuments}/>
+    const documentsModule = 
+    <DocumentsModule 
+    clients={clients} 
+    getProjects={getProjects} 
+    getDocuments={getDocuments} 
+    openDocument={openDocument} 
+    downloadFile={downloadFile}
+    ajaxErrorHandler={ajaxErrorHandler}/>;
 
 	beforeAll(() => {
 		configure({adapter:new Adapter()})
@@ -88,5 +118,21 @@ describe("DocumentsModule", () => {
         expect(componentWrapper.find("#breadcrumb-slider").children().at(1).text()).toBe("Alondra Perez");
         componentWrapper.find("li").at(0).simulate("doubleClick");
         expect(componentWrapper.find("#breadcrumb-slider").children().at(2).text()).toBe("2017 Form 1040");
+    });
+
+    it ("Should render download button if file is not PDF and call downloadFile() when button is clicked", () => {
+        componentWrapper.setState({
+            currClient:"100000", 
+            currProject:1, 
+            currDoc:"BBBBBBBBBBB", 
+            filePath:"path/to/file.xlsx"
+        });
+        componentWrapper.find("#download-prompt .color-button").at(0).simulate("click");
+        expect(downloadFile).toBeCalledWith("path/to/file.xlsx", null, ajaxErrorHandler);
+    });
+
+    it("Should display text from a text file once it has been received", () => {
+        componentWrapper.setState({currClient:"100000", currProject:1, currDoc:"ASDFHOWEOUH", textFile:"Testing!"})
+        expect(componentWrapper.find("#text-file").text()).toBe("Testing!");
     });
 });

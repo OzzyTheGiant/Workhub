@@ -67,7 +67,8 @@ class App extends Component {
             ajaxErrorHandler={this.ajaxErrorHandler}
             getProjects={this.getProjects}
             openDocument={services.openDocument}
-            getDocuments={this.getDocuments}/> : null
+            getDocuments={this.getDocuments}
+            downloadFile={services.downloadFile}/> : null
 		) : (
 			<LoginView initApplication={this.initApplication} login={services.login}/>
 		);

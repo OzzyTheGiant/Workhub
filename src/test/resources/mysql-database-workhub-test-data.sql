@@ -10,8 +10,13 @@ INSERT INTO Projects VALUES(3, "2017 Form 1065", "100000A", NOW(), null, 2017, 1
 INSERT INTO DocumentCategories VALUES(1, "Tax Return");
 INSERT INTO DocumentCategories VALUES(2, "Compilation");
 INSERT INTO DocumentCategories VALUES(3, "Work Papers");
-INSERT INTO Documents VALUES("ASDFQWERZCV", "file1", 1, "100000", 1, 2017, 1);
-INSERT INTO Documents VALUES("AAAAAAAAAAA", "file2", 1, "100000", 1, 2017, 3);
-INSERT INTO Documents VALUES("BBBBBBBBBBB", "file3", 1, "100000A", 2, 2017, 2);
-INSERT INTO Documents VALUES("CCCCCCCCCCC", "file4", 4, "100000A", 2, 2017, 2);
-INSERT INTO Documents VALUES("DDDDDDDDDDD", "file5", 1, "100000A", 2, 2017, 3);
+INSERT INTO DocumentCategories VALUES(4, "Notes");
+INSERT INTO DocumentCategories VALUES(5, "Other");
+INSERT INTO Documents VALUES("ASDFQWERZCV", "file1", 1, "100000", 1, 2017, 1, 0);
+INSERT INTO Documents VALUES("AAAAAAAAAAA", "file2", 1, "100000", 1, 2017, 3, 0);
+INSERT INTO Documents VALUES("BBBBBBBBBBB", "file3", 1, "100000", 2, 2017, 2, 0);
+INSERT INTO Documents VALUES("CCCCCCCCCCC", "file4", 4, "100000", 2, 2017, 2, 0);
+INSERT INTO Documents VALUES("DDDDDDDDDDD", "file5", 1, "100000", 2, 2017, 3, 0);
+INSERT INTO Documents VALUES('ASDFHOWEOUH', 'notes', 7, '100000', 1, 2017, 1, 0);
+INSERT INTO Documents VALUES('WQIERHLGL23', 'readme', 8, '100000', 1, 2017, 1, 0);
+
