@@ -135,4 +135,10 @@ describe("DocumentsModule", () => {
         componentWrapper.setState({currClient:"100000", currProject:1, currDoc:"ASDFHOWEOUH", textFile:"Testing!"})
         expect(componentWrapper.find("#text-file").text()).toBe("Testing!");
     });
+
+    it("Should go to previous level in list hierarchy when clicking on a breadcrumb", () => {
+        componentWrapper.find("li").at(0).simulate("doubleClick");
+        componentWrapper.find("#breadcrumb-slider > div").at(0).simulate("click");
+        expect(componentWrapper.find("li").at(0).text()).toBe("Alondra Perez");
+    });
 });
