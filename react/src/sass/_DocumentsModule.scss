@@ -3,10 +3,11 @@
         font-size:0.88rem;
         li {
             padding:0 8px 12px;
+            margin-bottom:20px;
             background-image:url("../images/folder.svg");
             background-repeat:no-repeat;
             &.PDF, &.WORD, &.EXCEL, &.POWERPOINT, 
-            &.WORD_2003, &.EXCEL_2003, &.POWERPOINT_2003, &.TXT, &.RTF {background-size:74px;}
+            &.WORD_2003, &.EXCEL_2003, &.POWERPOINT_2003, &.TXT, &.RTF {background-size:70px;}
             &.PDF {background-image:url("../images/pdf.svg")}
             &.WORD, &.WORD_2003 {background-image:url("../images/word.svg")}
             &.EXCEL, &.EXCEL_2003 {background-image:url("../images/excel.svg")}
@@ -42,10 +43,10 @@
             width:250px;
             height:74px;
             background-size:80px;
-            background-position:left top;
+            background-position:left center;
             padding-left:90px;
             margin-right:16px;
-            padding-top:5px;
+            padding-top:10px;
         }
         p {
             white-space:nowrap;
@@ -66,7 +67,7 @@
 #breadcrumbs {
     background-color:$color-black;
     border-radius:4px;
-    margin-bottom:1.2rem;
+    margin-bottom:0.6rem;
     display:flex;
     white-space:nowrap;
     justify-content:flex-start;

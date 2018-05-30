@@ -80,9 +80,12 @@ describe("DocumentsModule", () => {
 		expect(toJson(componentWrapper)).toMatchSnapshot();
     });
 
+    // instance() calls used to be "doubleClick" simulators but broke because event.currentTarget doesn't work
+
     it("Should render file lists correctly", () => {
-        componentWrapper.find("li").at(0).simulate("doubleClick");
-        componentWrapper.find("li").at(0).simulate("doubleClick");
+        componentWrapper.instance().renderProjectList({currentTarget:{dataset:{id:"100001"}}});
+        componentWrapper.instance().renderDocumentList({currentTarget:{dataset:{id:"1"}}});
+        componentWrapper.update();
         expect(toJson(componentWrapper)).toMatchSnapshot();
     })
     
@@ -97,15 +100,17 @@ describe("DocumentsModule", () => {
     });
 
     it("Should render projects after double-clicking a client", () => {
-        componentWrapper.find("li").at(0).simulate("doubleClick");
+        componentWrapper.instance().renderProjectList({currentTarget:{dataset:{id:"100001"}}});
+        componentWrapper.update();
         expect(getProjects).toBeCalledWith("100001");
         expect(componentWrapper.state("currClient")).toBe("100001");
         expect(componentWrapper.find("li").at(0).prop("title")).toBe("2017 Form 1040");
     });
 
     it("Should render documents after double-clicking a project", () => {
-        componentWrapper.find("li").at(0).simulate("doubleClick");
-        componentWrapper.find("li").at(0).simulate("doubleClick");
+        componentWrapper.instance().renderProjectList({currentTarget:{dataset:{id:"100001"}}});
+        componentWrapper.instance().renderDocumentList({currentTarget:{dataset:{id:"1"}}});
+        componentWrapper.update();
         expect(getDocuments).toBeCalledWith("100001", "1");
         expect(componentWrapper.state("currProject")).toBe("1");
         expect(componentWrapper.find("li").at(0).prop("title")).toBe("file2");
@@ -113,10 +118,12 @@ describe("DocumentsModule", () => {
 
     it("Should render file path correctly after double-clicking an icon", () => {
         expect(componentWrapper.find("#breadcrumb-slider").children().length).toBe(0);
-        componentWrapper.find("li").at(0).simulate("doubleClick");
+        componentWrapper.instance().renderProjectList({currentTarget:{dataset:{id:"100001"}}});
+        componentWrapper.update();
         expect(componentWrapper.find("#breadcrumb-slider").children().at(0).text()).toBe("Home");
         expect(componentWrapper.find("#breadcrumb-slider").children().at(1).text()).toBe("Alondra Perez");
-        componentWrapper.find("li").at(0).simulate("doubleClick");
+        componentWrapper.instance().renderDocumentList({currentTarget:{dataset:{id:1}}});
+        componentWrapper.update();
         expect(componentWrapper.find("#breadcrumb-slider").children().at(2).text()).toBe("2017 Form 1040");
     });
 
@@ -137,7 +144,8 @@ describe("DocumentsModule", () => {
     });
 
     it("Should go to previous level in list hierarchy when clicking on a breadcrumb", () => {
-        componentWrapper.find("li").at(0).simulate("doubleClick");
+        componentWrapper.instance().renderProjectList({currentTarget:{dataset:{id:"100001"}}});
+        componentWrapper.update();
         componentWrapper.find("#breadcrumb-slider > div").at(0).simulate("click");
         expect(componentWrapper.find("li").at(0).text()).toBe("Alondra Perez");
     });

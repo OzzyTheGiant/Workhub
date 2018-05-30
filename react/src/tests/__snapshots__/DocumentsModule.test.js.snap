@@ -195,88 +195,141 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
           </div>
         </div>
       </Breadcrumbs>
-      <ul
-        className="grid-view"
+      <IconLinkList
+        dblClickHandler={[Function]}
+        displayType="grid-view"
+        list={
+          Object {
+            "AAAAAAAAAAA": Object {
+              "accessLevel": "PUBLIC",
+              "action": Array [],
+              "category": Object {
+                "description": "Workpapers",
+                "id": 3,
+              },
+              "description": "file2",
+              "fileType": "PDF",
+              "id": "AAAAAAAAAAA",
+              "year": 2017,
+            },
+            "ASDFHOWEOUH": Object {
+              "accessLevel": "PUBLIC",
+              "action": Array [],
+              "category": Object {
+                "description": "Notes",
+                "id": 4,
+              },
+              "description": "notes",
+              "fileType": "TXT",
+              "id": "ASDFHOWEOUH",
+              "year": 2017,
+            },
+            "BBBBBBBBBBB": Object {
+              "accessLevel": "PUBLIC",
+              "action": Array [],
+              "category": Object {
+                "description": "Workpapers",
+                "id": 3,
+              },
+              "description": "file2",
+              "fileType": "EXCEL",
+              "id": "BBBBBBBBBBB",
+              "year": 2017,
+            },
+          }
+        }
+        nameLabel="description"
+        type="documents"
       >
-        <IconLink
-          dblClickHandler={[Function]}
-          details={
-            Object {
-              "category": "Workpapers",
-              "year": 2017,
-            }
-          }
-          fileType="PDF"
-          key="AAAAAAAAAAA"
-          name="file2"
-          view="grid-view"
+        <ul
+          className="grid-view"
         >
-          <li
-            className="PDF"
-            onDoubleClick={[Function]}
-            title="file2"
-          >
-            <p>
-              file2
-            </p>
-            <span
-              className="details"
-            />
-          </li>
-        </IconLink>
-        <IconLink
-          dblClickHandler={[Function]}
-          details={
-            Object {
-              "category": "Workpapers",
-              "year": 2017,
+          <IconLink
+            dblClickHandler={[Function]}
+            details={
+              Object {
+                "category": "Workpapers",
+                "year": 2017,
+              }
             }
-          }
-          fileType="EXCEL"
-          key="BBBBBBBBBBB"
-          name="file2"
-          view="grid-view"
-        >
-          <li
-            className="EXCEL"
-            onDoubleClick={[Function]}
-            title="file2"
+            fileType="PDF"
+            id="AAAAAAAAAAA"
+            key="AAAAAAAAAAA"
+            name="file2"
+            view="grid-view"
           >
-            <p>
-              file2
-            </p>
-            <span
-              className="details"
-            />
-          </li>
-        </IconLink>
-        <IconLink
-          dblClickHandler={[Function]}
-          details={
-            Object {
-              "category": "Notes",
-              "year": 2017,
+            <li
+              className="PDF"
+              data-id="AAAAAAAAAAA"
+              onDoubleClick={[Function]}
+              title="file2"
+            >
+              <p>
+                file2
+              </p>
+              <span
+                className="details"
+              />
+            </li>
+          </IconLink>
+          <IconLink
+            dblClickHandler={[Function]}
+            details={
+              Object {
+                "category": "Workpapers",
+                "year": 2017,
+              }
             }
-          }
-          fileType="TXT"
-          key="ASDFHOWEOUH"
-          name="notes"
-          view="grid-view"
-        >
-          <li
-            className="TXT"
-            onDoubleClick={[Function]}
-            title="notes"
+            fileType="EXCEL"
+            id="BBBBBBBBBBB"
+            key="BBBBBBBBBBB"
+            name="file2"
+            view="grid-view"
           >
-            <p>
-              notes
-            </p>
-            <span
-              className="details"
-            />
-          </li>
-        </IconLink>
-      </ul>
+            <li
+              className="EXCEL"
+              data-id="BBBBBBBBBBB"
+              onDoubleClick={[Function]}
+              title="file2"
+            >
+              <p>
+                file2
+              </p>
+              <span
+                className="details"
+              />
+            </li>
+          </IconLink>
+          <IconLink
+            dblClickHandler={[Function]}
+            details={
+              Object {
+                "category": "Notes",
+                "year": 2017,
+              }
+            }
+            fileType="TXT"
+            id="ASDFHOWEOUH"
+            key="ASDFHOWEOUH"
+            name="notes"
+            view="grid-view"
+          >
+            <li
+              className="TXT"
+              data-id="ASDFHOWEOUH"
+              onDoubleClick={[Function]}
+              title="notes"
+            >
+              <p>
+                notes
+              </p>
+              <span
+                className="details"
+              />
+            </li>
+          </IconLink>
+        </ul>
+      </IconLinkList>
     </div>
   </Module>
 </DocumentsModule>
@@ -449,56 +502,183 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
           />
         </div>
       </Breadcrumbs>
-      <ul
-        className="grid-view"
-      >
-        <IconLink
-          dblClickHandler={[Function]}
-          details={
-            Object {
-              "id": "100001",
-            }
-          }
-          key="100001"
-          name="Alondra Perez"
-          view="grid-view"
-        >
-          <li
-            onDoubleClick={[Function]}
-            title="Alondra Perez"
-          >
-            <p>
-              Alondra Perez
-            </p>
-            <span
-              className="details"
-            />
-          </li>
-        </IconLink>
-        <IconLink
-          dblClickHandler={[Function]}
-          details={
-            Object {
+      <IconLinkList
+        dblClickHandler={[Function]}
+        displayType="grid-view"
+        list={
+          Object {
+            "100000": Object {
+              "clientName": "Ozzy Perez",
               "id": "100000",
-            }
+              "projects": Object {
+                "1": Object {
+                  "category": Object {
+                    "description": "Tax Return",
+                    "id": 1,
+                  },
+                  "dateCreated": "2018-04-26T19:58:20.000+0000",
+                  "dateDue": "2017-04-15",
+                  "documents": Object {
+                    "AAAAAAAAAAA": Object {
+                      "accessLevel": "PUBLIC",
+                      "action": Array [],
+                      "category": Object {
+                        "description": "Workpapers",
+                        "id": 3,
+                      },
+                      "description": "file2",
+                      "fileType": "PDF",
+                      "id": "AAAAAAAAAAA",
+                      "year": 2017,
+                    },
+                    "ASDFHOWEOUH": Object {
+                      "accessLevel": "PUBLIC",
+                      "action": Array [],
+                      "category": Object {
+                        "description": "Notes",
+                        "id": 4,
+                      },
+                      "description": "notes",
+                      "fileType": "TXT",
+                      "id": "ASDFHOWEOUH",
+                      "year": 2017,
+                    },
+                    "BBBBBBBBBBB": Object {
+                      "accessLevel": "PUBLIC",
+                      "action": Array [],
+                      "category": Object {
+                        "description": "Workpapers",
+                        "id": 3,
+                      },
+                      "description": "file2",
+                      "fileType": "EXCEL",
+                      "id": "BBBBBBBBBBB",
+                      "year": 2017,
+                    },
+                  },
+                  "id": 1,
+                  "name": "2017 Form 1040",
+                },
+              },
+            },
+            "100001": Object {
+              "clientName": "Alondra Perez",
+              "id": "100001",
+              "projects": Object {
+                "1": Object {
+                  "category": Object {
+                    "description": "Tax Return",
+                    "id": 1,
+                  },
+                  "dateCreated": "2018-04-26T19:58:20.000+0000",
+                  "dateDue": "2017-04-15",
+                  "documents": Object {
+                    "AAAAAAAAAAA": Object {
+                      "accessLevel": "PUBLIC",
+                      "action": Array [],
+                      "category": Object {
+                        "description": "Workpapers",
+                        "id": 3,
+                      },
+                      "description": "file2",
+                      "fileType": "PDF",
+                      "id": "AAAAAAAAAAA",
+                      "year": 2017,
+                    },
+                    "ASDFHOWEOUH": Object {
+                      "accessLevel": "PUBLIC",
+                      "action": Array [],
+                      "category": Object {
+                        "description": "Notes",
+                        "id": 4,
+                      },
+                      "description": "notes",
+                      "fileType": "TXT",
+                      "id": "ASDFHOWEOUH",
+                      "year": 2017,
+                    },
+                    "BBBBBBBBBBB": Object {
+                      "accessLevel": "PUBLIC",
+                      "action": Array [],
+                      "category": Object {
+                        "description": "Workpapers",
+                        "id": 3,
+                      },
+                      "description": "file2",
+                      "fileType": "EXCEL",
+                      "id": "BBBBBBBBBBB",
+                      "year": 2017,
+                    },
+                  },
+                  "id": 1,
+                  "name": "2017 Form 1040",
+                },
+              },
+            },
           }
-          key="100000"
-          name="Ozzy Perez"
-          view="grid-view"
+        }
+        nameLabel="clientName"
+        type="clients"
+      >
+        <ul
+          className="grid-view"
         >
-          <li
-            onDoubleClick={[Function]}
-            title="Ozzy Perez"
+          <IconLink
+            dblClickHandler={[Function]}
+            details={
+              Object {
+                "id": "100001",
+              }
+            }
+            fileType={null}
+            id="100001"
+            key="100001"
+            name="Alondra Perez"
+            view="grid-view"
           >
-            <p>
-              Ozzy Perez
-            </p>
-            <span
-              className="details"
-            />
-          </li>
-        </IconLink>
-      </ul>
+            <li
+              className={null}
+              data-id="100001"
+              onDoubleClick={[Function]}
+              title="Alondra Perez"
+            >
+              <p>
+                Alondra Perez
+              </p>
+              <span
+                className="details"
+              />
+            </li>
+          </IconLink>
+          <IconLink
+            dblClickHandler={[Function]}
+            details={
+              Object {
+                "id": "100000",
+              }
+            }
+            fileType={null}
+            id="100000"
+            key="100000"
+            name="Ozzy Perez"
+            view="grid-view"
+          >
+            <li
+              className={null}
+              data-id="100000"
+              onDoubleClick={[Function]}
+              title="Ozzy Perez"
+            >
+              <p>
+                Ozzy Perez
+              </p>
+              <span
+                className="details"
+              />
+            </li>
+          </IconLink>
+        </ul>
+      </IconLinkList>
     </div>
   </Module>
 </DocumentsModule>
