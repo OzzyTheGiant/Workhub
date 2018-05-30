@@ -15,10 +15,11 @@ function extractDetails(list, id, type) {
 }
 
 const IconLinkList = props => {
+    let listIDs = Object.keys(props.list || {});
     return (
         <ul className={props.displayType}>
-            {props.list ? (
-                Object.keys(props.list).map(id => {
+            {props.list && listIDs.length > 0 ? (
+                listIDs.map(id => {
                     return (
                         <IconLink 
                         key={id}
