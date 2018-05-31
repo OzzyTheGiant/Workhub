@@ -49,14 +49,14 @@ describe("App", () => {
     });
     
     it("Should log out the user when 'Log Out' button is clicked", () => {
-        const wrapper = mount(app);
-        wrapper.instance().initApplication();
-        wrapper.instance().setClients(response);
-        wrapper.update();
-        wrapper.setState({isLoggedIn:false, currentModule:null, clients:[]});
-        wrapper.update();
-        expect(wrapper.find("LoginView").length).toBe(1);
-        expect(wrapper.find("DocumentsModule").length).toBe(0);
+        componentWrapper.instance().initApplication();
+        componentWrapper.instance().setClients(response);
+        componentWrapper.update();
+        expect(componentWrapper.find("DocumentsModule").length).toBe(1);
+        componentWrapper.setState({isLoggedIn:false, currentModule:null, clients:[]});
+        componentWrapper.update();
+        expect(componentWrapper.find("LoginView").length).toBe(1);
+        expect(componentWrapper.find("DocumentsModule").length).toBe(0);
     });
 });
 

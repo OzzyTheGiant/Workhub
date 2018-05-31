@@ -10,7 +10,11 @@ class LoginView extends React.Component {
 			password:null,
 			errorMessage:null
 		}
-	};
+    };
+    
+    componentDidMount() {
+        this.setState({errorMessage:this.props.errorMessage});
+    }
 
 	onLoginFormSubmit = (e) => {
 		if (e) e.preventDefault();
@@ -42,7 +46,8 @@ class LoginView extends React.Component {
 
 LoginView.propTypes = {
 	initApplication:PropTypes.func.isRequired,
-	login:PropTypes.func.isRequired
+    login:PropTypes.func.isRequired,
+    errorMessage:PropTypes.string
 };
 
 export default LoginView;

@@ -8,7 +8,7 @@ import services from 'api/services';
 class App extends Component {
 	constructor() {
 		super();
-		this.state = {isLoggedIn:false, clients:{}};
+		this.state = {isLoggedIn:false, clients:{}, errorMessage:null};
 	}
 
 	initApplication = () => {
@@ -16,9 +16,9 @@ class App extends Component {
 		this.setState({isLoggedIn:true});
     }
 
-    logout = () => services.logout(() => this.setState({
-        isLoggedIn:false, currentModule:null, clients:[]
-    }), this.ajaxErrorHandler);
+    logout = (errorMessage) => services.logout(() => this.setState({
+        isLoggedIn:false, currentModule:null, clients:[], errorMessage: errorMessage || null
+    }), () => window.location.pathname = "/");
 
     setClients = (data) => this.setState({
         currentModule:"documents",
@@ -55,8 +55,8 @@ class App extends Component {
         }
     };
 
-    ajaxErrorHandler = () => {
-        // TODO: set error message later
+    ajaxErrorHandler = error => {
+        if (error.response.status === 401) this.logout("Session expired, log back in to continue!");
     };
 
  	render() {
@@ -70,7 +70,7 @@ class App extends Component {
             getDocuments={this.getDocuments}
             downloadFile={services.downloadFile}/> : null
 		) : (
-			<LoginView initApplication={this.initApplication} login={services.login}/>
+			<LoginView initApplication={this.initApplication} login={services.login} errorMessage={this.state.errorMessage}/>
 		);
  		return (
  			<div className="App">

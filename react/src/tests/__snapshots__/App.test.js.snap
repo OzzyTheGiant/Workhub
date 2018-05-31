@@ -6,6 +6,7 @@ exports[`App Should render LoginView on start up 1`] = `
     className="App"
   >
     <LoginView
+      errorMessage={null}
       initApplication={[Function]}
       login={[Function]}
     >

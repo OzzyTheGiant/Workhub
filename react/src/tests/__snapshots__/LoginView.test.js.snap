@@ -39,7 +39,6 @@ exports[`LoginView Should render correctly 1`] = `
       />
     </form>
     <Notification
-      message={null}
       type=""
     >
       <div
