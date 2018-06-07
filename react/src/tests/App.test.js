@@ -37,7 +37,7 @@ describe("App", () => {
 	});
 
 	it('Should render DocumentsModule when setClients() is called', () => {
-        componentWrapper.instance().initApplication();
+        componentWrapper.setState({isLoggedIn:true});
 		componentWrapper.instance().setClients(response);
         componentWrapper.update();
 		expect(componentWrapper.find("DocumentsModule").length).toBe(1);
@@ -49,7 +49,7 @@ describe("App", () => {
     });
     
     it("Should log out the user when 'Log Out' button is clicked", () => {
-        componentWrapper.instance().initApplication();
+        componentWrapper.setState({isLoggedIn:true});
         componentWrapper.instance().setClients(response);
         componentWrapper.update();
         expect(componentWrapper.find("DocumentsModule").length).toBe(1);

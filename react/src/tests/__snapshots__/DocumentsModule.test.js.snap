@@ -19,7 +19,20 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
             "documents": Object {
               "AAAAAAAAAAA": Object {
                 "accessLevel": "PUBLIC",
-                "action": Array [],
+                "action": Array [
+                  Object {
+                    "actionDate": "2000-01-01T12:00:00.000+0000",
+                    "actionType": "OPEN",
+                    "employee": Object {
+                      "firstName": "John",
+                      "id": 2,
+                      "lastName": "Doe",
+                      "middleName": null,
+                      "role": "STAFF",
+                    },
+                    "id": 1,
+                  },
+                ],
                 "category": Object {
                   "description": "Workpapers",
                   "id": 3,
@@ -73,7 +86,20 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
             "documents": Object {
               "AAAAAAAAAAA": Object {
                 "accessLevel": "PUBLIC",
-                "action": Array [],
+                "action": Array [
+                  Object {
+                    "actionDate": "2000-01-01T12:00:00.000+0000",
+                    "actionType": "OPEN",
+                    "employee": Object {
+                      "firstName": "John",
+                      "id": 2,
+                      "lastName": "Doe",
+                      "middleName": null,
+                      "role": "STAFF",
+                    },
+                    "id": 1,
+                  },
+                ],
                 "category": Object {
                   "description": "Workpapers",
                   "id": 3,
@@ -116,6 +142,7 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
     }
   }
   downloadFile={[Function]}
+  getDocumentHistory={[Function]}
   getDocuments={[Function]}
   getProjects={[Function]}
   openDocument={[Function]}
@@ -124,6 +151,7 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
     buttonActions={
       Array [
         [Function],
+        null,
       ]
     }
     displayType="grid-view"
@@ -165,6 +193,7 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
               "text": "2017 Form 1040",
             },
             null,
+            null,
           ]
         }
       >
@@ -198,11 +227,25 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
       <IconLinkList
         dblClickHandler={[Function]}
         displayType="grid-view"
+        iconClickHandler={[Function]}
         list={
           Object {
             "AAAAAAAAAAA": Object {
               "accessLevel": "PUBLIC",
-              "action": Array [],
+              "action": Array [
+                Object {
+                  "actionDate": "2000-01-01T12:00:00.000+0000",
+                  "actionType": "OPEN",
+                  "employee": Object {
+                    "firstName": "John",
+                    "id": 2,
+                    "lastName": "Doe",
+                    "middleName": null,
+                    "role": "STAFF",
+                  },
+                  "id": 1,
+                },
+              ],
               "category": Object {
                 "description": "Workpapers",
                 "id": 3,
@@ -239,10 +282,11 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
           }
         }
         nameLabel="description"
+        selection={null}
         type="documents"
       >
         <ul
-          className="grid-view"
+          className="frame grid-view"
         >
           <IconLink
             dblClickHandler={[Function]}
@@ -253,14 +297,17 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
               }
             }
             fileType="PDF"
+            iconClickHandler={[Function]}
             id="AAAAAAAAAAA"
             key="AAAAAAAAAAA"
             name="file2"
+            selected={false}
             view="grid-view"
           >
             <li
-              className="PDF"
+              className=" PDF"
               data-id="AAAAAAAAAAA"
+              onClick={[Function]}
               onDoubleClick={[Function]}
               title="file2"
             >
@@ -281,14 +328,17 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
               }
             }
             fileType="EXCEL"
+            iconClickHandler={[Function]}
             id="BBBBBBBBBBB"
             key="BBBBBBBBBBB"
             name="file2"
+            selected={false}
             view="grid-view"
           >
             <li
-              className="EXCEL"
+              className=" EXCEL"
               data-id="BBBBBBBBBBB"
+              onClick={[Function]}
               onDoubleClick={[Function]}
               title="file2"
             >
@@ -309,14 +359,17 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
               }
             }
             fileType="TXT"
+            iconClickHandler={[Function]}
             id="ASDFHOWEOUH"
             key="ASDFHOWEOUH"
             name="notes"
+            selected={false}
             view="grid-view"
           >
             <li
-              className="TXT"
+              className=" TXT"
               data-id="ASDFHOWEOUH"
+              onClick={[Function]}
               onDoubleClick={[Function]}
               title="notes"
             >
@@ -354,7 +407,20 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
             "documents": Object {
               "AAAAAAAAAAA": Object {
                 "accessLevel": "PUBLIC",
-                "action": Array [],
+                "action": Array [
+                  Object {
+                    "actionDate": "2000-01-01T12:00:00.000+0000",
+                    "actionType": "OPEN",
+                    "employee": Object {
+                      "firstName": "John",
+                      "id": 2,
+                      "lastName": "Doe",
+                      "middleName": null,
+                      "role": "STAFF",
+                    },
+                    "id": 1,
+                  },
+                ],
                 "category": Object {
                   "description": "Workpapers",
                   "id": 3,
@@ -408,7 +474,20 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
             "documents": Object {
               "AAAAAAAAAAA": Object {
                 "accessLevel": "PUBLIC",
-                "action": Array [],
+                "action": Array [
+                  Object {
+                    "actionDate": "2000-01-01T12:00:00.000+0000",
+                    "actionType": "OPEN",
+                    "employee": Object {
+                      "firstName": "John",
+                      "id": 2,
+                      "lastName": "Doe",
+                      "middleName": null,
+                      "role": "STAFF",
+                    },
+                    "id": 1,
+                  },
+                ],
                 "category": Object {
                   "description": "Workpapers",
                   "id": 3,
@@ -451,6 +530,7 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
     }
   }
   downloadFile={[Function]}
+  getDocumentHistory={[Function]}
   getDocuments={[Function]}
   getProjects={[Function]}
   openDocument={[Function]}
@@ -459,6 +539,7 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
     buttonActions={
       Array [
         [Function],
+        null,
       ]
     }
     displayType="grid-view"
@@ -491,6 +572,7 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
             null,
             null,
             null,
+            null,
           ]
         }
       >
@@ -505,6 +587,7 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
       <IconLinkList
         dblClickHandler={[Function]}
         displayType="grid-view"
+        iconClickHandler={[Function]}
         list={
           Object {
             "100000": Object {
@@ -521,7 +604,20 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
                   "documents": Object {
                     "AAAAAAAAAAA": Object {
                       "accessLevel": "PUBLIC",
-                      "action": Array [],
+                      "action": Array [
+                        Object {
+                          "actionDate": "2000-01-01T12:00:00.000+0000",
+                          "actionType": "OPEN",
+                          "employee": Object {
+                            "firstName": "John",
+                            "id": 2,
+                            "lastName": "Doe",
+                            "middleName": null,
+                            "role": "STAFF",
+                          },
+                          "id": 1,
+                        },
+                      ],
                       "category": Object {
                         "description": "Workpapers",
                         "id": 3,
@@ -575,7 +671,20 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
                   "documents": Object {
                     "AAAAAAAAAAA": Object {
                       "accessLevel": "PUBLIC",
-                      "action": Array [],
+                      "action": Array [
+                        Object {
+                          "actionDate": "2000-01-01T12:00:00.000+0000",
+                          "actionType": "OPEN",
+                          "employee": Object {
+                            "firstName": "John",
+                            "id": 2,
+                            "lastName": "Doe",
+                            "middleName": null,
+                            "role": "STAFF",
+                          },
+                          "id": 1,
+                        },
+                      ],
                       "category": Object {
                         "description": "Workpapers",
                         "id": 3,
@@ -618,10 +727,11 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
           }
         }
         nameLabel="clientName"
+        selection={null}
         type="clients"
       >
         <ul
-          className="grid-view"
+          className="frame grid-view"
         >
           <IconLink
             dblClickHandler={[Function]}
@@ -631,14 +741,17 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
               }
             }
             fileType={null}
+            iconClickHandler={[Function]}
             id="100001"
             key="100001"
             name="Alondra Perez"
+            selected={false}
             view="grid-view"
           >
             <li
-              className={null}
+              className=" null"
               data-id="100001"
+              onClick={[Function]}
               onDoubleClick={[Function]}
               title="Alondra Perez"
             >
@@ -658,14 +771,17 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
               }
             }
             fileType={null}
+            iconClickHandler={[Function]}
             id="100000"
             key="100000"
             name="Ozzy Perez"
+            selected={false}
             view="grid-view"
           >
             <li
-              className={null}
+              className=" null"
               data-id="100000"
+              onClick={[Function]}
               onDoubleClick={[Function]}
               title="Ozzy Perez"
             >

@@ -8,6 +8,7 @@ describe("DocumentsModule", () => {
     /* ==== MOCKS ==== */
     const getProjects = jest.fn();
     const getDocuments = jest.fn();
+    const getDocumentHistory = jest.fn();
     const openDocument = jest.fn((id) => this.setState(
         {filePath:"/Users/Ozzy/Desktop/sas/[100000] Ozzy Perez/[Tax Return] 2017 Form 1040/[ASDFHOWEOUH][Notes][2017] notes.txt"}
     ));
@@ -16,7 +17,20 @@ describe("DocumentsModule", () => {
     const documents = {
         "AAAAAAAAAAA":{
             accessLevel:"PUBLIC",
-            action:[],
+            action:[
+                {
+                    actionDate:"2000-01-01T12:00:00.000+0000",
+                    actionType:"OPEN",
+                    id:1,
+                    employee:{
+                        firstName:"John",
+                        middleName:null,
+                        lastName:"Doe",
+                        role:"STAFF",
+                        id:2
+                    }
+                }
+            ],
             category:{description:"Workpapers", id:3},
             description:"file2",
             fileType:"PDF",
@@ -66,6 +80,7 @@ describe("DocumentsModule", () => {
     getDocuments={getDocuments} 
     openDocument={openDocument} 
     downloadFile={downloadFile}
+    getDocumentHistory={getDocumentHistory}
     ajaxErrorHandler={ajaxErrorHandler}/>;
 
 	beforeAll(() => {
@@ -90,12 +105,12 @@ describe("DocumentsModule", () => {
     })
     
     it("Should change icon view and show/hide details when clicking toggleDisplayType button", () => {
-        expect(componentWrapper.find("ul").prop("className")).toBe("grid-view");
+        expect(componentWrapper.find("ul").prop("className")).toBe("frame grid-view");
         componentWrapper.find("button").at(0).simulate('click');
-        expect(componentWrapper.find("ul").prop("className")).toBe("list-view");
+        expect(componentWrapper.find("ul").prop("className")).toBe("frame list-view");
         expect(componentWrapper.find(".details").at(0).find("p").at(0).text()).toBe("100001");
         componentWrapper.find("button").at(0).simulate('click');
-        expect(componentWrapper.find("ul").prop("className")).toBe("grid-view");
+        expect(componentWrapper.find("ul").prop("className")).toBe("frame grid-view");
         expect(componentWrapper.find(".details").children().length).toBe(0);
     });
 
@@ -148,5 +163,28 @@ describe("DocumentsModule", () => {
         componentWrapper.update();
         componentWrapper.find("#breadcrumb-slider > div").at(0).simulate("click");
         expect(componentWrapper.find("li").at(0).text()).toBe("Alondra Perez");
+    });
+
+    it("Should render document history when clicking toolbar button", () => {
+        componentWrapper.instance().renderProjectList({currentTarget:{dataset:{id:"100001"}}});
+        componentWrapper.instance().renderDocumentList({currentTarget:{dataset:{id:"1"}}});
+        componentWrapper.instance().iconClickHandler({currentTarget:{dataset:{id:"AAAAAAAAAAA"}}})
+        componentWrapper.update();
+        expect(componentWrapper.state("clickSelection")).toBe("AAAAAAAAAAA");
+        componentWrapper.find("button.viewDocumentHistory").simulate("click");
+        expect(getDocumentHistory).toBeCalled();
+        componentWrapper.setState({currDocHistory:[{
+            actionType:"OPEN",
+            id:1,
+            employee:{
+                firstName:"John",
+                middleName:null,
+                lastName:"Doe",
+                role:"STAFF",
+                id:2
+            }
+        }], currDoc:"AAAAAAAAAAA"});
+        expect(componentWrapper.find("#DocumentHistory").type()).toBe("ol");
+        expect(componentWrapper.find("#DocumentHistory > li").length).toBe(2);
     });
 });

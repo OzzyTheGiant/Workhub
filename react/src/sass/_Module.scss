@@ -1,5 +1,5 @@
 .Module {
-    padding:20px 16px;
+    padding:16px 20px 50px;
 	h1 {
 		font-size:2rem;
 		color:$color-main;
@@ -13,9 +13,14 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
+    button:not(:last-child) {margin-right:8px;}
 }
 
 .toggleDisplayType {
     &.button-list-view {background-image:url('../images/grid-view.svg')}
     &.button-grid-view {background-image:url('../images/list-view.svg')}
+}
+
+.viewDocumentHistory {
+    background-image:url('../images/history.svg');
 }

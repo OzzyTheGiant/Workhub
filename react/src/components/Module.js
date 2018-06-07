@@ -5,10 +5,12 @@ const Module = (props) => {
     let toolbarButtons = null; 
     if (props.buttonActions) {
         toolbarButtons = props.buttonActions.map((func, index) => {
-            return <button 
+            if (func) return (
+                <button 
                 key={index} 
                 className={func.name.split(" ")[1] + " toolbar-button button-" + props.displayType} 
-                onClick={func}></button>;
+                onClick={func}></button>
+            ); else return null;
         });
     }
 	return (

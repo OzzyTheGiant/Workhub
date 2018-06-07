@@ -8,6 +8,7 @@ $color-white:#FFF;
 $color-gray-text:#7E949E;
 $color-main:#00638E;
 $color-main-light:#8CDCFF;
+$color-main-dim:tint(#00638E, 70%);
 $color-success:#008E78;
 $color-error:#8E0000;
 $color-gray:#F4F8F9;
@@ -63,10 +64,13 @@ input {
     display:flex;
     flex-wrap:wrap;
     justify-content:left;
-    max-height:1000px;
-    overflow-y:auto;
     li, .list-item {
         display:inline-block;
         cursor:pointer;
     }
+}
+
+.frame {
+    max-height:390px;
+    overflow-y:auto;
 }

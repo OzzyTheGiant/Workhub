@@ -1,6 +1,7 @@
 #DocumentsModule {
     .grid-view, .list-view {
         font-size:0.88rem;
+        .selected {background-color:$color-main-dim;}
         li {
             padding:0 8px 12px;
             margin-bottom:20px;
@@ -32,10 +33,13 @@
             padding-top:65px;
             height:112px;
             overflow:hidden;
-            background-position:center top;
+            background-position:center 8px;
             text-align:center;
             &.PDF, &.WORD, &.EXCEL, &.POWERPOINT, 
-            &.WORD_2003, &.EXCEL_2003, &.POWERPOINT_2003, &.TXT, &.RTF {background-size:60px;}
+            &.WORD_2003, &.EXCEL_2003, &.POWERPOINT_2003, &.TXT, &.RTF {
+                background-size:60px;
+                background-position:center top;
+            }
         }
     }
     .list-view {
@@ -43,7 +47,7 @@
             width:250px;
             height:74px;
             background-size:80px;
-            background-position:left center;
+            background-position:4px center;
             padding-left:90px;
             margin-right:16px;
             padding-top:10px;
@@ -58,7 +62,7 @@
         width:100%;
         max-width:1280px;
         background-color: $color-black;
-        height:500px;
+        height:700px;
         margin-bottom:30px;
         .color-button {display:block; margin:20px auto 0;}
     }
@@ -123,4 +127,54 @@
     padding:20px 8px;
     border:1px solid shade($color-gray, 10%);
     white-space:pre;
+}
+
+#DocumentHistory {
+    list-style-type:none;
+    padding-left:0;
+    .header-row {
+        li, li:not(.action-type) {background-color:$color-black;}
+        color:$color-white;
+        font-weight:bold;
+    }
+    .action-type {
+        font-weight:bold;
+        background-color:$color-main;
+        color:$color-white;
+        min-width:85px;
+        width:16%;
+    }
+    > li {border-bottom:1px solid $color-white;}
+    ul li {
+        display:inline-block;
+        padding:8px;
+        &:not(.action-type) {
+            background-color:$color-main-dim;
+        }
+    }
+    .employee {
+        width:42%;
+        min-width:200px;
+    }
+    .action-type, .employee {border-right:1px solid $color-white;}
+    .action-date {
+        width:42%;
+        min-width:170px;
+        @media screen and (max-width:595px) {width:auto;}
+    }
+    @media screen and (max-width:517px) {
+        .header-row {display:none;}
+        .action-type {
+            display:block;
+            width:100%;
+            text-align:center;
+            border-right:none;
+        }
+        .action-date, .employee {width:50%; text-align:center}
+        > li {border-bottom:none;margin-bottom:14px;}
+    }
+    @media screen and (max-width:463px) {
+        .action-date, .employee {display:block;width:auto;}
+        .employee {border-right:none;}
+    }
 }

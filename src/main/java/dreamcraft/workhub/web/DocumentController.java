@@ -1,7 +1,9 @@
 package dreamcraft.workhub.web;
 
 import dreamcraft.workhub.model.Document;
+import dreamcraft.workhub.model.DocumentAction;
 import dreamcraft.workhub.model.Employee;
+import dreamcraft.workhub.service.DocumentActionService;
 import dreamcraft.workhub.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +17,7 @@ import java.util.List;
 @RestController
 public class DocumentController {
     @Autowired private DocumentService documentService;
+    @Autowired private DocumentActionService docActionService;
 
     @GetMapping("/clients/{clientId}/documents")
     public List<Document> getDocumentsByClientId(@PathVariable String clientId) {
@@ -24,6 +27,12 @@ public class DocumentController {
     @GetMapping("/projects/{projectId}/documents")
     public List<Document> getDocumentsByProjectId(@PathVariable int projectId) {
         return documentService.selectByProjectId(projectId);
+    }
+
+    @GetMapping("documents/{id}/history")
+    public List<DocumentAction> getDocumentHistoryByDocumentId(@PathVariable String id) {
+        // TODO: write unit tests for this method
+        return docActionService.selectByDocumentId(id);
     }
 
     @GetMapping(value = "/documents/{id}/open", produces={"text/plain"})

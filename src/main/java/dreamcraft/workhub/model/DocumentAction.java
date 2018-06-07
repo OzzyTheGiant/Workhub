@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "DocumentHistory")
-@JsonIgnoreProperties({"document", "employee"})
+@JsonIgnoreProperties({"document"})
 public class DocumentAction {
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -29,7 +29,10 @@ const services = {
         let url = response.config.url.split("/");
         if (successHandler) successHandler(response.data);
         else downloadDocument(url[url.length - 1], response.data, response.headers["content-type"]);
-    }).catch(error => errorHandler(error))
+    }).catch(error => errorHandler(error)),
+
+    getDocumentHistory:(docID, successHandler, errorHandler) => ajax.get(`documents/${docID}/history`)
+    .then(response => successHandler(response.data)).catch(error => errorHandler(error))
 };
 
 export default services;

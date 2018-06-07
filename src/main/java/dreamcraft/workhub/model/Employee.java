@@ -6,12 +6,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Collection;
+import java.util.List;
 
 @Entity(name = "user")
 @Table(name = "Employees")
+@JsonIgnoreProperties({"username", "password", "documentHistory", "accountNonExpired", "accountNonLocked", "active", "authorities", "credentialsNonExpired", "enabled"})
 public class Employee implements UserDetails {
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    public static final long serialVersionUID = 1L;
 
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private short id;
@@ -26,6 +30,7 @@ public class Employee implements UserDetails {
     @Column(name = "Active", nullable = false, columnDefinition = "TINYINT DEFAULT 1") private boolean isActive;
     @Column(name = "Role", nullable = false, columnDefinition = "VARCHAR(5) DEFAULT 'STAFF'", length = 5)
     private String role;
+    @OneToMany(mappedBy = "employee") private List<DocumentAction> documentHistory;
 
     public short getId() {
         return id;
@@ -89,6 +94,14 @@ public class Employee implements UserDetails {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<DocumentAction> getDocumentHistory() {
+        return documentHistory;
+    }
+
+    public void setDocumentHistory(List<DocumentAction> documentHistory) {
+        this.documentHistory = documentHistory;
     }
 
     @Override

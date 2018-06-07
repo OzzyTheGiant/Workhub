@@ -21,6 +21,10 @@ public class DocumentActionService implements DocumentActionServiceInterface{
         return documentActionDAO.findById(id).get();
     }
 
+    public List<DocumentAction> selectByDocumentId(String id) {
+        return documentActionDAO.findByDocumentId(id);
+    }
+
     @Override
     public void save(DocumentAction action) {
         documentActionDAO.save(action);
