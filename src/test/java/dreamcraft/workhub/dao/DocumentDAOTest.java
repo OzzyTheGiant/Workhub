@@ -27,12 +27,12 @@ class DocumentDAOTest {
 
     @Test
     public void findAllByClientId_ShouldReturnTwoDocuments() {
-        assertEquals(2, documentDAO.findAllByClientId("100000").size());
+        assertEquals(7, documentDAO.findAllByClientId("100000").size());
     }
 
     @Test
     public void findAllByProjectId_ShouldReturnTwoDocuments() {
-        assertEquals(2, documentDAO.findAllByProjectId(1).size());
+        assertEquals(4, documentDAO.findAllByProjectId(1).size());
     }
 
     @Test

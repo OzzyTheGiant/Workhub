@@ -31,7 +31,6 @@ public class DocumentController {
 
     @GetMapping("documents/{id}/history")
     public List<DocumentAction> getDocumentHistoryByDocumentId(@PathVariable String id) {
-        // TODO: write unit tests for this method
         return docActionService.selectByDocumentId(id);
     }
 

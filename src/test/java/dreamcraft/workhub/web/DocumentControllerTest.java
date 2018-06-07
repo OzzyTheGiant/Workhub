@@ -1,7 +1,9 @@
 package dreamcraft.workhub.web;
 
 import dreamcraft.workhub.model.Document;
+import dreamcraft.workhub.model.DocumentAction;
 import dreamcraft.workhub.model.Employee;
+import dreamcraft.workhub.service.DocumentActionService;
 import dreamcraft.workhub.service.DocumentService;
 import dreamcraft.workhub.service.NoResultsFoundException;
 import org.json.JSONArray;
@@ -31,6 +33,7 @@ class DocumentControllerTest extends ControllerTest {
     private Document document;
     @InjectMocks private DocumentController controller;
     @Mock private DocumentService documentService;
+    @Mock private DocumentActionService actionService;
     @Mock private UsernamePasswordAuthenticationToken principal;
 
     @Override
@@ -127,6 +130,27 @@ class DocumentControllerTest extends ControllerTest {
             .andExpect(status().isNotFound())
             .andReturn();
         verify(documentService).getDocumentFilePath("doesnotexist", employee);
+    }
+
+    @Test
+    public void getDocumentHistoryByDocumentId_ShouldReturnArrayOfActions() throws Exception {
+        List<DocumentAction> actions = Arrays.asList(new DocumentAction(), new DocumentAction());
+        when(actionService.selectByDocumentId("AAAAAAAAAAA")).thenReturn(actions);
+        MvcResult result = mockMVC.perform(get("/documents/AAAAAAAAAAA/history"))
+            .andExpect((status().isOk()))
+            .andReturn();
+        JSONAssert.assertEquals("[{}, {}]", result.getResponse().getContentAsString(), false);
+        verify(actionService).selectByDocumentId("AAAAAAAAAAA");
+    }
+
+    @Test
+    public void getDocumentHistoryByDocumentId_ShouldThrowErrorIfClientDoesNotExist() throws Exception {
+        List<DocumentAction> actions = Arrays.asList(new DocumentAction(), new DocumentAction());
+        when(actionService.selectByDocumentId("AAAAAAAAAAA")).thenThrow(NoResultsFoundException.class);
+        mockMVC.perform(get("/documents/AAAAAAAAAAA/history"))
+                .andExpect((status().isNotFound()))
+                .andReturn();verify(actionService).selectByDocumentId("AAAAAAAAAAA");
+        verify(actionService).selectByDocumentId("AAAAAAAAAAA");
     }
 
     private Employee createTestEmployee() {
