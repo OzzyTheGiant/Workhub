@@ -160,9 +160,9 @@
     .action-date {
         width:42%;
         min-width:170px;
-        @media screen and (max-width:595px) {width:auto;}
+        @media screen and (max-width:602px) {width:auto;}
     }
-    @media screen and (max-width:517px) {
+    @media screen and (max-width:524px) {
         .header-row {display:none;}
         .action-type {
             display:block;
@@ -173,7 +173,7 @@
         .action-date, .employee {width:50%; text-align:center}
         > li {border-bottom:none;margin-bottom:14px;}
     }
-    @media screen and (max-width:463px) {
+    @media screen and (max-width:470px) {
         .action-date, .employee {display:block;width:auto;}
         .employee {border-right:none;}
     }
