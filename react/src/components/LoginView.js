@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Notification from 'components/Notification';
+import React from "react";
+import PropTypes from "prop-types";
+import Notification from "components/Notification";
 
 class LoginView extends React.Component {
 	constructor() {
@@ -9,12 +9,12 @@ class LoginView extends React.Component {
 			username:null,
 			password:null,
 			errorMessage:null
-		}
-    };
+		};
+	}
     
-    componentDidMount() {
-        this.setState({errorMessage:this.props.errorMessage});
-    }
+	componentDidMount() {
+		this.setState({errorMessage:this.props.errorMessage});
+	}
 
 	onLoginFormSubmit = (e) => {
 		if (e) e.preventDefault();
@@ -24,11 +24,11 @@ class LoginView extends React.Component {
 
 	onSuccessfulLogin = () => this.props.initApplication();
 
-	onFailedLogin = error => this.setState({
+	onFailedLogin = () => this.setState({
 		errorMessage: "Login Error: Username or password is incorrect!"
 	});
 
-	render(props) {
+	render() {
 		return (
 			<div id="LoginView">
 				<form action="/login" method="post" onSubmit={this.onLoginFormSubmit}>
@@ -42,12 +42,12 @@ class LoginView extends React.Component {
 			</div>
 		);
 	}
-};
+}
 
 LoginView.propTypes = {
 	initApplication:PropTypes.func.isRequired,
-    login:PropTypes.func.isRequired,
-    errorMessage:PropTypes.string
+	login:PropTypes.func.isRequired,
+	errorMessage:PropTypes.string
 };
 
 export default LoginView;

@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const Header = (props) => {
-    return (
-        <header id="Header">
-            <img src="http://placehold.it/120x32/8CDCFF" alt="Workhub Logo"/>
-            <nav>
-                <ul>
-                    <li onClick={props.logout}>Log Out</li>
-                </ul>
-            </nav>
-        </header>
-    );
+	return (
+		<header id="Header">
+			<img src="http://placehold.it/120x32/8CDCFF" alt="Workhub Logo"/>
+			<nav>
+				<ul>
+					<li onClick={props.logout}>Log Out</li>
+				</ul>
+			</nav>
+		</header>
+	);
 };
 
 Header.propTypes = {
-    logout:PropTypes.func.isRequired
-}
+	logout:PropTypes.func.isRequired
+};
 
 export default Header;
