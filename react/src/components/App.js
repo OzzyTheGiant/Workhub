@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import "css/main-styles.css";
-import Header from "components/Header";
-import LoginView from "components/LoginView";
-import DocumentsModule from "components/DocumentsModule";
 import services from "api/services";
+import AppUserInterface from 'components/AppUserInterface';
  
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {isLoggedIn:false, clients:{}, errorMessage:null};
-		//this.cacheInterval = 300000; // 5 minutes
 	}
 
 	initApplication = () => { 
@@ -22,14 +19,6 @@ class App extends Component {
     	/* Logs the user out and clears the state */
     	isLoggedIn:false, currentModule:null, clients:[], errorMessage: errorMessage || null
     }), () => window.location.pathname = "/");
-
-    // checkCacheTime(dataset, cacheName) {
-    //     /* Checks to see if enough time has passed before fetching data from server again */
-    //     let now = (new Date()).getTime();
-    //     if (now - dataset[cacheName] >= this.cacheInterval) {
-    //         this.setState({cacheName:{...this.state.cacheName, docActionsCacheTime:now}})
-    //     }
-    // }
 
     setClients = (data) => this.setState({
     	/* add client data to state, converted from array to object with id keys */
@@ -75,26 +64,11 @@ class App extends Component {
     };
 
  	render() {
- 		const view = this.state.isLoggedIn ? (
-    		this.state.currentModule === "documents" ? 
-    			<DocumentsModule 
-    				clients={this.state.clients}
-    				ajaxErrorHandler={this.ajaxErrorHandler}
-    				getProjects={this.getProjects}
-    				openDocument={services.openDocument}
-    				getDocuments={this.getDocuments}
-    				downloadFile={services.downloadFile}
-    				getDocumentHistory={services.getDocumentHistory}/> : null
-    	) : (
-    		<LoginView initApplication={this.initApplication} login={services.login} errorMessage={this.state.errorMessage}/>
-    	);
- 		return (
- 			<div className="App">
- 				{this.state.isLoggedIn ? <Header logout={this.logout}/> : null}
- 				{view}
- 				<footer>&copy; 2018 Salinas, Allen & Schmitt, LLP. All Rights Reserved</footer>
- 			</div>
- 		);
+		 return (
+		 	<AppUserInterface 
+			isLoggedIn={this.state.isLoggedIn} 
+			logout={this.logout}/>
+		 );
   	}
 }
 
