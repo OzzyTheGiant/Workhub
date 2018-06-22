@@ -11,7 +11,12 @@ import java.util.List;
 
 @RestController
 public class ProjectController {
-    @Autowired ProjectServiceInterface projectService;
+	@Autowired ProjectServiceInterface projectService;
+	
+	@GetMapping("projects")
+	public List<Project> getAllProjects() {
+		return projectService.selectAll();
+	}
 
     @GetMapping("/clients/{clientId}/projects")
     public List<Project> projectListForClient(@PathVariable String clientId) {

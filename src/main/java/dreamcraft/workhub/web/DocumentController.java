@@ -17,7 +17,12 @@ import java.util.List;
 @RestController
 public class DocumentController {
     @Autowired private DocumentService documentService;
-    @Autowired private DocumentActionService docActionService;
+	@Autowired private DocumentActionService docActionService;
+	
+	@GetMapping("/documents")
+	public List<Document> getAllDocuments() {
+		return documentService.selectAll();
+	}
 
     @GetMapping("/clients/{clientId}/documents")
     public List<Document> getDocumentsByClientId(@PathVariable String clientId) {
