@@ -47,7 +47,7 @@ class App extends Component {
 		services.logout({
 			successHandler:() => this.setState({
 				...this.initialState, 
-				notification:errorMessage ? {type:"error", text:errorMessage} : null
+				notification:errorMessage ? {type:"error", text:errorMessage} : {}
 			}), 
 			errorHandler:() => window.location.pathname = "/"
 		});
