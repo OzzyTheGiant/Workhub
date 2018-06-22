@@ -1,13 +1,16 @@
 package dreamcraft.workhub.model;
 
 import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "Projects")
-@JsonIgnoreProperties({"client"})
 public class Project {
     @Id @Column(name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,7 +18,9 @@ public class Project {
     @Column(name = "Name", length = 100, nullable = false)
     private String Name;
 
-    @ManyToOne @JoinColumn(name = "ClientID", nullable = false)
+	@ManyToOne @JoinColumn(name = "ClientID", nullable = false)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+   	@JsonIdentityReference(alwaysAsId = true)
     private Client client;
 
     @ManyToOne @JoinColumn(name = "CategoryID", nullable = false)

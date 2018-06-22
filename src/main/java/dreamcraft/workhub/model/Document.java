@@ -2,21 +2,32 @@ package dreamcraft.workhub.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
 
 @Entity
 @Table(name = "Documents")
-@JsonIgnoreProperties({"client", "project"})
 public class Document {
     @Id @Column(name = "ID") private String id;
     @Column(name = "Description", nullable = false) String description;
-    @Column(name = "Year", nullable = false) private short year;
+	@Column(name = "Year", nullable = false) private short year;
+	
     @Column(name = "AccessLevel", nullable = false, columnDefinition = "TINYINT DEFAULT 0") @Enumerated(EnumType.ORDINAL)
-    private AccessLevel accessLevel;
-    @ManyToOne @JoinColumn(name = "ClientID") private Client client;
-    @ManyToOne @JoinColumn(name = "ProjectID") private Project project;
+	private AccessLevel accessLevel;
+	
+	@ManyToOne @JoinColumn(name = "ClientID")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
+	private Client client;
+
+	@ManyToOne @JoinColumn(name = "ProjectID")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+   	@JsonIdentityReference(alwaysAsId = true)
+	private Project project;
+
     @ManyToOne @JoinColumn(name = "CategoryID") @Enumerated private DocumentCategory category;
     @OneToMany(mappedBy = "document") private List<DocumentAction> action;
     @Column(name = "FileTypeID") @Enumerated(EnumType.ORDINAL) private FileType fileType;
