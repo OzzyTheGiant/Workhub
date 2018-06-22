@@ -16,7 +16,7 @@
     button:not(:last-child) {margin-right:8px;}
 }
 
-.toggleDisplayType {
+.toggleIconView {
     &.button-list-view {background-image:url('../images/grid-view.svg')}
     &.button-grid-view {background-image:url('../images/list-view.svg')}
 }

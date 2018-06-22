@@ -12,7 +12,7 @@ const DocumentHistory = props => {
 					<li className="action-date">Date &amp; Time</li>
 				</ul>
 			</li>
-			{props.actionList.map(action => {
+			{props.historyList.map(action => {
 				let date = datetimeFormatter(action.actionDate);
 				return (
 					<li key={action.id}>
@@ -29,7 +29,7 @@ const DocumentHistory = props => {
 };
 
 DocumentHistory.propTypes = {
-	actionList:PropTypes.array.isRequired
+	historyList:PropTypes.array.isRequired
 };
 
 export default DocumentHistory;

@@ -15,24 +15,26 @@ function extractDetails(list, id, type) {
 }
 
 const IconLinkList = props => {
-	let listIDs = Object.keys(props.list || {});
+	let list = props.list;
+	if (!props.list) return null;
+	let listIDs = Object.keys(list || {});
 	return (
 		<ul className={"frame " + props.displayType}>
-			{props.list && listIDs.length > 0 ? (
+			{list && listIDs.length > 0 ? (
 				listIDs.map(id => {
 					let selected = false;
-					if (props.selection === id) selected = true;
+					if (props.clickSelection === id) selected = true;
 					return (
 						<IconLink 
-							key={id}
-							id={id} // this id will be passed via event dataset to event handler
-							name={props.list[id][props.nameLabel]}
-							details={extractDetails(props.list, id, props.type)}
-							selected={selected}
-							dblClickHandler={props.dblClickHandler}
-							iconClickHandler={props.iconClickHandler}
-							fileType={props.list[id].fileType || null}
-							view={props.displayType}/>
+						key={id}
+						id={id} // this id will be passed via event dataset to event handler
+						name={list[id][props.nameLabel]}
+						details={extractDetails(list, id, props.type)}
+						selected={selected}
+						dblClickHandler={props.iconDoubleClickHandler}
+						iconClickHandler={props.iconClickHandler}
+						fileType={list[id].fileType || null}
+						view={props.displayType}/>
 					);
 				}).sort((a, b) => {
 					if (a.props.name < b.props.name) return -1;
@@ -47,13 +49,13 @@ const IconLinkList = props => {
 };
 
 IconLinkList.propTypes = {
-	list:PropTypes.object,
+	list:PropTypes.any,
 	type:PropTypes.string.isRequired,
 	nameLabel:PropTypes.any.isRequired,
 	displayType:PropTypes.string.isRequired,
-	dblClickHandler:PropTypes.func.isRequired,
+	clickSelection:PropTypes.any,
 	iconClickHandler:PropTypes.func.isRequired,
-	selection:PropTypes.any
+	iconDoubleClickHandler:PropTypes.func.isRequired,
 };
 
 export default IconLinkList;

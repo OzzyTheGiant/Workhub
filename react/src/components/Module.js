@@ -8,7 +8,7 @@ const Module = (props) => {
 			if (func) return (
 				<button 
 					key={index} 
-					className={func.name.split(" ")[1] + " toolbar-button button-" + props.displayType} 
+					className={func.name.split(" ")[1] + " toolbar-button button-" + props.iconDisplayType} 
 					onClick={func}></button>
 			); else return null;
 		});
@@ -26,7 +26,7 @@ const Module = (props) => {
 
 Module.propTypes = {
 	title:PropTypes.string.isRequired,
-	displayType:PropTypes.string,
+	iconDisplayType:PropTypes.string,
 	buttonActions:PropTypes.arrayOf(PropTypes.func),
 	children:PropTypes.any
 };

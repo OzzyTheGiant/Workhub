@@ -5,7 +5,7 @@ const Breadcrumbs = props => {
 	return (
 		<div id="breadcrumbs">
 			<div id="breadcrumb-slider">
-				{props.breadcrumbs.map((crumb, index) => crumb ? <div key={index} onClick={crumb.clickHandler}>{crumb.text}</div> : null)}
+				{props.breadcrumbs.map((crumb, index) => crumb ? <div key={index} data-level={index + 1} onClick={crumb.clickHandler}>{crumb.text}</div> : null)}
 			</div>
 		</div>
 	);
