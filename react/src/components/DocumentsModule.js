@@ -7,7 +7,7 @@ import DocumentHistory from "components/DocumentHistory";
 import Document from "components/Document";
 
 class DocumentsModule extends React.Component {
-	componentDidMount() { 
+	componentDidMount() {
 		/* ajax request clients, projects, and documents as soon as module loads on app startup */
 		if (!this.props.clients) this.props.serviceCaller("getClients");
 		if (!this.props.projects) this.props.serviceCaller("getProjects");
@@ -140,7 +140,6 @@ class DocumentsModule extends React.Component {
 				list = this.viewDocListByProjectId(this.props.currentModule.parentId); nameLabel = "description"; break;
 			default: break;
 		}
-
     	return (
     		<Module title="Documents" buttonActions={this.generateButtonActions()} iconDisplayType={this.props.iconDisplayType}>
     			<Breadcrumbs breadcrumbs={this.props.breadCrumbs}/>
@@ -160,7 +159,7 @@ class DocumentsModule extends React.Component {
 					fileType={this.props.documents[this.props.currentModule.parentId].fileType} 
 					filePath={this.props.currentModule.filePath} 
 					textFile={this.props.currentModule.textFileData} 
-					downloadDocument={() => this.props.serviceCaller("downloadFile", this.props.clickSelection)}/>
+					downloadDocument={() => this.props.serviceCaller("downloadFile", this.props.currentModule.filePath)}/>
     			) : null}
     			{this.props.documentHistory.length > 0 ? (
     				<DocumentHistory historyList={this.props.documentHistory}/>

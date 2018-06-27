@@ -14,7 +14,7 @@ const Document = props => { // Object element for rendering PDFs, otherwise, wil
 				</div>
 			) : (
 				<div id="download-prompt">
-					This file could not be loaded or cannot be previewed online, click below to download and open locally.
+					This file could not be loaded or cannot be previewed online. Your file will now start downloading automatically. If download doesn't start, click below to download and open manually.
 					<button className="color-button button-ok" onClick={props.downloadDocument}>Download</button>
 				</div>
 			)}

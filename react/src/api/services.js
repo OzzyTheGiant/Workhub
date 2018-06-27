@@ -59,7 +59,12 @@ const services = { // all services must return an object literal that will updat
 			successHandler((prevState, props) => {
 				return { currentModule:{...prevState.currentModule, textFileData:response.data} };
 			});
-		} else downloadDocument(url[url.length - 1], response.data, response.headers["content-type"]);
+		} else {
+			successHandler((prevState, props) => {
+				return { currentModule:{...prevState.currentModule, filePath} };
+			});
+			downloadDocument(url[url.length - 1], response.data, response.headers["content-type"])
+		};
     }).catch(error => errorHandler(error)),
 
     getDocumentHistory:({data:docID, successHandler, errorHandler}) => ajax.get(`documents/${docID}/history`)
