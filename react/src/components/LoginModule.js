@@ -13,7 +13,7 @@ class LoginModule extends React.Component {
 
 	render() {
 		return (
-			<div id="LoginView">
+			<div id="LoginModule">
 				<form action="/login" method="post" onSubmit={this.onLoginFormSubmit}>
 					<img src="https://placehold.it/50x50/00638E" alt="Logo"/>
 					<h1>Log in to your account</h1>
