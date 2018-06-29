@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +38,19 @@ class DocumentControllerTest extends ControllerTest {
     @Override
     void initMockMvcAndSampleData() {
         mockMVC = MockMvcBuilders.standaloneSetup(controller).build();
-    }
+	}
+	
+	@Test
+	public void getAllDocuments_shouldReturnListOfAllDocuments() throws Exception {
+		List<Document> documents = Arrays.asList(new Document(), new Document());
+		when(documentService.selectAll()).thenReturn(documents);
+		MvcResult result = mockMVC.perform(get("/documents"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+			.andReturn();
+		verify(documentService).selectAll();
+		JSONAssert.assertEquals(createJSONArray().toString(), result.getResponse().getContentAsString(), false);
+	}
 
     @Test
     public void getDocumentsByClientId_ShouldReturnListOfTwoDocuments() throws Exception {
@@ -145,7 +156,6 @@ class DocumentControllerTest extends ControllerTest {
 
     @Test
     public void getDocumentHistoryByDocumentId_ShouldThrowErrorIfClientDoesNotExist() throws Exception {
-        List<DocumentAction> actions = Arrays.asList(new DocumentAction(), new DocumentAction());
         when(actionService.selectByDocumentId("AAAAAAAAAAA")).thenThrow(NoResultsFoundException.class);
         mockMVC.perform(get("/documents/AAAAAAAAAAA/history"))
                 .andExpect((status().isNotFound()))

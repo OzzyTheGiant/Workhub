@@ -26,7 +26,14 @@ class ProjectServiceTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-    }
+	}
+	
+	@Test
+	public void selectAll_ShouldReturnListOfAllProjects() {
+		when(projectDAO.findAll()).thenReturn(Arrays.asList(new Project(), new Project()));
+		assertEquals(2, projectService.selectAll().size(), "selectAll should return two projects");
+		verify(projectDAO).findAll();
+	}
 
     @Test
     public void selectAllByClientId_ShouldReturnListOfProjectsByClientId() {

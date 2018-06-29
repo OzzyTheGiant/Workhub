@@ -35,7 +35,19 @@ class ProjectControllerTest extends ControllerTest {
         project = new Project();
         client = new Client();
         project.setClient(client);
-    }
+	}
+	
+	@Test
+	public void getAllProjects_ShouldReturnListOfAllProjects() throws Exception {
+		List<Project> projects = Arrays.asList(project, project);
+		when(projectService.selectAll()).thenReturn(projects);
+		MvcResult result = mockMVC.perform(get("/projects"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+			.andReturn();
+		verify(projectService).selectAll();
+		JSONAssert.assertEquals(createJSONArray().toString(), result.getResponse().getContentAsString(), false);
+	}
 
     @Test
     public void projectListForClient_shouldReturnListOfProjectsByClient() throws Exception {
@@ -47,8 +59,6 @@ class ProjectControllerTest extends ControllerTest {
                 .andReturn();
         verify(projectService).selectAllByClientId("100000");
         JSONArray jsonArray = createJSONArray();
-        System.out.println(jsonArray.toString());
-        System.out.println(result.getResponse().getContentAsString());
         JSONAssert.assertEquals(jsonArray.toString(), result.getResponse().getContentAsString(), false);
     }
 

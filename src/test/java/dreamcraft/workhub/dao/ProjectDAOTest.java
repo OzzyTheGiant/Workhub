@@ -23,7 +23,12 @@ import static org.junit.jupiter.api.Assertions.*;
         DbUnitTestExecutionListener.class
 })
 class ProjectDAOTest {
-    @Autowired private ProjectDAO projectDAO;
+	@Autowired private ProjectDAO projectDAO;
+	
+	@Test
+	public void findAll_ShouldReturnThreeProjects() throws Exception {
+		assertThat(projectDAO.findAll(), hasSize(3));
+	}
 
     @Test
     public void findAll_ShouldReturnTwoClients() throws Exception {

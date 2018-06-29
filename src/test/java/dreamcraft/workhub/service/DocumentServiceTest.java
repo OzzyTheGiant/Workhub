@@ -29,7 +29,14 @@ class DocumentServiceTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-    }
+	}
+	
+	@Test
+	public void selectAll_ShouldReturnListOfAllDocuments() throws Exception {
+		when(documentDAO.findAll()).thenReturn(Arrays.asList(new Document(), new Document()));
+		assertEquals(2, documentService.selectAll().size(), "selectAll() should return list of two documents");
+		verify(documentDAO).findAll();
+	}
 
     @Test
     public void selectByClientId_ShouldReturnListOfDocumentsByClient() throws Exception {
