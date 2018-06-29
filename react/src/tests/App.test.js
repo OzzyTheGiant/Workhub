@@ -3,60 +3,67 @@ import { configure, mount, shallow, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 import App from 'components/App';
-import LoginView from 'components/LoginView';
-import Header from 'components/Header';
-import Module from 'components/Module';
-import DocumentsModule from 'components/DocumentsModule';
+/* ==== MOCKS ====*/
+jest.mock('api/services');
+import services from 'api/services';
 
 describe("App", () => {
 	/* ==== COMPONENT ==== */
-	const app = <App/>;
-	let componentWrapper = null;
+	let app, componentWrapper = null;
 
-	/* ==== MOCKS ====*/
-    const services = {login: jest.fn()};
-    const response = [
-        {id:"100000", clientName: "Ozzy Perez"},
-        {id:"100001", clientName: "Alondra Perez"}
-    ];
+	beforeAll(() => {
+		configure({adapter:new Adapter()});
+		app = <App services={services}/>;
+	})
 
-	beforeAll(() => configure({adapter:new Adapter()}))
-	beforeEach(() => componentWrapper = shallow(app))
+	beforeEach(() => {
+		componentWrapper = mount(app);
+	});
 
 	it('Should fully render html without crashing', () => {
 		render(app);
 	});
 
-	it('Should render LoginView on start up', () => {
-		const wrapper = mount(app);
-		let jsonComponent = toJson(wrapper);
+	it('Should render LoginModule on start up', () => {
+		let jsonComponent = toJson(componentWrapper);
 		expect(jsonComponent.type).toBe('App');
-		expect(jsonComponent.children[0].type).toBe('div');
-		expect(jsonComponent.children[0].children[0].type).toBe('LoginView');
+		expect(jsonComponent.children[0].type).toBe('AppUserInterface');
+		expect(jsonComponent.children[0].children[0].children[0].type).toBe('LoginModule');
 		expect(jsonComponent).toMatchSnapshot();
 	});
 
-	it('Should render DocumentsModule when setClients() is called', () => {
-        componentWrapper.setState({isLoggedIn:true});
-		componentWrapper.instance().setClients(response);
-        componentWrapper.update();
+	it('Should render DocumentsModule after logging in', () => {
+		componentWrapper.instance().serviceCaller("login", {username:"OzzyTheGiant", password:"1234567"});
+		componentWrapper.update();
 		expect(componentWrapper.find("DocumentsModule").length).toBe(1);
-        expect(componentWrapper.state("currentModule")).toBe("documents");
-        expect(componentWrapper.state("clients")).toEqual({
-            "100000":{id:"100000", clientName: "Ozzy Perez"},
-            "100001":{id:"100001", clientName: "Alondra Perez"}
-        });
+		expect(services.login).toBeCalled();
+		expect(componentWrapper.state("isLoggedIn")).toBe(true);
     });
     
     it("Should log out the user when 'Log Out' button is clicked", () => {
-        componentWrapper.setState({isLoggedIn:true});
-        componentWrapper.instance().setClients(response);
-        componentWrapper.update();
-        expect(componentWrapper.find("DocumentsModule").length).toBe(1);
-        componentWrapper.setState({isLoggedIn:false, currentModule:null, clients:[]});
-        componentWrapper.update();
-        expect(componentWrapper.find("LoginView").length).toBe(1);
+		componentWrapper.instance().serviceCaller("login", {username:"ozzy", password:"12345678"});
+		componentWrapper.update();
+        componentWrapper.instance().serviceCaller("logout");
+		componentWrapper.update();
+		expect(services.logout).toBeCalled();
+        expect(componentWrapper.find("LoginModule").length).toBe(1);
         expect(componentWrapper.find("DocumentsModule").length).toBe(0);
-    });
+		expect(componentWrapper.state("isLoggedIn")).toBe(false);
+	});
+	
+	it("Should update state to add clients, projects, and documents when requesting for them", () => {
+		componentWrapper.instance().serviceCaller("getClients");
+		componentWrapper.update();
+		componentWrapper.instance().serviceCaller("getProjects");
+		componentWrapper.update();
+		componentWrapper.instance().serviceCaller("getDocuments");
+		componentWrapper.update();
+		expect(services.getClients).toBeCalled();
+		expect(services.getProjects).toBeCalled();
+		expect(services.getDocuments).toBeCalled();
+		expect(Object.keys(componentWrapper.state("clients")).length).toBe(2);
+		expect(Object.keys(componentWrapper.state("projects")).length).toBe(1);
+		expect(Object.keys(componentWrapper.state("documents")).length).toBe(3);
+	});
 });
 

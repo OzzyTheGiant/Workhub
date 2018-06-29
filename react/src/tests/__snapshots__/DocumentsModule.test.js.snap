@@ -2,150 +2,106 @@
 
 exports[`DocumentsModule Should render file lists correctly 1`] = `
 <DocumentsModule
-  ajaxErrorHandler={[Function]}
+  breadCrumbs={
+    Array [
+      Object {
+        "clickHandler": [Function],
+        "text": "Home",
+      },
+      Object {
+        "clickHandler": [Function],
+        "text": "Ozzy Perez",
+      },
+      Object {
+        "clickHandler": [Function],
+        "text": "2017 Form 1040",
+      },
+    ]
+  }
+  clickSelection={null}
   clients={
     Object {
       "100000": Object {
         "clientName": "Ozzy Perez",
         "id": "100000",
-        "projects": Object {
-          "1": Object {
-            "category": Object {
-              "description": "Tax Return",
-              "id": 1,
-            },
-            "dateCreated": "2018-04-26T19:58:20.000+0000",
-            "dateDue": "2017-04-15",
-            "documents": Object {
-              "AAAAAAAAAAA": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [
-                  Object {
-                    "actionDate": "2000-01-01T12:00:00.000+0000",
-                    "actionType": "OPEN",
-                    "employee": Object {
-                      "firstName": "John",
-                      "id": 2,
-                      "lastName": "Doe",
-                      "middleName": null,
-                      "role": "STAFF",
-                    },
-                    "id": 1,
-                  },
-                ],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "PDF",
-                "id": "AAAAAAAAAAA",
-                "year": 2017,
-              },
-              "ASDFHOWEOUH": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Notes",
-                  "id": 4,
-                },
-                "description": "notes",
-                "fileType": "TXT",
-                "id": "ASDFHOWEOUH",
-                "year": 2017,
-              },
-              "BBBBBBBBBBB": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "EXCEL",
-                "id": "BBBBBBBBBBB",
-                "year": 2017,
-              },
-            },
-            "id": 1,
-            "name": "2017 Form 1040",
-          },
-        },
       },
       "100001": Object {
         "clientName": "Alondra Perez",
         "id": "100001",
-        "projects": Object {
-          "1": Object {
-            "category": Object {
-              "description": "Tax Return",
-              "id": 1,
-            },
-            "dateCreated": "2018-04-26T19:58:20.000+0000",
-            "dateDue": "2017-04-15",
-            "documents": Object {
-              "AAAAAAAAAAA": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [
-                  Object {
-                    "actionDate": "2000-01-01T12:00:00.000+0000",
-                    "actionType": "OPEN",
-                    "employee": Object {
-                      "firstName": "John",
-                      "id": 2,
-                      "lastName": "Doe",
-                      "middleName": null,
-                      "role": "STAFF",
-                    },
-                    "id": 1,
-                  },
-                ],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "PDF",
-                "id": "AAAAAAAAAAA",
-                "year": 2017,
-              },
-              "ASDFHOWEOUH": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Notes",
-                  "id": 4,
-                },
-                "description": "notes",
-                "fileType": "TXT",
-                "id": "ASDFHOWEOUH",
-                "year": 2017,
-              },
-              "BBBBBBBBBBB": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "EXCEL",
-                "id": "BBBBBBBBBBB",
-                "year": 2017,
-              },
-            },
-            "id": 1,
-            "name": "2017 Form 1040",
-          },
-        },
       },
     }
   }
-  downloadFile={[Function]}
-  getDocumentHistory={[Function]}
-  getDocuments={[Function]}
-  getProjects={[Function]}
-  openDocument={[Function]}
+  currentModule={
+    Object {
+      "filePath": null,
+      "listType": "documents",
+      "name": "documents",
+      "parentId": "1",
+      "textFileData": null,
+    }
+  }
+  documentHistory={Array []}
+  documents={
+    Object {
+      "AAAAAAAAAAA": Object {
+        "accessLevel": "PUBLIC",
+        "category": Object {
+          "description": "Workpapers",
+          "id": 3,
+        },
+        "description": "file2",
+        "fileType": "PDF",
+        "id": "AAAAAAAAAAA",
+        "project": 1,
+        "year": 2017,
+      },
+      "ASDFHOWEOUH": Object {
+        "accessLevel": "PUBLIC",
+        "category": Object {
+          "description": "Notes",
+          "id": 4,
+        },
+        "client": "100000",
+        "description": "notes",
+        "fileType": "TXT",
+        "id": "ASDFHOWEOUH",
+        "project": 1,
+        "year": 2017,
+      },
+      "BBBBBBBBBBB": Object {
+        "accessLevel": "PUBLIC",
+        "category": Object {
+          "description": "Workpapers",
+          "id": 3,
+        },
+        "client": "100000",
+        "description": "file3",
+        "fileType": "EXCEL",
+        "id": "BBBBBBBBBBB",
+        "project": 1,
+        "year": 2017,
+      },
+    }
+  }
+  iconDisplayType="grid-view"
+  projects={
+    Object {
+      "1": Object {
+        "category": Object {
+          "description": "Tax Return",
+          "id": 1,
+        },
+        "client": "100000",
+        "dateCreated": "2018-04-26T19:58:20.000+0000",
+        "dateDue": "2017-04-15",
+        "id": 1,
+        "name": "2017 Form 1040",
+      },
+    }
+  }
+  serviceCaller={[Function]}
+  updateGlobalState={[Function]}
+  updateModuleState={[Function]}
 >
   <Module
     buttonActions={
@@ -154,7 +110,7 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
         null,
       ]
     }
-    displayType="grid-view"
+    iconDisplayType="grid-view"
     title="Documents"
   >
     <div
@@ -171,7 +127,7 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
           className="toolbarButtons"
         >
           <button
-            className="toggleDisplayType toolbar-button button-grid-view"
+            className="toggleIconView toolbar-button button-grid-view"
             key="0"
             onClick={[Function]}
           />
@@ -186,14 +142,12 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
             },
             Object {
               "clickHandler": [Function],
-              "text": "Alondra Perez",
+              "text": "Ozzy Perez",
             },
             Object {
               "clickHandler": [Function],
               "text": "2017 Form 1040",
             },
-            null,
-            null,
           ]
         }
       >
@@ -204,18 +158,21 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
             id="breadcrumb-slider"
           >
             <div
+              data-level={1}
               key="0"
               onClick={[Function]}
             >
               Home
             </div>
             <div
+              data-level={2}
               key="1"
               onClick={[Function]}
             >
-              Alondra Perez
+              Ozzy Perez
             </div>
             <div
+              data-level={3}
               key="2"
               onClick={[Function]}
             >
@@ -225,27 +182,14 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
         </div>
       </Breadcrumbs>
       <IconLinkList
-        dblClickHandler={[Function]}
+        clickSelection={null}
         displayType="grid-view"
         iconClickHandler={[Function]}
+        iconDoubleClickHandler={[Function]}
         list={
           Object {
             "AAAAAAAAAAA": Object {
               "accessLevel": "PUBLIC",
-              "action": Array [
-                Object {
-                  "actionDate": "2000-01-01T12:00:00.000+0000",
-                  "actionType": "OPEN",
-                  "employee": Object {
-                    "firstName": "John",
-                    "id": 2,
-                    "lastName": "Doe",
-                    "middleName": null,
-                    "role": "STAFF",
-                  },
-                  "id": 1,
-                },
-              ],
               "category": Object {
                 "description": "Workpapers",
                 "id": 3,
@@ -253,36 +197,38 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
               "description": "file2",
               "fileType": "PDF",
               "id": "AAAAAAAAAAA",
+              "project": 1,
               "year": 2017,
             },
             "ASDFHOWEOUH": Object {
               "accessLevel": "PUBLIC",
-              "action": Array [],
               "category": Object {
                 "description": "Notes",
                 "id": 4,
               },
+              "client": "100000",
               "description": "notes",
               "fileType": "TXT",
               "id": "ASDFHOWEOUH",
+              "project": 1,
               "year": 2017,
             },
             "BBBBBBBBBBB": Object {
               "accessLevel": "PUBLIC",
-              "action": Array [],
               "category": Object {
                 "description": "Workpapers",
                 "id": 3,
               },
-              "description": "file2",
+              "client": "100000",
+              "description": "file3",
               "fileType": "EXCEL",
               "id": "BBBBBBBBBBB",
+              "project": 1,
               "year": 2017,
             },
           }
         }
         nameLabel="description"
-        selection={null}
         type="documents"
       >
         <ul
@@ -331,7 +277,7 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
             iconClickHandler={[Function]}
             id="BBBBBBBBBBB"
             key="BBBBBBBBBBB"
-            name="file2"
+            name="file3"
             selected={false}
             view="grid-view"
           >
@@ -340,10 +286,10 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
               data-id="BBBBBBBBBBB"
               onClick={[Function]}
               onDoubleClick={[Function]}
-              title="file2"
+              title="file3"
             >
               <p>
-                file2
+                file3
               </p>
               <span
                 className="details"
@@ -390,150 +336,91 @@ exports[`DocumentsModule Should render file lists correctly 1`] = `
 
 exports[`DocumentsModule Should render folder lists correctly 1`] = `
 <DocumentsModule
-  ajaxErrorHandler={[Function]}
+  breadCrumbs={Array []}
+  clickSelection={null}
   clients={
     Object {
       "100000": Object {
         "clientName": "Ozzy Perez",
         "id": "100000",
-        "projects": Object {
-          "1": Object {
-            "category": Object {
-              "description": "Tax Return",
-              "id": 1,
-            },
-            "dateCreated": "2018-04-26T19:58:20.000+0000",
-            "dateDue": "2017-04-15",
-            "documents": Object {
-              "AAAAAAAAAAA": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [
-                  Object {
-                    "actionDate": "2000-01-01T12:00:00.000+0000",
-                    "actionType": "OPEN",
-                    "employee": Object {
-                      "firstName": "John",
-                      "id": 2,
-                      "lastName": "Doe",
-                      "middleName": null,
-                      "role": "STAFF",
-                    },
-                    "id": 1,
-                  },
-                ],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "PDF",
-                "id": "AAAAAAAAAAA",
-                "year": 2017,
-              },
-              "ASDFHOWEOUH": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Notes",
-                  "id": 4,
-                },
-                "description": "notes",
-                "fileType": "TXT",
-                "id": "ASDFHOWEOUH",
-                "year": 2017,
-              },
-              "BBBBBBBBBBB": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "EXCEL",
-                "id": "BBBBBBBBBBB",
-                "year": 2017,
-              },
-            },
-            "id": 1,
-            "name": "2017 Form 1040",
-          },
-        },
       },
       "100001": Object {
         "clientName": "Alondra Perez",
         "id": "100001",
-        "projects": Object {
-          "1": Object {
-            "category": Object {
-              "description": "Tax Return",
-              "id": 1,
-            },
-            "dateCreated": "2018-04-26T19:58:20.000+0000",
-            "dateDue": "2017-04-15",
-            "documents": Object {
-              "AAAAAAAAAAA": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [
-                  Object {
-                    "actionDate": "2000-01-01T12:00:00.000+0000",
-                    "actionType": "OPEN",
-                    "employee": Object {
-                      "firstName": "John",
-                      "id": 2,
-                      "lastName": "Doe",
-                      "middleName": null,
-                      "role": "STAFF",
-                    },
-                    "id": 1,
-                  },
-                ],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "PDF",
-                "id": "AAAAAAAAAAA",
-                "year": 2017,
-              },
-              "ASDFHOWEOUH": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Notes",
-                  "id": 4,
-                },
-                "description": "notes",
-                "fileType": "TXT",
-                "id": "ASDFHOWEOUH",
-                "year": 2017,
-              },
-              "BBBBBBBBBBB": Object {
-                "accessLevel": "PUBLIC",
-                "action": Array [],
-                "category": Object {
-                  "description": "Workpapers",
-                  "id": 3,
-                },
-                "description": "file2",
-                "fileType": "EXCEL",
-                "id": "BBBBBBBBBBB",
-                "year": 2017,
-              },
-            },
-            "id": 1,
-            "name": "2017 Form 1040",
-          },
-        },
       },
     }
   }
-  downloadFile={[Function]}
-  getDocumentHistory={[Function]}
-  getDocuments={[Function]}
-  getProjects={[Function]}
-  openDocument={[Function]}
+  currentModule={
+    Object {
+      "filePath": null,
+      "listType": "clients",
+      "name": "documents",
+      "parentId": null,
+      "textFileData": null,
+    }
+  }
+  documentHistory={Array []}
+  documents={
+    Object {
+      "AAAAAAAAAAA": Object {
+        "accessLevel": "PUBLIC",
+        "category": Object {
+          "description": "Workpapers",
+          "id": 3,
+        },
+        "description": "file2",
+        "fileType": "PDF",
+        "id": "AAAAAAAAAAA",
+        "project": 1,
+        "year": 2017,
+      },
+      "ASDFHOWEOUH": Object {
+        "accessLevel": "PUBLIC",
+        "category": Object {
+          "description": "Notes",
+          "id": 4,
+        },
+        "client": "100000",
+        "description": "notes",
+        "fileType": "TXT",
+        "id": "ASDFHOWEOUH",
+        "project": 1,
+        "year": 2017,
+      },
+      "BBBBBBBBBBB": Object {
+        "accessLevel": "PUBLIC",
+        "category": Object {
+          "description": "Workpapers",
+          "id": 3,
+        },
+        "client": "100000",
+        "description": "file3",
+        "fileType": "EXCEL",
+        "id": "BBBBBBBBBBB",
+        "project": 1,
+        "year": 2017,
+      },
+    }
+  }
+  iconDisplayType="grid-view"
+  projects={
+    Object {
+      "1": Object {
+        "category": Object {
+          "description": "Tax Return",
+          "id": 1,
+        },
+        "client": "100000",
+        "dateCreated": "2018-04-26T19:58:20.000+0000",
+        "dateDue": "2017-04-15",
+        "id": 1,
+        "name": "2017 Form 1040",
+      },
+    }
+  }
+  serviceCaller={[Function]}
+  updateGlobalState={[Function]}
+  updateModuleState={[Function]}
 >
   <Module
     buttonActions={
@@ -542,7 +429,7 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
         null,
       ]
     }
-    displayType="grid-view"
+    iconDisplayType="grid-view"
     title="Documents"
   >
     <div
@@ -559,22 +446,14 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
           className="toolbarButtons"
         >
           <button
-            className="toggleDisplayType toolbar-button button-grid-view"
+            className="toggleIconView toolbar-button button-grid-view"
             key="0"
             onClick={[Function]}
           />
         </div>
       </div>
       <Breadcrumbs
-        breadcrumbs={
-          Array [
-            null,
-            null,
-            null,
-            null,
-            null,
-          ]
-        }
+        breadcrumbs={Array []}
       >
         <div
           id="breadcrumbs"
@@ -585,149 +464,23 @@ exports[`DocumentsModule Should render folder lists correctly 1`] = `
         </div>
       </Breadcrumbs>
       <IconLinkList
-        dblClickHandler={[Function]}
+        clickSelection={null}
         displayType="grid-view"
         iconClickHandler={[Function]}
+        iconDoubleClickHandler={[Function]}
         list={
           Object {
             "100000": Object {
               "clientName": "Ozzy Perez",
               "id": "100000",
-              "projects": Object {
-                "1": Object {
-                  "category": Object {
-                    "description": "Tax Return",
-                    "id": 1,
-                  },
-                  "dateCreated": "2018-04-26T19:58:20.000+0000",
-                  "dateDue": "2017-04-15",
-                  "documents": Object {
-                    "AAAAAAAAAAA": Object {
-                      "accessLevel": "PUBLIC",
-                      "action": Array [
-                        Object {
-                          "actionDate": "2000-01-01T12:00:00.000+0000",
-                          "actionType": "OPEN",
-                          "employee": Object {
-                            "firstName": "John",
-                            "id": 2,
-                            "lastName": "Doe",
-                            "middleName": null,
-                            "role": "STAFF",
-                          },
-                          "id": 1,
-                        },
-                      ],
-                      "category": Object {
-                        "description": "Workpapers",
-                        "id": 3,
-                      },
-                      "description": "file2",
-                      "fileType": "PDF",
-                      "id": "AAAAAAAAAAA",
-                      "year": 2017,
-                    },
-                    "ASDFHOWEOUH": Object {
-                      "accessLevel": "PUBLIC",
-                      "action": Array [],
-                      "category": Object {
-                        "description": "Notes",
-                        "id": 4,
-                      },
-                      "description": "notes",
-                      "fileType": "TXT",
-                      "id": "ASDFHOWEOUH",
-                      "year": 2017,
-                    },
-                    "BBBBBBBBBBB": Object {
-                      "accessLevel": "PUBLIC",
-                      "action": Array [],
-                      "category": Object {
-                        "description": "Workpapers",
-                        "id": 3,
-                      },
-                      "description": "file2",
-                      "fileType": "EXCEL",
-                      "id": "BBBBBBBBBBB",
-                      "year": 2017,
-                    },
-                  },
-                  "id": 1,
-                  "name": "2017 Form 1040",
-                },
-              },
             },
             "100001": Object {
               "clientName": "Alondra Perez",
               "id": "100001",
-              "projects": Object {
-                "1": Object {
-                  "category": Object {
-                    "description": "Tax Return",
-                    "id": 1,
-                  },
-                  "dateCreated": "2018-04-26T19:58:20.000+0000",
-                  "dateDue": "2017-04-15",
-                  "documents": Object {
-                    "AAAAAAAAAAA": Object {
-                      "accessLevel": "PUBLIC",
-                      "action": Array [
-                        Object {
-                          "actionDate": "2000-01-01T12:00:00.000+0000",
-                          "actionType": "OPEN",
-                          "employee": Object {
-                            "firstName": "John",
-                            "id": 2,
-                            "lastName": "Doe",
-                            "middleName": null,
-                            "role": "STAFF",
-                          },
-                          "id": 1,
-                        },
-                      ],
-                      "category": Object {
-                        "description": "Workpapers",
-                        "id": 3,
-                      },
-                      "description": "file2",
-                      "fileType": "PDF",
-                      "id": "AAAAAAAAAAA",
-                      "year": 2017,
-                    },
-                    "ASDFHOWEOUH": Object {
-                      "accessLevel": "PUBLIC",
-                      "action": Array [],
-                      "category": Object {
-                        "description": "Notes",
-                        "id": 4,
-                      },
-                      "description": "notes",
-                      "fileType": "TXT",
-                      "id": "ASDFHOWEOUH",
-                      "year": 2017,
-                    },
-                    "BBBBBBBBBBB": Object {
-                      "accessLevel": "PUBLIC",
-                      "action": Array [],
-                      "category": Object {
-                        "description": "Workpapers",
-                        "id": 3,
-                      },
-                      "description": "file2",
-                      "fileType": "EXCEL",
-                      "id": "BBBBBBBBBBB",
-                      "year": 2017,
-                    },
-                  },
-                  "id": 1,
-                  "name": "2017 Form 1040",
-                },
-              },
             },
           }
         }
         nameLabel="clientName"
-        selection={null}
         type="clients"
       >
         <ul

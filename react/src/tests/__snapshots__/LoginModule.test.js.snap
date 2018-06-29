@@ -1,12 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginView Should render correctly 1`] = `
-<LoginView
-  initApplication={[Function]}
-  login={[Function]}
+exports[`LoginModule Should render correctly 1`] = `
+<LoginModule
+  currentModule={
+    Object {
+      "name": "login",
+      "password": null,
+      "username": null,
+    }
+  }
+  notification={Object {}}
+  serviceCaller={[Function]}
+  updateModuleState={[Function]}
 >
   <div
-    id="LoginView"
+    id="LoginModule"
   >
     <form
       action="/login"
@@ -46,5 +54,5 @@ exports[`LoginView Should render correctly 1`] = `
       />
     </Notification>
   </div>
-</LoginView>
+</LoginModule>
 `;

@@ -21,7 +21,7 @@ class LoginModule extends React.Component {
 					<input type="password" name="password" placeholder="Password" onChange={(e) => this.props.updateModuleState({password: e.target.value})}/>
 					<input type="submit" className="color-button button-ok" value="Log In"/>
 				</form>
-				<Notification type={this.props.notification.type ? "error" : ""} message={this.props.notification.text}/>
+				<Notification type={this.props.notification.type ? "error" : ""} text={this.props.notification.text}/>
 			</div>
 		);
 	}

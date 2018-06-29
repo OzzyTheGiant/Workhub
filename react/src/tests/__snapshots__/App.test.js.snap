@@ -1,61 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App Should render LoginView on start up 1`] = `
-<App>
-  <div
-    className="App"
+exports[`App Should render LoginModule on start up 1`] = `
+<App
+  services={
+    Object {
+      "downloadFile": [Function],
+      "getClients": [Function],
+      "getDocumentHistory": [Function],
+      "getDocuments": [Function],
+      "getProjects": [Function],
+      "login": [Function],
+      "logout": [Function],
+      "openDocument": [Function],
+    }
+  }
+>
+  <AppUserInterface
+    appState={
+      Object {
+        "breadCrumbs": Array [],
+        "clickSelection": null,
+        "clients": null,
+        "currentModule": Object {
+          "name": "login",
+          "password": null,
+          "username": null,
+        },
+        "documentHistory": Array [],
+        "documents": null,
+        "employees": null,
+        "iconDisplayType": "grid-view",
+        "isLoggedIn": false,
+        "notification": Object {},
+        "projects": null,
+      }
+    }
+    serviceCaller={[Function]}
+    updateState={[Function]}
   >
-    <LoginView
-      errorMessage={null}
-      initApplication={[Function]}
-      login={[Function]}
+    <div
+      className="App"
     >
-      <div
-        id="LoginView"
+      <LoginModule
+        currentModule={
+          Object {
+            "name": "login",
+            "password": null,
+            "username": null,
+          }
+        }
+        notification={Object {}}
+        serviceCaller={[Function]}
+        updateGlobalState={[Function]}
+        updateModuleState={[Function]}
       >
-        <form
-          action="/login"
-          method="post"
-          onSubmit={[Function]}
+        <div
+          id="LoginModule"
         >
-          <img
-            alt="Logo"
-            src="https://placehold.it/50x50/00638E"
-          />
-          <h1>
-            Log in to your account
-          </h1>
-          <input
-            name="username"
-            onChange={[Function]}
-            placeholder="Username"
-            type="text"
-          />
-          <input
-            name="password"
-            onChange={[Function]}
-            placeholder="Password"
-            type="password"
-          />
-          <input
-            className="color-button button-ok"
-            type="submit"
-            value="Log In"
-          />
-        </form>
-        <Notification
-          message={null}
-          type=""
-        >
-          <div
-            className="Notification none"
-          />
-        </Notification>
-      </div>
-    </LoginView>
-    <footer>
-      © 2018 Salinas, Allen & Schmitt, LLP. All Rights Reserved
-    </footer>
-  </div>
+          <form
+            action="/login"
+            method="post"
+            onSubmit={[Function]}
+          >
+            <img
+              alt="Logo"
+              src="https://placehold.it/50x50/00638E"
+            />
+            <h1>
+              Log in to your account
+            </h1>
+            <input
+              name="username"
+              onChange={[Function]}
+              placeholder="Username"
+              type="text"
+            />
+            <input
+              name="password"
+              onChange={[Function]}
+              placeholder="Password"
+              type="password"
+            />
+            <input
+              className="color-button button-ok"
+              type="submit"
+              value="Log In"
+            />
+          </form>
+          <Notification
+            type=""
+          >
+            <div
+              className="Notification none"
+            />
+          </Notification>
+        </div>
+      </LoginModule>
+      <footer>
+        © 2018 Salinas, Allen & Schmitt, LLP. All Rights Reserved
+      </footer>
+    </div>
+  </AppUserInterface>
 </App>
 `;

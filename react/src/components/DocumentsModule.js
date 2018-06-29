@@ -48,8 +48,8 @@ class DocumentsModule extends React.Component {
 				currentModule:{
 					...prevState.currentModule,
 					listType,
-					textFileData:listType === null ? prevState.textFileData : null,
-					filePath:null,
+					textFileData:listType === null ? prevState.currentModule.textFileData : null,
+					filePath:depth === 4 ? prevState.currentModule.filePath : null,
 					parentId:prevState.clickSelection || id// same as how bread crumbs are generated above, but this will determine which list to render next regardless of traversal
 				}
 			}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import "css/main-styles.css";
-import services from "api/services";
 import AppUserInterface from 'components/AppUserInterface';
  
 class App extends Component {
@@ -34,7 +34,7 @@ class App extends Component {
 		an error function for dealing with http errors and any necessary data */
 		if (serviceName === "logout") this.logout();
 		else {
-			services[serviceName]({
+			this.props.services[serviceName]({
 				successHandler:(responseData) => this.setState(responseData), 
 				errorHandler:this.ajaxErrorHandler,
 				data
@@ -44,7 +44,7 @@ class App extends Component {
 
     logout = (errorMessage) => {
 		/* end session by calling ajax service and reset state to initial form */
-		services.logout({
+		this.props.services.logout({
 			successHandler:() => this.setState({
 				...this.initialState, 
 				notification:errorMessage ? {type:"error", text:errorMessage} : {}
@@ -69,6 +69,10 @@ class App extends Component {
  	render() {
 		return <AppUserInterface appState={this.state} serviceCaller={this.serviceCaller} updateState={this.updateState}/>;
   	}
+}
+
+App.propTypes = {
+	services:PropTypes.objectOf(PropTypes.func).isRequired
 }
 
 export default App;
