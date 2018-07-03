@@ -51,7 +51,7 @@ const services = { // all services must return an object literal that will updat
 		});
 	}).catch(error => errorHandler(error)),
 
-    downloadFile:({data:filePath, successHandler, errorHandler}) => ajax.get(`document-files/${filePath}`, {
+    downloadFile:({data:filePath, successHandler, errorHandler}) => ajax.get(`document-files${filePath}`, {
 		responseType:filePath.split(".").pop() === "txt" ? 'text' : 'blob'
 	}).then(response => {
         let url = response.config.url.split("/");

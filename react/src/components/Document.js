@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getBaseUrl } from 'api/ajax-manager';
 
 const Document = props => { // Object element for rendering PDFs, otherwise, will display a link to download the non-PDF file
 	return (
 		<object
 			className="frame"
-			data={"/document-files" + props.filePath} 
+			data={`${getBaseUrl()}/document-files${props.filePath}`} 
 			type={props.fileType === "PDF" ? "application/pdf" : "application/octet-stream"}
 			title={"Current Document: " + props.fileName + "." + props.fileType.toLowerCase()}>
 			{props.fileType === "TXT" ? (

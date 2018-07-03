@@ -5,14 +5,14 @@ const api = axios.create({
 	timeout:'15000',
     responseType:'json',
     responseEncoding:'utf8',
-	withCredentials:true,
+	withCredentials:true
 });
 
-function getBaseUrl() {
+export function getBaseUrl() {
 	if (window.location.hostname === "localhost") {
 		return "http://localhost:3000/";
 	} else {
-		return "http://workhub.com/";
+		return "http://workhub/api";
 	}
 }
 
