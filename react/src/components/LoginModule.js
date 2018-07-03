@@ -15,7 +15,7 @@ class LoginModule extends React.Component {
 		return (
 			<div id="LoginModule">
 				<form action="/login" method="post" onSubmit={this.onLoginFormSubmit}>
-					<img src="https://placehold.it/50x50/00638E" alt="Logo"/>
+					<img src="/workhub-icon-blue.svg" alt="Workhub Logo"/>
 					<h1>Log in to your account</h1>
 					<input type="text" name="username" placeholder="Username" onChange={(e) => this.props.updateModuleState({username: e.target.value})}/>
 					<input type="password" name="password" placeholder="Password" onChange={(e) => this.props.updateModuleState({password: e.target.value})}/>

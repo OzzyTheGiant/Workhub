@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Header = (props) => {
 	return (
 		<header id="Header">
-			<img src="http://placehold.it/120x32/8CDCFF" alt="Workhub Logo"/>
+			<img src="/workhub-logo-white.svg" alt="Workhub Logo"/>
 			<nav>
 				<ul>
 					<li onClick={props.logout}>Log Out</li>
