@@ -1,79 +1,284 @@
-CREATE DATABASE IF NOT EXISTS Workhub;
+CREATE DATABASE  IF NOT EXISTS `Workhub` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `Workhub`;
+-- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
+--
+-- Host: localhost    Database: Workhub
+-- ------------------------------------------------------
+-- Server version	5.6.30
 
-CREATE TABLE IF NOT EXISTS Clients (
-    ID VARCHAR(20) PRIMARY KEY,
-    ClientName VARCHAR(255) NOT NULL
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE IF NOT EXISTS Employees (
-    ID SMALLINT PRIMARY KEY AUTOINCREMENT,
-    Username VARCHAR(20) NOT NULL UNIQUE,
-    Password VARCHAR(255) NOT NULL,
-    FirstName VARCHAR(20) NOT NULL,
-    MiddleName VARCHAR(20),
-    LastName VARCHAR(20) NOT NULL
-    Active TINYINT NOT NULL DEFAULT 1;
-    Role VARCHAR(5) NOT NULL DEFAULT "STAFF";
-);
+--
+-- Table structure for table `Clients`
+--
 
-CREATE TABLE IF NOT EXISTS ProjectCategories (
-    ID SMALLINT PRIMARY KEY,
-    Description VARCHAR(30) NOT NULL UNIQUE
-);
+DROP TABLE IF EXISTS `Clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Clients` (
+  `ID` varchar(20) NOT NULL,
+  `ClientName` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE IF NOT EXISTS Projects (
-    ID INT PRIMARY KEY AUTOINCREMENT,
-    Name VARCHAR(100) NOT NULL,
-    ClientID INT NOT NULL,
-    Category TINTYINT NOT NULL,
-    DateCreated DATETIME NOT NULL,
-    DateDue DATETIME DEFAULT NULL,
-    FOREIGN KEY (ClientID) REFERENCES Clients(ID),
-    FOREIGN KEY (Category) REFERENCES ProjectCategories(ID)
-);
+--
+-- Dumping data for table `Clients`
+--
 
-CREATE TABLE IF NOT EXISTS FileTypes (
-    ID INT PRIMARY KEY AUTOINCREMENT,
-    Type VARCHAR(253) NOT NULL UNIQUE
-);
+LOCK TABLES `Clients` WRITE;
+/*!40000 ALTER TABLE `Clients` DISABLE KEYS */;
+INSERT INTO `Clients` VALUES ('100000','Ozzy Perez'),('100000A','ABC Company, Inc.');
+/*!40000 ALTER TABLE `Clients` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS DocumentCategories (
-    ID SMALLINT PRIMARY KEY,
-    Description VARCHAR(30) NOT NULL UNIQUE
-);
+--
+-- Table structure for table `DocumentAccessRestrictions`
+--
 
-CREATE TABLE IF NOT EXISTS Documents (
-    ID VARCHAR(255) PRIMARY KEY,
-    Description VARCHAR(255) NOT NULL,
-    AccessLevel TINYINT NOT NULL DEFAULT 0;
-    ClientID INT NOT NULL,
-    ProjectID INT,
-    FileTypeID TINYINT NOT NULL,
-    FOREIGN KEY (ClientID) REFERENCES Clients(ID),
-    FOREIGN KEY (ProjectID) REFERENCES Projects(ID),
-    FOREIGN KEY (FileTypeID) REFERENCES FileTypes(ID)
-);
+DROP TABLE IF EXISTS `DocumentAccessRestrictions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DocumentAccessRestrictions` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DocumentID` varchar(255) DEFAULT NULL,
+  `EmployeeID` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKi5e2manweew0khtxku7j29y1v` (`DocumentID`),
+  KEY `FK36q1onxnnl9uh3dm2qg0dmkls` (`EmployeeID`),
+  CONSTRAINT `FK36q1onxnnl9uh3dm2qg0dmkls` FOREIGN KEY (`EmployeeID`) REFERENCES `Employees` (`ID`),
+  CONSTRAINT `FKi5e2manweew0khtxku7j29y1v` FOREIGN KEY (`DocumentID`) REFERENCES `Documents` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE IF NOT EXISTS DocumentActionTypes (
-    ID TINYINT PRIMARY KEY AUTOINCREMENT,
-    Description VARCHAR(50) NOT NULL UNIQUE
-);
+--
+-- Dumping data for table `DocumentAccessRestrictions`
+--
 
-CREATE TABLE IF NOT EXISTS DocumentHistory (
-    ID INT PRIMARY KEY AUTOINCREMENT,
-    Action TINYINT NOT NULL,
-    DocumentID ID VARCHAR(255) NOT NULL,
-    ActionDate DATETIME NOT NULL,
-    ActionUser INT NOT NULL,
-    FOREIGN KEY (DocumentID) REFERENCES Documents(ID),
-    FOREIGN KEY (Action) REFERENCES DocumentActionTypes(ID),
-    FOREIGN KEY (ActionUser) REFERENCES Employees(ID)
-);
+LOCK TABLES `DocumentAccessRestrictions` WRITE;
+/*!40000 ALTER TABLE `DocumentAccessRestrictions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `DocumentAccessRestrictions` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS DocumentAccessRestrictions (
-    ID INT PRIMARY KEY,
-    DocumentID VARCHAR(255) NOT NULL,
-    EmployeeID SMALLINT NOT NULL,
-    FOREIGN KEY (DocumentID) REFERENCES Documents(ID),
-    FOREIGN KEY (EmployeeID) REFERENCES Employees(ID)
-);
+--
+-- Table structure for table `DocumentCategories`
+--
+
+DROP TABLE IF EXISTS `DocumentCategories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DocumentCategories` (
+  `ID` smallint(6) NOT NULL,
+  `Description` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `UK_ikxlwuaptcr9r66drkfpwqt09` (`Description`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DocumentCategories`
+--
+
+LOCK TABLES `DocumentCategories` WRITE;
+/*!40000 ALTER TABLE `DocumentCategories` DISABLE KEYS */;
+INSERT INTO `DocumentCategories` VALUES (2,'Compilation'),(4,'Notes'),(5,'Other'),(1,'Tax Return'),(3,'Work Papers');
+/*!40000 ALTER TABLE `DocumentCategories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DocumentHistory`
+--
+
+DROP TABLE IF EXISTS `DocumentHistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DocumentHistory` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Action` int(11) NOT NULL,
+  `ActionDate` datetime NOT NULL,
+  `ActionUser` smallint(6) DEFAULT NULL,
+  `DocumentID` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKdkj8i8xo4bo179gw3y2qtl35g` (`ActionUser`),
+  KEY `FKcd01la4akv1fdghval5drfud3` (`DocumentID`),
+  CONSTRAINT `FKcd01la4akv1fdghval5drfud3` FOREIGN KEY (`DocumentID`) REFERENCES `Documents` (`ID`),
+  CONSTRAINT `FKdkj8i8xo4bo179gw3y2qtl35g` FOREIGN KEY (`ActionUser`) REFERENCES `Employees` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DocumentHistory`
+--
+
+LOCK TABLES `DocumentHistory` WRITE;
+/*!40000 ALTER TABLE `DocumentHistory` DISABLE KEYS */;
+INSERT INTO `DocumentHistory` VALUES (2,1,'2018-05-02 15:21:43',1,'AAAAAAAAAAA'),(3,1,'2018-05-02 15:23:25',1,'AAAAAAAAAAA'),(4,1,'2018-05-03 10:47:02',1,'AAAAAAAAAAA'),(5,1,'2018-05-03 13:02:15',2,'AAAAAAAAAAA'),(6,1,'2018-05-03 13:06:19',2,'AAAAAAAAAAA'),(7,1,'2018-05-03 13:07:09',2,'AAAAAAAAAAA'),(8,1,'2018-05-03 13:07:40',2,'AAAAAAAAAAA'),(9,1,'2018-05-18 09:51:46',1,'AAAAAAAAAAA'),(10,1,'2018-05-18 09:52:48',1,'AAAAAAAAAAA'),(11,1,'2018-05-18 09:54:57',1,'AAAAAAAAAAA'),(12,1,'2018-05-18 09:55:19',1,'AAAAAAAAAAA'),(13,1,'2018-05-18 09:55:38',1,'AAAAAAAAAAA'),(14,1,'2018-05-18 09:56:11',1,'AAAAAAAAAAA'),(15,1,'2018-05-18 09:58:28',1,'AAAAAAAAAAA'),(16,1,'2018-05-18 10:04:38',1,'AAAAAAAAAAA'),(17,1,'2018-05-18 10:10:29',1,'AAAAAAAAAAA'),(18,1,'2018-05-22 09:56:59',2,'ASDFQWERZCV'),(19,1,'2018-05-22 09:57:02',2,'ASDFQWERZCV'),(20,1,'2018-05-22 10:02:56',2,'ASDFQWERZCV'),(21,1,'2018-05-22 10:03:29',2,'ASDFQWERZCV'),(22,1,'2018-05-22 10:12:06',2,'ASDFQWERZCV'),(23,1,'2018-05-22 10:42:48',2,'ASDFQWERZCV'),(24,1,'2018-05-22 10:48:04',2,'ASDFQWERZCV'),(25,1,'2018-05-22 10:52:45',2,'ASDFQWERZCV'),(26,1,'2018-05-22 10:54:21',2,'ASDFQWERZCV'),(27,1,'2018-05-22 10:56:23',2,'ASDFQWERZCV'),(28,1,'2018-05-22 11:12:10',2,'ASDFQWERZCV'),(29,1,'2018-05-22 11:22:21',2,'ASDFQWERZCV'),(30,1,'2018-05-22 11:25:00',2,'ASDFQWERZCV'),(31,1,'2018-05-22 11:31:23',2,'ASDFQWERZCV'),(32,1,'2018-05-22 11:32:46',2,'ASDFQWERZCV'),(33,1,'2018-05-22 11:43:55',2,'ASDFQWERZCV'),(34,1,'2018-05-22 11:44:54',2,'ASDFQWERZCV'),(35,1,'2018-05-22 11:46:23',2,'ASDFQWERZCV'),(36,1,'2018-05-22 13:07:05',2,'ASDFQWERZCV'),(37,1,'2018-05-22 13:09:17',2,'ASDFQWERZCV'),(38,1,'2018-05-22 13:10:40',2,'ASDFQWERZCV'),(39,1,'2018-05-22 13:15:06',2,'ASDFQWERZCV'),(40,1,'2018-05-22 13:15:41',2,'ASDFQWERZCV'),(41,1,'2018-05-22 13:28:53',2,'ASDFQWERZCV'),(42,1,'2018-05-22 14:33:58',2,'ASDFQWERZCV'),(43,1,'2018-05-22 14:39:42',2,'ASDFQWERZCV'),(44,1,'2018-05-22 14:45:48',2,'ASDFQWERZCV'),(45,1,'2018-05-22 14:53:54',2,'ASDFQWERZCV'),(46,1,'2018-05-22 15:26:55',2,'ASDFQWERZCV'),(47,1,'2018-05-22 20:45:20',2,'ASDFQWERZCV'),(48,1,'2018-05-22 15:48:07',2,'ASDFQWERZCV'),(49,1,'2018-05-22 20:49:32',2,'ASDFQWERZCV'),(50,1,'2018-05-22 16:02:04',2,'ASDFQWERZCV'),(51,1,'2018-05-23 15:45:06',2,'ASDFQWERZCV'),(52,1,'2018-05-23 19:39:37',2,'ASDFQWERZCV'),(53,1,'2018-05-23 19:42:15',2,'ASDFQWERZCV'),(54,1,'2018-05-23 19:58:22',2,'ASDFQWERZCV'),(55,1,'2018-05-23 21:32:07',2,'ASDFQWERZCV'),(56,1,'2018-05-23 21:32:18',2,'CCCCCCCCCCC'),(57,1,'2018-05-23 21:55:08',2,'CCCCCCCCCCC'),(58,1,'2018-05-24 03:20:46',2,'CCCCCCCCCCC'),(59,1,'2018-05-24 13:43:24',2,'CCCCCCCCCCC'),(60,1,'2018-05-24 14:20:46',2,'CCCCCCCCCCC'),(61,1,'2018-05-24 14:28:34',2,'CCCCCCCCCCC'),(62,1,'2018-05-24 14:36:18',2,'CCCCCCCCCCC'),(63,1,'2018-05-24 14:37:12',2,'CCCCCCCCCCC'),(64,1,'2018-05-24 14:45:44',2,'CCCCCCCCCCC'),(65,1,'2018-05-24 14:48:03',2,'CCCCCCCCCCC'),(66,1,'2018-05-24 14:51:39',2,'ASDFQWERZCV'),(67,1,'2018-05-24 14:53:06',2,'CCCCCCCCCCC'),(68,1,'2018-05-24 16:08:01',2,'ASDFHOWEOUH'),(69,1,'2018-05-24 16:17:09',2,'WQIERHLGL23'),(70,1,'2018-05-24 16:28:35',2,'CCCCCCCCCCC'),(71,1,'2018-05-24 16:46:31',2,'CCCCCCCCCCC'),(72,1,'2018-05-24 16:48:59',2,'CCCCCCCCCCC'),(73,1,'2018-05-24 16:49:47',2,'CCCCCCCCCCC'),(74,1,'2018-05-24 16:51:14',2,'ASDFHOWEOUH'),(75,1,'2018-05-24 14:07:35',2,'CCCCCCCCCCC'),(76,1,'2018-05-24 14:11:22',2,'ASDFQWERZCV'),(77,1,'2018-05-24 14:18:21',2,'ASDFQWERZCV'),(78,1,'2018-05-24 14:18:38',2,'CCCCCCCCCCC'),(79,1,'2018-05-24 14:22:10',2,'CCCCCCCCCCC'),(80,1,'2018-05-24 16:31:36',2,'CCCCCCCCCCC'),(81,1,'2018-05-24 18:57:57',2,'CCCCCCCCCCC'),(82,1,'2018-05-25 09:57:59',2,'WQIERHLGL23'),(83,1,'2018-05-25 10:46:25',2,'WQIERHLGL23'),(84,1,'2018-05-25 10:47:28',2,'ASDFQWERZCV'),(85,1,'2018-05-25 10:47:43',2,'ASDFHOWEOUH'),(86,1,'2018-05-25 11:14:54',2,'ASDFHOWEOUH'),(87,1,'2018-05-25 11:16:36',2,'WQIERHLGL23'),(88,1,'2018-05-25 14:09:29',2,'ASDFHOWEOUH'),(89,1,'2018-05-25 14:16:53',2,'ASDFHOWEOUH'),(90,1,'2018-05-25 14:16:57',2,'ASDFQWERZCV'),(91,1,'2018-05-25 14:17:34',2,'WQIERHLGL23'),(92,1,'2018-05-25 14:17:44',2,'ASDFHOWEOUH'),(93,1,'2018-05-25 14:17:50',2,'ASDFQWERZCV'),(94,1,'2018-05-25 14:19:04',2,'ASDFHOWEOUH'),(95,1,'2018-05-25 14:19:19',2,'WQIERHLGL23'),(96,1,'2018-05-25 14:24:00',2,'WQIERHLGL23'),(97,1,'2018-05-25 14:25:43',2,'WQIERHLGL23'),(98,1,'2018-05-25 15:30:00',2,'ASDFHOWEOUH'),(99,1,'2018-05-25 15:31:35',2,'ASDFHOWEOUH'),(100,1,'2018-05-25 16:26:25',2,'ASDFHOWEOUH'),(101,1,'2018-05-25 16:29:58',2,'ASDFHOWEOUH'),(102,1,'2018-05-25 16:36:47',2,'WQIERHLGL23'),(103,1,'2018-05-25 16:48:46',2,'AAAAAAAAAAA'),(104,1,'2018-05-30 12:36:19',2,'ASDFQWERZCV'),(105,1,'2018-05-30 12:39:00',2,'ASDFQWERZCV'),(106,1,'2018-05-30 12:39:11',2,'ASDFQWERZCV'),(107,1,'2018-05-30 12:39:53',2,'ASDFQWERZCV'),(108,1,'2018-05-30 12:41:22',2,'ASDFQWERZCV'),(109,1,'2018-05-30 12:45:21',2,'ASDFQWERZCV'),(110,1,'2018-05-30 13:53:58',2,'ASDFHOWEOUH'),(111,1,'2018-05-31 15:55:37',2,'ASDFHOWEOUH'),(112,1,'2018-06-01 15:40:11',2,'ASDFHOWEOUH'),(113,1,'2018-06-01 15:43:07',2,'ASDFHOWEOUH'),(114,1,'2018-06-01 15:44:55',2,'ASDFHOWEOUH'),(115,1,'2018-06-02 12:38:27',2,'ASDFQWERZCV'),(116,1,'2018-06-03 11:23:06',2,'ASDFHOWEOUH'),(117,1,'2018-06-03 11:23:14',2,'ASDFQWERZCV'),(118,1,'2018-06-05 18:40:32',2,'ASDFHOWEOUH'),(119,1,'2018-06-07 13:23:37',2,'ASDFHOWEOUH'),(120,1,'2018-06-07 16:46:26',1,'AAAAAAAAAAA'),(121,1,'2018-06-07 16:48:12',1,'AAAAAAAAAAA'),(122,1,'2018-06-11 10:48:57',2,'ASDFHOWEOUH'),(123,1,'2018-06-21 09:32:18',2,'ASDFQWERZCV'),(124,1,'2018-06-21 09:34:51',2,'ASDFQWERZCV'),(125,1,'2018-06-21 09:37:51',2,'ASDFHOWEOUH'),(126,1,'2018-06-21 09:38:50',2,'ASDFHOWEOUH'),(127,1,'2018-06-21 09:43:55',2,'ASDFHOWEOUH'),(128,1,'2018-06-21 09:45:51',2,'ASDFHOWEOUH'),(129,1,'2018-06-21 09:47:37',2,'ASDFHOWEOUH'),(130,1,'2018-06-21 09:51:45',2,'ASDFHOWEOUH'),(131,1,'2018-06-21 09:52:06',2,'ASDFHOWEOUH'),(132,1,'2018-06-21 09:57:13',2,'ASDFHOWEOUH'),(133,1,'2018-06-21 09:59:03',2,'ASDFHOWEOUH'),(134,1,'2018-06-21 09:59:35',2,'ASDFHOWEOUH'),(135,1,'2018-06-21 09:59:47',2,'WQIERHLGL23'),(136,1,'2018-06-21 14:39:48',2,'ASDFQWERZCV'),(137,1,'2018-06-21 14:40:17',2,'ASDFHOWEOUH'),(138,1,'2018-06-21 14:41:17',2,'ASDFHOWEOUH'),(139,1,'2018-06-21 14:42:44',2,'ASDFHOWEOUH'),(140,1,'2018-06-21 14:43:43',2,'ASDFHOWEOUH'),(141,1,'2018-06-21 14:43:50',2,'ASDFHOWEOUH'),(142,1,'2018-06-21 14:43:56',2,'ASDFHOWEOUH'),(143,1,'2018-06-21 14:44:02',2,'ASDFHOWEOUH'),(144,1,'2018-06-21 14:47:08',2,'ASDFHOWEOUH'),(145,1,'2018-06-21 14:54:18',2,'ASDFHOWEOUH'),(146,1,'2018-06-21 15:47:01',2,'ASDFHOWEOUH'),(147,1,'2018-06-21 15:52:45',2,'ASDFHOWEOUH'),(148,1,'2018-06-21 16:06:40',2,'ASDFHOWEOUH'),(149,1,'2018-06-21 16:06:53',2,'ASDFHOWEOUH'),(150,1,'2018-06-21 16:48:59',2,'ASDFHOWEOUH'),(151,1,'2018-06-21 16:51:27',2,'ASDFHOWEOUH'),(152,1,'2018-06-21 16:53:35',2,'ASDFHOWEOUH'),(153,1,'2018-06-21 16:54:47',2,'ASDFHOWEOUH'),(154,1,'2018-06-21 16:56:22',2,'ASDFHOWEOUH'),(155,1,'2018-06-22 08:31:46',2,'ASDFHOWEOUH'),(156,1,'2018-06-22 08:53:51',2,'ASDFHOWEOUH'),(157,1,'2018-06-22 08:54:17',2,'ASDFHOWEOUH'),(158,1,'2018-06-22 09:00:36',2,'ASDFHOWEOUH'),(159,1,'2018-06-22 10:00:07',2,'ASDFHOWEOUH'),(160,1,'2018-06-22 10:00:16',2,'ASDFHOWEOUH'),(161,1,'2018-06-22 10:01:22',2,'ASDFHOWEOUH'),(162,1,'2018-06-22 10:01:52',2,'ASDFHOWEOUH'),(163,1,'2018-06-22 10:02:17',2,'ASDFHOWEOUH'),(164,1,'2018-06-22 10:02:18',2,'ASDFHOWEOUH'),(165,1,'2018-06-22 10:03:17',2,'ASDFHOWEOUH'),(166,1,'2018-06-22 10:03:21',2,'ASDFHOWEOUH'),(167,1,'2018-06-22 10:04:12',2,'ASDFQWERZCV'),(168,1,'2018-06-22 10:04:19',2,'ASDFQWERZCV'),(169,1,'2018-06-22 10:05:27',2,'ASDFHOWEOUH'),(170,1,'2018-06-22 10:06:48',2,'ASDFHOWEOUH'),(171,1,'2018-06-22 15:01:34',2,'WQIERHLGL23'),(172,1,'2018-06-27 16:24:54',2,'WQIERHLGL23'),(173,1,'2018-06-27 16:30:20',2,'WQIERHLGL23'),(174,1,'2018-06-27 16:42:58',2,'WQIERHLGL23'),(175,1,'2018-06-27 16:44:43',2,'WQIERHLGL23'),(176,1,'2018-06-27 16:49:31',2,'WQIERHLGL23'),(177,1,'2018-06-28 10:26:41',2,'WQIERHLGL23'),(178,1,'2018-06-28 11:46:50',2,'ASDFHOWEOUH'),(179,1,'2018-06-29 10:10:25',1,'AAAAAAAAAAA'),(180,1,'2018-06-29 10:12:05',1,'AAAAAAAAAAA'),(181,1,'2018-06-29 10:21:03',1,'AAAAAAAAAAA');
+/*!40000 ALTER TABLE `DocumentHistory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Documents`
+--
+
+DROP TABLE IF EXISTS `Documents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Documents` (
+  `ID` varchar(255) NOT NULL,
+  `Description` varchar(255) NOT NULL,
+  `FileTypeID` int(11) DEFAULT NULL,
+  `ClientID` varchar(20) DEFAULT NULL,
+  `ProjectID` int(11) DEFAULT NULL,
+  `Year` smallint(6) NOT NULL,
+  `CategoryID` smallint(6) DEFAULT NULL,
+  `AccessLevel` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  KEY `FK7sbyfbjtp91ltgeca8bgw0p7c` (`ClientID`),
+  KEY `FK8y6c4pq8v80gdqiqo2tl18hvp` (`ProjectID`),
+  KEY `FK4epvr08yi99v2hvlm285e7weg` (`CategoryID`),
+  CONSTRAINT `FK4epvr08yi99v2hvlm285e7weg` FOREIGN KEY (`CategoryID`) REFERENCES `DocumentCategories` (`ID`),
+  CONSTRAINT `FK7sbyfbjtp91ltgeca8bgw0p7c` FOREIGN KEY (`ClientID`) REFERENCES `Clients` (`ID`),
+  CONSTRAINT `FK8y6c4pq8v80gdqiqo2tl18hvp` FOREIGN KEY (`ProjectID`) REFERENCES `Projects` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Documents`
+--
+
+LOCK TABLES `Documents` WRITE;
+/*!40000 ALTER TABLE `Documents` DISABLE KEYS */;
+INSERT INTO `Documents` VALUES ('AAAAAAAAAAA','file2',0,'100000',1,2017,3,0),('ASDFHOWEOUH','notes',7,'100000',1,2017,4,0),('ASDFQWERZCV','file1',0,'100000',1,2017,1,0),('BBBBBBBBBBB','file3',0,'100000',2,2017,2,0),('CCCCCCCCCCC','file4',3,'100000',2,2017,2,0),('DDDDDDDDDDD','file5',0,'100000',2,2017,3,0),('WQIERHLGL23','readme',8,'100000',1,2017,5,0);
+/*!40000 ALTER TABLE `Documents` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Employees`
+--
+
+DROP TABLE IF EXISTS `Employees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Employees` (
+  `ID` smallint(6) NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(20) NOT NULL,
+  `lastName` varchar(20) NOT NULL,
+  `MiddleName` varchar(20) DEFAULT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Username` varchar(20) NOT NULL,
+  `Active` tinyint(4) NOT NULL DEFAULT '1',
+  `Role` varchar(5) NOT NULL DEFAULT 'STAFF',
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `UK_d58chcnaafu5lfy4ta72e11mb` (`Username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Employees`
+--
+
+LOCK TABLES `Employees` WRITE;
+/*!40000 ALTER TABLE `Employees` DISABLE KEYS */;
+INSERT INTO `Employees` VALUES (1,'nobody','nobody',NULL,'$2a$10$fz8qgIi86rYBWJ.Gkr0vre1UxijQA1pgI6x8ctydzUIVMUFjkhWKm','nobody',1,'STAFF'),(2,'Oziel','Perez',NULL,'$2a$10$REnTefPx0/ysHCwS6eGo2el7BtmHtpOO0mAdiCq261qWRWnYG2Mh6','OzzyTheGiant',1,'STAFF');
+/*!40000 ALTER TABLE `Employees` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ProjectCategories`
+--
+
+DROP TABLE IF EXISTS `ProjectCategories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ProjectCategories` (
+  `ID` smallint(6) NOT NULL,
+  `Description` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ProjectCategories`
+--
+
+LOCK TABLES `ProjectCategories` WRITE;
+/*!40000 ALTER TABLE `ProjectCategories` DISABLE KEYS */;
+INSERT INTO `ProjectCategories` VALUES (1,'Tax Return'),(2,'Financial Statements');
+/*!40000 ALTER TABLE `ProjectCategories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ProjectCategory`
+--
+
+DROP TABLE IF EXISTS `ProjectCategory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ProjectCategory` (
+  `ID` smallint(6) NOT NULL,
+  `Description` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ProjectCategory`
+--
+
+LOCK TABLES `ProjectCategory` WRITE;
+/*!40000 ALTER TABLE `ProjectCategory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ProjectCategory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Projects`
+--
+
+DROP TABLE IF EXISTS `Projects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Projects` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(100) NOT NULL,
+  `ClientID` varchar(20) NOT NULL,
+  `DateCreated` datetime NOT NULL,
+  `DateDue` datetime DEFAULT NULL,
+  `Year` smallint(6) NOT NULL,
+  `CategoryID` smallint(6) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK90oy6lgow4x6gkc4467qg3k1n` (`ClientID`),
+  KEY `FK4cy4iuu8a56cuwwpof1cjo3wl` (`CategoryID`),
+  CONSTRAINT `FK4cy4iuu8a56cuwwpof1cjo3wl` FOREIGN KEY (`CategoryID`) REFERENCES `ProjectCategories` (`ID`),
+  CONSTRAINT `FK90oy6lgow4x6gkc4467qg3k1n` FOREIGN KEY (`ClientID`) REFERENCES `Clients` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Projects`
+--
+
+LOCK TABLES `Projects` WRITE;
+/*!40000 ALTER TABLE `Projects` DISABLE KEYS */;
+INSERT INTO `Projects` VALUES (1,'2017 Form 1040','100000','2018-04-26 14:58:20','2017-04-15 11:59:00',2017,1),(2,'Financial Statements - March 2017','100000','2018-04-26 14:58:31',NULL,2017,2),(3,'2017 Form 1065','100000A','2018-04-26 14:58:37',NULL,2017,1);
+/*!40000 ALTER TABLE `Projects` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-06-29 16:22:08
