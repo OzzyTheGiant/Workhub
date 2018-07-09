@@ -8,7 +8,7 @@ class LoginModule extends React.Component {
 		this.props.serviceCaller("login", {
 			username:this.props.currentModule.username,
 			password:this.props.currentModule.password
-		}); // TODO: make sure that success and error handlers are passed at the service method
+		});
 	}
 
 	render() {
