@@ -16,7 +16,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("dreamcraft.workhub.dao")
-@PropertySource("classpath:application.properties")
+@PropertySource({"classpath:application.properties", "file:/opt/tomcat/conf/workhub.properties"})
 public class DataConfig {
     @Autowired private Environment env;
 
