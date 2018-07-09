@@ -70,7 +70,18 @@ input {
     }
 }
 
+$base-width:750px; $base-height:500px; $increment:150px;
 .frame {
     max-height:390px;
-    overflow-y:auto;
+	overflow-y:auto;
+	@media screen and (min-height:$base-width + ($increment * 3)) {
+		max-height:$base-height + ($increment * 3);
+	}
+	@media screen and (min-height:$base-width + ($increment * 2)) and (max-height:$base-width + ($increment * 3) - 1) {
+		max-height:$base-height + ($increment * 2);
+	}
+	@media screen and (min-height:$base-width + $increment) and (max-height:$base-width + ($increment * 2) - 1) {
+		max-height:$base-height + $increment;
+	}
+	@media screen and (min-height:$base-width) and (max-height:$base-width + $increment - 1) {max-height:$base-height;}
 }
