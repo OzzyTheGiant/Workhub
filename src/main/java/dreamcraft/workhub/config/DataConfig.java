@@ -3,6 +3,7 @@ package dreamcraft.workhub.config;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -16,9 +17,11 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("dreamcraft.workhub.dao")
-@PropertySource({"classpath:application.properties", "file:/opt/tomcat/conf/workhub.properties"})
+@PropertySource("classpath:application.properties")
 public class DataConfig {
-    @Autowired private Environment env;
+	@Autowired private Environment env;
+	@Value("${db.username}") private String username;
+	@Value("${db.password}") private String password;
 
 //    @Bean
 //    public LocalSessionFactoryBean createSessionFactory() {
@@ -43,8 +46,8 @@ public class DataConfig {
     public DataSource createDataSource() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUrl(env.getProperty("db.url")); // contains database name, otherwise set via .setDatabaseName()
-        dataSource.setUser(env.getProperty("db.username"));
-        dataSource.setPassword(env.getProperty("db.password"));
+        dataSource.setUser(username);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
