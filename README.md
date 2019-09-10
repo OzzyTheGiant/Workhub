@@ -1,4 +1,4 @@
-Workhub - Document and Project Management Web Application
+Workhub - A Sample Document Management Web Application
 
 INTRODUCTION
 This application is built using React for the front end, Java Spring Boot for the backend and MySQL for the database. The back end of the app exposes a REST API to access client, project, and document data, which is organized in the front end using folders, similar to a file explorer on the OS.
